@@ -10,8 +10,8 @@ Material:
   m_Name: Brass_Mat
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_ShaderKeywords: _DISABLE_SSR _DISABLE_SSR_TRANSPARENT _DISPLACEMENT_LOCK_TILING_SCALE
-    _DOUBLESIDED_ON _MASKMAP _MATERIAL_FEATURE_CLEAR_COAT _MATERIAL_FEATURE_IRIDESCENCE
-    _NORMALMAP _NORMALMAP_TANGENT_SPACE _PIXEL_DISPLACEMENT _PIXEL_DISPLACEMENT_LOCK_OBJECT_SCALE
+    _DOUBLESIDED_ON _MATERIAL_FEATURE_CLEAR_COAT _MATERIAL_FEATURE_IRIDESCENCE _NORMALMAP_TANGENT_SPACE
+    _PIXEL_DISPLACEMENT _PIXEL_DISPLACEMENT_LOCK_OBJECT_SCALE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -72,7 +72,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3287de45d937b34418b4eb16c1a27c8b, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
