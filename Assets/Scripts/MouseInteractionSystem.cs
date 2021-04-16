@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MosueInteractionSystem : MonoBehaviour
+public class MouseInteractionSystem : MonoBehaviour
 {
     const int MOUSELEFTCLICK = 0;
     const int MOUSERIGHTCLICK = 1;
