@@ -6,6 +6,7 @@ public class MouseInteractionSystem : MonoBehaviour
 {
     const int MOUSELEFTCLICK = 0;
     const int MOUSERIGHTCLICK = 1;
+    private GameObject currentObject;
     public bool isMouseActive { get; set; }
 
     // Start is called before the first frame update
@@ -29,9 +30,17 @@ public class MouseInteractionSystem : MonoBehaviour
                     if (hit.rigidbody != null)
                     {
                         if (hit.rigidbody.gameObject.tag == "Object")
-                            hit.rigidbody.gameObject.GetComponent<AbstractObjectInteraction>().ObjectInteraction();
+                        {
+                            currentObject = hit.rigidbody.gameObject;
+                            currentObject.GetComponent<AbstractObjectInteraction>().ObjectInteraction();
+                        }                           
                     }
                 }
+            }
+            
+            if (Input.GetMouseButton(MOUSERIGHTCLICK))
+            {
+                currentObject = null;
             }
         }        
     }
