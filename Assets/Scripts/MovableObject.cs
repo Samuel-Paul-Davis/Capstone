@@ -7,6 +7,7 @@ public class MovableObject : AbstractObjectInteraction
     public float speed = 10f;
     public Vector3 targetPos;
     public bool isMoving;
+    public bool isActive;
 
     // Start is called before the first frame update
     void Start()
@@ -17,20 +18,25 @@ public class MovableObject : AbstractObjectInteraction
     // Update is called once per frame
     void Update()
     {
-        if (isMoving)
+        if (isActive)
         {
             SetTarggetPosition();
+        }
+
+        if (isMoving)
+        {            
             MoveAObject();
         }
     }
 
     public override void ObjectInteraction()
     {
-        isMoving = true;
+        isActive = true;
     }
 
     public override void ObjectDeselectInteraction()
     {
+        isActive = false;
         isMoving = false;
     }
 

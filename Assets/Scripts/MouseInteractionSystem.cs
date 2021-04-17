@@ -7,7 +7,8 @@ public class MouseInteractionSystem : MonoBehaviour
     const int MOUSELEFTCLICK = 0;
     const int MOUSERIGHTCLICK = 1;
     private GameObject currentObject;
-    public bool isMouseActive { get; set; }
+    [SerializeField]
+    public bool isMouseActive = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -40,6 +41,8 @@ public class MouseInteractionSystem : MonoBehaviour
             
             if (Input.GetMouseButton(MOUSERIGHTCLICK))
             {
+                if (currentObject != null)
+                    currentObject.GetComponent<AbstractObjectInteraction>().ObjectDeselectInteraction();
                 currentObject = null;
             }
         }        
