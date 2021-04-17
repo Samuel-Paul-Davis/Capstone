@@ -21,7 +21,7 @@ public class MouseInteractionSystem : MonoBehaviour
     {
         if (isMouseActive)
         {
-            if (Input.GetMouseButton(MOUSELEFTCLICK))
+            if (Input.GetMouseButtonDown(MOUSELEFTCLICK))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -34,17 +34,17 @@ public class MouseInteractionSystem : MonoBehaviour
                         {
                             currentObject = hit.rigidbody.gameObject;
                             currentObject.GetComponent<AbstractObjectInteraction>().ObjectInteraction();
-                        }                           
+                        }
                     }
                 }
             }
             
-            if (Input.GetMouseButton(MOUSERIGHTCLICK))
+            if (Input.GetMouseButtonDown(MOUSERIGHTCLICK))
             {
                 if (currentObject != null)
                     currentObject.GetComponent<AbstractObjectInteraction>().ObjectDeselectInteraction();
                 currentObject = null;
             }
-        }        
+        }
     }
 }
