@@ -4,8 +4,22 @@ using UnityEngine;
 
 public class WallDetection : MonoBehaviour
 {
+    public Vector3 ledgeDetectionBoxScale = new Vector3(1, 1, 1);
+    public Vector3 ledgeDetectionBoxCenter = new Vector3(2, 5, 1);
+    public float LedgeDetectionDistance = 1000f;
     private bool wallDetected;
     private SphereCollider sphereCollider;
+    public RaycastHit rayCastHit;
+
+    private bool _grabLedge;
+
+    public bool grabLedge
+    {
+        get { return _grabLedge; }
+        set { _grabLedge = value; }
+    }
+
+    public bool hit;
 
     // Start is called before the first frame update
     private void Start()
@@ -23,8 +37,30 @@ public class WallDetection : MonoBehaviour
     {
         if (wallDetected)
         {
-            LedgeDetection.DetectLedge(transform.position + (transform.forward * 2) + (transform.up * 2));
+            rayCastHit = LedgeDetection.DetectLedge((transform.position * ledgeDetectionBoxCenter.x) + (transform.up * ledgeDetectionBoxCenter.y) + (transform.forward * ledgeDetectionBoxCenter.z), ledgeDetectionBoxScale, new Vector3(0, -1, 0), new Quaternion(0, 0, 0, 0), LedgeDetectionDistance, true);
+            if (rayCastHit.point == Vector3.zero)
+            {
+                hit = false;
+            }
+            else
+            {
+                hit = true;
+            }
+            print("WallDetection: " + hit);
+            CanBeClimbed(rayCastHit.point);
         }
+    }
+
+    private bool CanBeClimbed(Vector3 point)
+    {
+        float distBA = Vector3.Distance(transform.position, point);
+        if (distBA < 2.45)
+        {
+            Debug.DrawLine(transform.position, point, Color.green);
+            return true;
+        }
+        Debug.DrawLine(transform.position, point, Color.red);
+        return false; ;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,16 +73,5 @@ public class WallDetection : MonoBehaviour
     {
         wallDetected = false;
         print("Wall de-detected");
-    }
-
-    private void OnDrawGizmos()
-    {
-        Vector3 direction = new Vector3(0, -1, 0);
-        Vector3 cent = transform.position + (transform.forward * 2) + (transform.up * 2);
-        Gizmos.color = Color.red;
-        //Draw a Ray forward from GameObject toward the maximum distance
-        Gizmos.DrawRay(cent, direction * 1000f); ;
-        //Draw a cube at the maximum distance
-        Gizmos.DrawWireCube(cent + direction, transform.localScale);
     }
 }

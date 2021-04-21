@@ -307,6 +307,7 @@ namespace TheFirstPerson
         private float currentTurnMult;
 
         private float cameraAngle;
+        private bool grabbingLedge;
 
         //Input Name Defaults (assuming default unity axes are set up)
         private string jumpBtn = "Jump";
@@ -727,6 +728,11 @@ namespace TheFirstPerson
             jumping = true;
             yVel = Mathf.Max(yVel, jumpSpeed);
             jumpPressed = 0;
+        }
+
+        private void Hang()
+        {
+            Vector3 targetMove = Vector3.zero;
         }
 
         private void UpdateMouseLock()
