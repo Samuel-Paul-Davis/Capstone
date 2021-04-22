@@ -26,7 +26,6 @@ public class InteractableObject : AbstractObjectInteraction
 
     public override void ObjectInteraction()
     {
-        //Debug.Log(moveObject.returnHome);
         if (moveObject.returnHome)
             moveObject.returnHome = false;
         else
