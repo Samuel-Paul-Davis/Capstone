@@ -8,9 +8,33 @@ public class ClimbingController : TFPExtension
     public WallDetection wallDetection;
     public BoxCollider boxxy;
 
+    private bool _canBeginClimb;
+    private bool _climbing;
+    private bool _wallWithinRange;
+
+    public bool CanBeginClimb
+    {
+        get { return _canBeginClimb; }
+        set { _canBeginClimb = value; }
+    }
+
+
     private void Start()
     {
         gameObject.GetComponent<WallDetection>();
+    }
+    private void Update()
+    {
+        //TODO: Move to seperate function and use callback when you press forward against a wall.
+        if(_canBeginClimb && _wallWithinRange && Input.GetKey("W"))
+        {
+
+        }
+    }
+
+    private void MovePlayer()
+    {
+        
     }
 
     public override void ExPreUpdate(ref TFPData data, TFPInfo info)
@@ -35,4 +59,5 @@ public class ClimbingController : TFPExtension
             print("NULL object");
         }
     }
+
 }

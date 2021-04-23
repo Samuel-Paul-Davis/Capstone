@@ -18,8 +18,8 @@ public class LedgeDetection : MonoBehaviour
     {
         LayerMask mask = 1 << 10;
 
-        Physics.BoxCast(center, halfExtents, direction, out RaycastHit raycastHit, orientation, maxDistance, mask);
-
+        //Physics.BoxCast(center, halfExtents, direction, out RaycastHit raycastHit, orientation, maxDistance, mask);
+        Physics.SphereCast(center, 1, direction, out RaycastHit raycastHit, maxDistance, mask);
         if (drawCube)
             DrawCubePoints(CubePoints(center, halfExtents, orientation, raycastHit.point));
 
