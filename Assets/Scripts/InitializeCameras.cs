@@ -48,27 +48,15 @@ public class InitializeCameras : MonoBehaviour
             GameObject gObjParent;
 
             if (gObj.transform != gObj.transform.root) gObjParent = gObj.transform.parent.gameObject;
-            else gObjParent = null; //throw new Exception("'Player' GameObject not found!");
+            else gObjParent = null;
 
-            if (gObj.GetComponent<CharacterController>() || !gObjParent) return gObj; //BUG: leaving here when child has CharacterController
+            if (gObj.GetComponent<CharacterController>() || !gObjParent) return gObj;
             else if (gObjParent && gObjParent.CompareTag("Player")) return FindPlayerObject(ref gArr, gObjParent);
-            else throw new Exception("'Player' GameObject not found!"); //return gObj;
+            else throw new Exception("'Player' GameObject not found!");
         } else
         {
-            //foreach (GameObject g in list)
-            for (int i = gArr.Length - 1; i >= 0; i--)
-            {
-                GameObject gParent;
-
-                if (gArr[i].transform != gArr[i].transform.root) gParent = gArr[i].transform.parent.gameObject;
-                else gParent = null; //throw new Exception("'Player' GameObject not found!");
-
-                if (gArr[i].GetComponent<CharacterController>() || !gParent) return gArr[i]; //BUG: leaving here when child has CharacterController
-                else if (gParent && gParent.CompareTag("Player")) return FindPlayerObject(ref gArr, gParent);
-                else throw new Exception("'Player' GameObject not found!"); //return g;
-            }
-
-            throw new Exception("List of 'Players' is null; are you sure there is a GameObject tagged 'Player'?");
+            if (gArr != null) return FindPlayerObject(ref gArr, gArr[gArr.Length - 1]);
+            else throw new Exception("List of 'Players' is null; are you sure there is a GameObject tagged 'Player'?");
         }
     }
 }
