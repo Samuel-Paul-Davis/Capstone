@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 using System;
 
@@ -24,9 +25,10 @@ public class InitializeCameras : MonoBehaviour
             } catch (Exception e)
             {
                 Debug.LogException(e);
+                return;
             }
 
-            Debug.Log(playerObject);
+            gameObject.GetComponentInChildren<CinemachineClearShot>().LookAt = playerObject.transform;
         }
     }
 
