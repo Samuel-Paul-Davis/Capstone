@@ -18,26 +18,15 @@ public class InitializeCameras : MonoBehaviour
             gameObjects = GameObject.FindGameObjectsWithTag("Player");
 
             //validation; should be forwards compatible with Unity 2020.3+
-            if (gameObjects.Length > 1)
+            try
             {
-                try
-                {
-                    playerObject = FindPlayerObject(ref gameObjects);
-                } catch (Exception e)
-                {
-                    Debug.Log(e);
-                }
-            } else if (gameObjects.Length > 0)
+                playerObject = FindPlayerObject(ref gameObjects);
+            } catch (Exception e)
             {
-                playerObject = gameObjects[0];
-            } else
-            {
-                playerObject = null;
+                Debug.LogException(e);
             }
 
-            if (playerObject) Debug.Log(playerObject.name);
-            else Debug.Log("No GameObjects tagged 'Player'");
-
+            Debug.Log(playerObject);
         }
     }
 
@@ -50,13 +39,14 @@ public class InitializeCameras : MonoBehaviour
             if (gObj.transform != gObj.transform.root) gObjParent = gObj.transform.parent.gameObject;
             else gObjParent = null;
 
-            if (gObj.GetComponent<CharacterController>() || !gObjParent) return gObj;
+            if (gObj.GetComponent<CharacterController>() && gObj.CompareTag("Player")) return gObj;
             else if (gObjParent && gObjParent.CompareTag("Player")) return FindPlayerObject(ref gArr, gObjParent);
-            else throw new Exception("'Player' GameObject not found!");
+            else if (!gObjParent && !gObj.GetComponent<CharacterController>() && gObj.CompareTag("Player")) throw new Exception("No GameObject tagged as 'Player' has CharacterController component!");
+            else throw new Exception("No 'Player' GameObject not found in array!");
         } else
         {
-            if (gArr != null) return FindPlayerObject(ref gArr, gArr[gArr.Length - 1]);
-            else throw new Exception("List of 'Players' is null; are you sure there is a GameObject tagged 'Player'?");
+            if (gArr != null && gArr.Length > 0) return FindPlayerObject(ref gArr, gArr[gArr.Length - 1]);
+            else throw new Exception("Array of 'Players' is null; are you sure there is a GameObject tagged 'Player'?");
         }
     }
 }
