@@ -453,6 +453,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackingCameras
       objectReference: {fileID: 0}
+    - target: {fileID: 3960944134744224686, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: lookAt
+      value: 
+      objectReference: {fileID: 1390013143}
+    - target: {fileID: 3960944134744224686, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: ignoreTag
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960944134744224686, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: optimalTargetDistance
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
 --- !u!1 &721621418
@@ -811,6 +823,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1390013143 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1474722496800166263, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+  m_PrefabInstance: {fileID: 2994450026324174697}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1730952141
 GameObject:
   m_ObjectHideFlags: 0

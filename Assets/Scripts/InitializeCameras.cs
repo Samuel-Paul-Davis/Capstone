@@ -10,19 +10,29 @@ using System;
 public class InitializeCameras : MonoBehaviour
 {
     private GameObject[] gameObjects;
-    private GameObject playerObject;
+    [Header("CM ClearShot")]
+    [SerializeField]
+    private GameObject lookAt;
+
+    [Header("CM Collider")]
+    public string ignoreTag;
+    public float optimalTargetDistance;
 
     // Awake is called when the script is initialized
     void Awake()
     {
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
+            //default values
+            if (ignoreTag == "") ignoreTag = "Player";
+            if (optimalTargetDistance == 0.0) optimalTargetDistance = 2;
+
             gameObjects = GameObject.FindGameObjectsWithTag("Player");
 
             //validation; should be forwards compatible with Unity 2020.3+
             try
             {
-                playerObject = FindPlayerObject(ref gameObjects);
+                lookAt = FindPlayerObject(ref gameObjects);
             }
             catch (Exception e)
             {
@@ -34,12 +44,12 @@ public class InitializeCameras : MonoBehaviour
             CinemachineCollider collider = gameObject.GetComponentInChildren<CinemachineCollider>();
 
             if (!clearShot.LookAt)
-                clearShot.LookAt = playerObject.transform;
+                clearShot.LookAt = lookAt.transform;
 
             if (collider.m_IgnoreTag == "")
-                collider.m_IgnoreTag = "Player";
+                collider.m_IgnoreTag = ignoreTag;
             if (collider.m_OptimalTargetDistance == 0.0)
-                collider.m_OptimalTargetDistance = 2;
+                collider.m_OptimalTargetDistance = optimalTargetDistance;
         }
     }
 
