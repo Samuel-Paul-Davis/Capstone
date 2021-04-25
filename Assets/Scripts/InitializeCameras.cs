@@ -29,6 +29,9 @@ public class InitializeCameras : MonoBehaviour
             }
 
             gameObject.GetComponentInChildren<CinemachineClearShot>().LookAt = playerObject.transform;
+
+            gameObject.GetComponentInChildren<CinemachineCollider>().m_IgnoreTag = "Player";
+            gameObject.GetComponentInChildren<CinemachineCollider>().m_OptimalTargetDistance = 2; //check if using m_... fields is best practice
         }
     }
 
