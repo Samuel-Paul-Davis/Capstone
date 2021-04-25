@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEditor.Experimental.SceneManagement;
 
 using System;
 
@@ -11,10 +12,10 @@ public class InitializeCameras : MonoBehaviour
     private GameObject[] gameObjects;
     private GameObject playerObject;
 
-    // Start is called before the first frame update
+    // Awake is called when the script is initialized
     void Awake()
     {
-        if (!Application.IsPlaying(gameObject)) //should run only in edit mode
+        if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
             gameObjects = GameObject.FindGameObjectsWithTag("Player");
 
@@ -22,7 +23,8 @@ public class InitializeCameras : MonoBehaviour
             try
             {
                 playerObject = FindPlayerObject(ref gameObjects);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Debug.LogException(e);
                 return;
