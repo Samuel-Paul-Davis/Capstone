@@ -8,58 +8,48 @@ public class ClimbingController : TFPExtension
     public WallDetection wallDetection;
     public BoxCollider boxxy;
 
+    private Animation animator;
+
     private bool _canBeginClimb;
-    private bool _climbing;
+    public bool _climbing;
     private bool _wallWithinRange;
-
-    public bool CanBeginClimb
-    {
-        get { return _canBeginClimb; }
-        set { _canBeginClimb = value; }
-    }
-
+    private Vector3 _climbingTarget;
 
     private void Start()
     {
         gameObject.GetComponent<WallDetection>();
     }
+
     private void Update()
     {
-        //TODO: Move to seperate function and use callback when you press forward against a wall.
-        if(_canBeginClimb && _wallWithinRange && Input.GetKey("W"))
+        if (_canBeginClimb)
         {
-
+            Vector3.Lerp(transform.position, _climbingTarget, Time.deltaTime);
         }
     }
 
-    private void MovePlayer()
+    public void ClimbUpLedge(Vector3 climbingPoint)
     {
         // Begin Animation
-        // If lege is within range move to ledge
-        // If not, fail.
+        print("Climbing up ledge has begun");
+        _climbingTarget = climbingPoint;
+        _canBeginClimb = true;
+        _climbing = true;
+    }
+
+    private void BeginClimb()
+    {
+        //Opposite normal to the wall
+        //Play animation
+        //If player is close enough to ledge grab
+    }
+
+    private void DropOffLedge()
+    {
     }
 
     public override void ExPreUpdate(ref TFPData data, TFPInfo info)
     {
-        try
-        {
-            print(wallDetection.hit);
-            if (wallDetection.hit)
-            {
-                data.yVel = 5;
-                data.gravMult = 0;
-                if (boxxy.transform.position.y >= wallDetection.rayCastHit.point.y)
-                {
-                    data.yVel = 0;
-                    data.currentMove = Vector3.zero;
-                    data.movementEnabled = false;
-                }
-            }
-        }
-        catch (System.NullReferenceException)
-        {
-            print("NULL object");
-        }
+        data.movementEnabled = !_climbing;
     }
-
 }

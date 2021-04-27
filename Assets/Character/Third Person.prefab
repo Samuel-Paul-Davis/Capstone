@@ -88,8 +88,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e3df8be06c32c43a618a6c841e58b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LedgeDetectionBoxSize: {x: 1, y: 1, z: 1}
+  ledgeDetectionBoxScale: {x: 0.5, y: 0.5, z: 0.5}
+  ledgeDetectionBoxCenter: {x: 1, y: 5, z: 0}
   LedgeDetectionDistance: 1000
+  climbingController: {fileID: 2801270270712739497}
+  hit: 0
 --- !u!1 &1474722496800166263
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474722496800166263}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.953, z: 1.264}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5347343701973740976}
@@ -240,6 +243,7 @@ MonoBehaviour:
   - {fileID: 1474722496800166262}
   - {fileID: 1474722496800166259}
   - {fileID: 1474722496800166260}
+  - {fileID: 2801270270712739497}
 --- !u!114 &1474722496800166262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallDetection: {fileID: 880084122}
   boxxy: {fileID: 5568556761775211665}
+  _climbing: 0
 --- !u!1 &1474722497954237365
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,14 +11,7 @@ public class WallDetection : MonoBehaviour
     private SphereCollider sphereCollider;
     public RaycastHit rayCastHit;
 
-    private bool _grabLedge;
-
-    public bool grabLedge
-    {
-        get { return _grabLedge; }
-        set { _grabLedge = value; }
-    }
-
+    public ClimbingController climbingController;
     public bool hit;
 
     // Start is called before the first frame update
@@ -46,9 +39,19 @@ public class WallDetection : MonoBehaviour
             {
                 hit = true;
             }
-            print("WallDetection: " + hit);
             CanBeClimbed(rayCastHit.point);
+
+            if (hit && Input.GetKeyDown("w"))
+            {
+                print("Climbing inputs gotten");
+                StartClimbing(rayCastHit);
+            }
         }
+    }
+
+    private void StartClimbing(RaycastHit rayhit)
+    {
+        climbingController.ClimbUpLedge(rayhit.point);
     }
 
     private bool CanBeClimbed(Vector3 point)
@@ -66,12 +69,10 @@ public class WallDetection : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         wallDetected = true;
-        print("Wall detected");
     }
 
     private void OnTriggerExit(Collider other)
     {
         wallDetected = false;
-        print("Wall de-detected");
     }
 }
