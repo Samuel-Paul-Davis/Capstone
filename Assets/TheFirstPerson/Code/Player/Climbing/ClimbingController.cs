@@ -34,7 +34,9 @@ public class ClimbingController : TFPExtension
 
     private void MovePlayer()
     {
-        
+        // Begin Animation
+        // If lege is within range move to ledge
+        // If not, fail.
     }
 
     public override void ExPreUpdate(ref TFPData data, TFPInfo info)
