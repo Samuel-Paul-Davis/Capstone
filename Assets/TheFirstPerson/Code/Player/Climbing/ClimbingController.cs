@@ -14,6 +14,7 @@ public class ClimbingController : TFPExtension
     public bool _climbing;
     private bool _wallWithinRange;
     private Vector3 _climbingTarget;
+    private Vector3 startingPosition;
 
     private void Start()
     {
@@ -24,7 +25,14 @@ public class ClimbingController : TFPExtension
     {
         if (_canBeginClimb)
         {
-            Vector3.Lerp(transform.position, _climbingTarget, Time.deltaTime);
+            //transform.position = Vector3.Lerp(transform.position, _climbingTarget, Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _climbingTarget, Time.deltaTime * 2f);
+            if (transform.position == _climbingTarget)
+            {
+                print("Climbing has been completed");
+                _canBeginClimb = false;
+                _climbing = false;
+            }
         }
     }
 
@@ -32,6 +40,7 @@ public class ClimbingController : TFPExtension
     {
         // Begin Animation
         print("Climbing up ledge has begun");
+        startingPosition = transform.position;
         _climbingTarget = climbingPoint;
         _canBeginClimb = true;
         _climbing = true;
