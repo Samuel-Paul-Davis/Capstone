@@ -23,9 +23,7 @@ public class InitializeCameras : MonoBehaviour
     {
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
-<<<<<<< HEAD
             InitializeClearShot();
-=======
             //default values
             if (ignoreTag == "") ignoreTag = "Player";
             if (optimalTargetDistance == 0.0) optimalTargetDistance = 2;
@@ -53,7 +51,6 @@ public class InitializeCameras : MonoBehaviour
                 collider.m_IgnoreTag = ignoreTag;
             if (collider.m_OptimalTargetDistance == 0.0)
                 collider.m_OptimalTargetDistance = optimalTargetDistance;
->>>>>>> 2d374d7f83c238d17c626d34259408a4b6ad0bdd
         }
     }
 
@@ -70,13 +67,13 @@ public class InitializeCameras : MonoBehaviour
             else if (gObjParent && gObjParent.CompareTag("Player")) return FindPlayerObject(ref gArr, gObjParent);
             else if (!gObjParent && !gObj.GetComponent<CharacterController>() && gObj.CompareTag("Player")) throw new Exception("No GameObject tagged as 'Player' has CharacterController component!");
             else throw new Exception("No 'Player' GameObject not found in array!");
-        } else
+        }
+        else
         {
             if (gArr != null && gArr.Length > 0) return FindPlayerObject(ref gArr, gArr[gArr.Length - 1]);
             else throw new Exception("Array of 'Players' is null; are you sure there is a GameObject tagged 'Player'?");
         }
     }
-<<<<<<< HEAD
 
     private void InitializeClearShot()
     {
@@ -108,6 +105,4 @@ public class InitializeCameras : MonoBehaviour
         if (collider.m_OptimalTargetDistance == 0.0)
             collider.m_OptimalTargetDistance = optimalTargetDistance;
     }
-=======
->>>>>>> 2d374d7f83c238d17c626d34259408a4b6ad0bdd
 }
