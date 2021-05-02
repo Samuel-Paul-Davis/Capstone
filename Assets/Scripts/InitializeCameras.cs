@@ -23,7 +23,37 @@ public class InitializeCameras : MonoBehaviour
     {
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
+<<<<<<< HEAD
             InitializeClearShot();
+=======
+            //default values
+            if (ignoreTag == "") ignoreTag = "Player";
+            if (optimalTargetDistance == 0.0) optimalTargetDistance = 2;
+
+            gameObjects = GameObject.FindGameObjectsWithTag("Player");
+
+            //validation; should be forwards compatible with Unity 2020.3+
+            try
+            {
+                lookAt = FindPlayerObject(ref gameObjects);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                return;
+            }
+
+            CinemachineClearShot clearShot = gameObject.GetComponentInChildren<CinemachineClearShot>();
+            CinemachineCollider collider = gameObject.GetComponentInChildren<CinemachineCollider>();
+
+            if (!clearShot.LookAt)
+                clearShot.LookAt = lookAt.transform;
+
+            if (collider.m_IgnoreTag == "")
+                collider.m_IgnoreTag = ignoreTag;
+            if (collider.m_OptimalTargetDistance == 0.0)
+                collider.m_OptimalTargetDistance = optimalTargetDistance;
+>>>>>>> 2d374d7f83c238d17c626d34259408a4b6ad0bdd
         }
     }
 
@@ -46,6 +76,7 @@ public class InitializeCameras : MonoBehaviour
             else throw new Exception("Array of 'Players' is null; are you sure there is a GameObject tagged 'Player'?");
         }
     }
+<<<<<<< HEAD
 
     private void InitializeClearShot()
     {
@@ -77,4 +108,6 @@ public class InitializeCameras : MonoBehaviour
         if (collider.m_OptimalTargetDistance == 0.0)
             collider.m_OptimalTargetDistance = optimalTargetDistance;
     }
+=======
+>>>>>>> 2d374d7f83c238d17c626d34259408a4b6ad0bdd
 }

@@ -259,6 +259,9 @@ namespace TheFirstPerson
         string xMouseName = "Mouse X";
         string yMouseName = "Mouse Y";
 
+        //Key binding for mouse moving
+        KeyCode mouseUnlock = KeyCode.LeftAlt;
+
         TFPInfo controllerInfo;
 
         void Start()
@@ -320,14 +323,29 @@ namespace TheFirstPerson
                 originalMinJH = minJumpHeight;
             }
 
-
             ExecuteExtension(ExtFunc.PreUpdate);
             if (movementEnabled)
             {
                 UpdateInput();
             }
 
-            UpdateMouseLock();
+            //UpdateMouseLock();
+            if (Input.GetKeyDown(mouseUnlock))
+            {
+                if (mouseLocked)
+                {
+                    mouseLocked = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+                else
+                {
+                    mouseLocked = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+            }
+
             ExecuteExtension(ExtFunc.PostInput);
             if (thirdPersonMode && movementEnabled)
             {
@@ -808,7 +826,7 @@ namespace TheFirstPerson
                 running = runHeld;
             }
             	jumpHeld = standard ? Input.GetButton(jumpBtn) : customInputSystem.JumpHeld();
-if (standard ? Input.GetButtonDown(jumpBtn) : customInputSystem.JumpPressed())
+            if (standard ? Input.GetButtonDown(jumpBtn) : customInputSystem.JumpPressed())
             {
                 jumpPressed = coyoteTime;
                 if (moveInFixedUpdate)
