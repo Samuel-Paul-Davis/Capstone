@@ -588,7 +588,6 @@ namespace TheFirstPerson
             groundAngle = Vector3.Angle(hitNormal, Vector3.up);
             hitPoint = hit.point;
         }
-
         void setCurrentMoveVars()
         {
             currentTurnMult = 1.0f;
