@@ -10,13 +10,8 @@ using System;
 public class InitializeCameras : MonoBehaviour
 {
     private GameObject[] gameObjects;
-    [Header("CM ClearShot")]
-    [SerializeField]
-    private GameObject lookAt;
-
-    [Header("CM Collider")]
-    public string ignoreTag;
-    public float optimalTargetDistance;
+    public ClearShotInspector clearShotInspector;
+    public DollyInspector dollyInspector;
 
     // Awake is called when the script is initialized
     void Awake()
@@ -68,15 +63,15 @@ public class InitializeCameras : MonoBehaviour
     private void InitializeClearShot()
     {
         //default values
-        if (ignoreTag == "") ignoreTag = "Player";
-        if (optimalTargetDistance == 0.0) optimalTargetDistance = 2;
+        if (clearShotInspector.ignoreTag == "") clearShotInspector.ignoreTag = "Player";
+        if (clearShotInspector.optimalTargetDistance == 0.0) clearShotInspector.optimalTargetDistance = 2;
 
         gameObjects = GameObject.FindGameObjectsWithTag("Player");
 
         //validation; should be forwards compatible with Unity 2020.3+
         try
         {
-            lookAt = FindPlayerObject(ref gameObjects);
+            clearShotInspector.lookAt = FindPlayerObject(ref gameObjects);
         }
         catch (Exception e)
         {
@@ -88,16 +83,34 @@ public class InitializeCameras : MonoBehaviour
         CinemachineCollider collider = gameObject.GetComponentInChildren<CinemachineCollider>();
 
         if (!clearShot.LookAt)
-            clearShot.LookAt = lookAt.transform;
+            clearShot.LookAt = clearShotInspector.lookAt.transform;
 
         if (collider.m_IgnoreTag == "")
-            collider.m_IgnoreTag = ignoreTag;
+            collider.m_IgnoreTag = clearShotInspector.ignoreTag;
         if (collider.m_OptimalTargetDistance == 0.0)
-            collider.m_OptimalTargetDistance = optimalTargetDistance;
+            collider.m_OptimalTargetDistance = clearShotInspector.optimalTargetDistance;
     }
 
     private void InitializeDolly()
     {
         
     }
+}
+
+[Serializable]
+public struct ClearShotInspector
+{
+    [Header("CM ClearShot")]
+    public GameObject lookAt;
+
+    [Header("CM Collider")]
+    public string ignoreTag;
+    public float optimalTargetDistance;
+};
+
+[Serializable]
+public struct DollyInspector
+{
+    [Header("CM Dolly")]
+    public int placeholder;
 }
