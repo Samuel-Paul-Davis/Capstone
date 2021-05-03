@@ -93,7 +93,25 @@ public class InitializeCameras : MonoBehaviour
 
     private void InitializeDolly()
     {
-        
+        gameObjects = GameObject.FindGameObjectsWithTag("Player");
+
+        //validation; should be forwards compatible with Unity 2020.3+
+        try
+        {
+            GameObject player = FindPlayerObject(ref gameObjects);
+
+            dollyInspector.lookAt = player;
+            dollyInspector.follow = player;
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+            return;
+        }
+
+        gameObject.GetComponentInChildren<CinemachineVirtualCamera>().m_Follow = dollyInspector.follow.transform;
+        gameObject.GetComponentInChildren<CinemachineVirtualCamera>().m_LookAt = dollyInspector.lookAt.transform;
+
     }
 }
 
@@ -111,6 +129,6 @@ public struct ClearShotInspector
 [Serializable]
 public struct DollyInspector
 {
-    [Header("CM Dolly")]
-    public int placeholder;
+    public GameObject lookAt;
+    public GameObject follow;
 }
