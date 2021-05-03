@@ -23,7 +23,25 @@ public class InitializeCameras : MonoBehaviour
     {
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
-            InitializeClearShot();
+            try
+            {
+                if (name == "DollyCamera")
+                {
+                    InitializeDolly();
+                    return;
+                }
+
+                if (name == "TrackingCameras" || name == "FixedCameras")
+                {
+                    InitializeClearShot();
+                    return;
+                }
+
+                throw new Exception("Multiple camera prefab instances and/or prefab name changes are not supported");
+
+            } catch (Exception e) {
+                Debug.LogException(e);
+            }
         }
     }
 
@@ -76,5 +94,10 @@ public class InitializeCameras : MonoBehaviour
             collider.m_IgnoreTag = ignoreTag;
         if (collider.m_OptimalTargetDistance == 0.0)
             collider.m_OptimalTargetDistance = optimalTargetDistance;
+    }
+
+    private void InitializeDolly()
+    {
+        
     }
 }
