@@ -23,6 +23,7 @@ public class InitializeCameras : MonoBehaviour
     {
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
+            InitializeClearShot();
             //default values
             if (ignoreTag == "") ignoreTag = "Player";
             if (optimalTargetDistance == 0.0) optimalTargetDistance = 2;
@@ -66,10 +67,42 @@ public class InitializeCameras : MonoBehaviour
             else if (gObjParent && gObjParent.CompareTag("Player")) return FindPlayerObject(ref gArr, gObjParent);
             else if (!gObjParent && !gObj.GetComponent<CharacterController>() && gObj.CompareTag("Player")) throw new Exception("No GameObject tagged as 'Player' has CharacterController component!");
             else throw new Exception("No 'Player' GameObject not found in array!");
-        } else
+        }
+        else
         {
             if (gArr != null && gArr.Length > 0) return FindPlayerObject(ref gArr, gArr[gArr.Length - 1]);
             else throw new Exception("Array of 'Players' is null; are you sure there is a GameObject tagged 'Player'?");
         }
+    }
+
+    private void InitializeClearShot()
+    {
+        //default values
+        if (ignoreTag == "") ignoreTag = "Player";
+        if (optimalTargetDistance == 0.0) optimalTargetDistance = 2;
+
+        gameObjects = GameObject.FindGameObjectsWithTag("Player");
+
+        //validation; should be forwards compatible with Unity 2020.3+
+        try
+        {
+            lookAt = FindPlayerObject(ref gameObjects);
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+            return;
+        }
+
+        CinemachineClearShot clearShot = gameObject.GetComponentInChildren<CinemachineClearShot>();
+        CinemachineCollider collider = gameObject.GetComponentInChildren<CinemachineCollider>();
+
+        if (!clearShot.LookAt)
+            clearShot.LookAt = lookAt.transform;
+
+        if (collider.m_IgnoreTag == "")
+            collider.m_IgnoreTag = ignoreTag;
+        if (collider.m_OptimalTargetDistance == 0.0)
+            collider.m_OptimalTargetDistance = optimalTargetDistance;
     }
 }
