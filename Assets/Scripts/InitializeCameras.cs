@@ -16,6 +16,7 @@ public class InitializeCameras : MonoBehaviour
     }
 
     private GameObject[] gameObjects;
+    private GameObject player;
     public PrefabEnum prefabEnum;
     public ClearShotInspector clearShotInspector;
     public DollyInspector dollyInspector;
@@ -74,6 +75,22 @@ public class InitializeCameras : MonoBehaviour
         }
     }
 
+    private bool IsPlayerObjectFound(ref GameObject[] gameObjects)
+    {
+        //validation; should be forwards compatible with Unity 2020.3+
+        try
+        {
+            player = FindPlayerObject(ref gameObjects);
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+            return false;
+        }
+
+        return true;
+    }
+
     private void InitializeClearShot()
     {
         prefabEnum = PrefabEnum.ClearShot;
@@ -84,16 +101,10 @@ public class InitializeCameras : MonoBehaviour
 
         gameObjects = GameObject.FindGameObjectsWithTag("Player");
 
-        //validation; should be forwards compatible with Unity 2020.3+
-        try
-        {
-            clearShotInspector.lookAt = FindPlayerObject(ref gameObjects);
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
+        if (!IsPlayerObjectFound(ref gameObjects))
             return;
-        }
+
+        clearShotInspector.lookAt = player;
 
         CinemachineClearShot clearShot = gameObject.GetComponentInChildren<CinemachineClearShot>();
         CinemachineCollider collider = gameObject.GetComponentInChildren<CinemachineCollider>();
@@ -113,19 +124,11 @@ public class InitializeCameras : MonoBehaviour
 
         gameObjects = GameObject.FindGameObjectsWithTag("Player");
 
-        //validation; should be forwards compatible with Unity 2020.3+
-        try
-        {
-            GameObject player = FindPlayerObject(ref gameObjects);
-
-            dollyInspector.lookAt = player;
-            dollyInspector.follow = player;
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
+        if (!IsPlayerObjectFound(ref gameObjects))
             return;
-        }
+
+        dollyInspector.lookAt = player;
+        dollyInspector.follow = player;
 
         gameObject.GetComponentInChildren<CinemachineVirtualCamera>().m_Follow = dollyInspector.follow.transform;
         gameObject.GetComponentInChildren<CinemachineVirtualCamera>().m_LookAt = dollyInspector.lookAt.transform;
