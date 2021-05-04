@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEditor.Experimental.SceneManagement;
 using System;
+using System.Text.RegularExpressions;
 
 [ExecuteAlways]
 public class InitializeCameras : MonoBehaviour
@@ -14,31 +15,44 @@ public class InitializeCameras : MonoBehaviour
         Dolly
     }
 
-    private GameObject[] gameObjects;
+    private GameObject[] _gameObjects;
+    private GameObject _player;
+
     public PrefabEnum prefabEnum;
     public ClearShotInspector clearShotInspector;
     public DollyInspector dollyInspector;
+
+    private const string _PlayerTagName = "Player";
+    private const string _DollyPattern = "^DollyCamera.*";
+    private const string _ClearShotPattern = "(^Tracking|^Fixed)Cameras.*";
 
     // Awake is called when the script is initialized
     void Awake()
     {
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
+            Regex dollyRegex = new Regex(_DollyPattern);
+            Regex clearShotRegex = new Regex(_ClearShotPattern);
+
             try
             {
-                if (name == "DollyCamera")
+                if (dollyRegex.IsMatch(name))
                 {
                     InitializeDolly();
                     return;
                 }
 
-                if (name == "TrackingCameras" || name == "FixedCameras")
+                if (clearShotRegex.IsMatch(name))
                 {
                     InitializeClearShot();
                     return;
                 }
 
-                throw new Exception("Multiple camera prefab instances and/or prefab name changes are not supported");
+                throw new Exception(
+                    "Type of camera prefab not recognized. " +
+                    "When renaming camera prefabs in scene hierarchy, please keep the original name first followed by the new name. Example:\n" +
+                    "\t'TrackingCameras' -> 'TrackingCameras<custom name>'"
+                    );
 
             } catch (Exception e) {
                 Debug.LogException(e);
@@ -52,18 +66,44 @@ public class InitializeCameras : MonoBehaviour
         {
             GameObject gObjParent;
 
-            if (gObj.transform != gObj.transform.root) gObjParent = gObj.transform.parent.gameObject;
-            else gObjParent = null;
+            if (gObj.transform != gObj.transform.root) 
+                gObjParent = gObj.transform.parent.gameObject;
+            else
+                gObjParent = null;
 
-            if (gObj.GetComponent<CharacterController>() && gObj.CompareTag("Player")) return gObj;
-            else if (gObjParent && gObjParent.CompareTag("Player")) return FindPlayerObject(ref gArr, gObjParent);
-            else if (!gObjParent && !gObj.GetComponent<CharacterController>() && gObj.CompareTag("Player")) throw new Exception("No GameObject tagged as 'Player' has CharacterController component!");
-            else throw new Exception("No 'Player' GameObject not found in array!");
+            if (gObj.GetComponent<CharacterController>() && gObj.CompareTag(_PlayerTagName))
+                return gObj;
+            else if (gObjParent && gObjParent.CompareTag(_PlayerTagName))
+                return FindPlayerObject(ref gArr, gObjParent);
+            else if (!gObjParent && !gObj.GetComponent<CharacterController>() && gObj.CompareTag(_PlayerTagName))
+                throw new Exception("No GameObject tagged as 'Player' has CharacterController component!");
+            else
+                throw new Exception("No 'Player' GameObject not found in array!");
         } else
         {
-            if (gArr != null && gArr.Length > 0) return FindPlayerObject(ref gArr, gArr[gArr.Length - 1]);
-            else throw new Exception("Array of 'Players' is null; are you sure there is a GameObject tagged 'Player'?");
+            if (gArr != null && gArr.Length > 0)
+                return FindPlayerObject(ref gArr, gArr[gArr.Length - 1]);
+            else
+                throw new Exception("Array of 'Players' is null; are you sure there is a GameObject tagged 'Player'?");
         }
+    }
+
+    private bool SetPlayerObject()
+    {
+        _gameObjects = GameObject.FindGameObjectsWithTag(_PlayerTagName);
+
+        //validation; should be forwards compatible with Unity 2020.3+
+        try
+        {
+            _player = FindPlayerObject(ref _gameObjects);
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+            return false;
+        }
+
+        return true;
     }
 
     private void InitializeClearShot()
@@ -71,21 +111,15 @@ public class InitializeCameras : MonoBehaviour
         prefabEnum = PrefabEnum.ClearShot;
 
         //default values
-        if (clearShotInspector.ignoreTag == "") clearShotInspector.ignoreTag = "Player";
-        if (clearShotInspector.optimalTargetDistance == 0.0) clearShotInspector.optimalTargetDistance = 2;
+        if (clearShotInspector.ignoreTag == "")
+            clearShotInspector.ignoreTag = _PlayerTagName;
+        if (clearShotInspector.optimalTargetDistance == 0.0)
+            clearShotInspector.optimalTargetDistance = 2;
 
-        gameObjects = GameObject.FindGameObjectsWithTag("Player");
-
-        //validation; should be forwards compatible with Unity 2020.3+
-        try
-        {
-            clearShotInspector.lookAt = FindPlayerObject(ref gameObjects);
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
+        if (!SetPlayerObject())
             return;
-        }
+
+        clearShotInspector.lookAt = _player;
 
         CinemachineClearShot clearShot = gameObject.GetComponentInChildren<CinemachineClearShot>();
         CinemachineCollider collider = gameObject.GetComponentInChildren<CinemachineCollider>();
@@ -103,24 +137,16 @@ public class InitializeCameras : MonoBehaviour
     {
         prefabEnum = PrefabEnum.Dolly;
 
-        gameObjects = GameObject.FindGameObjectsWithTag("Player");
-
-        //validation; should be forwards compatible with Unity 2020.3+
-        try
-        {
-            GameObject player = FindPlayerObject(ref gameObjects);
-
-            dollyInspector.lookAt = player;
-            dollyInspector.follow = player;
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
+        if (!SetPlayerObject())
             return;
-        }
 
-        gameObject.GetComponentInChildren<CinemachineVirtualCamera>().m_Follow = dollyInspector.follow.transform;
-        gameObject.GetComponentInChildren<CinemachineVirtualCamera>().m_LookAt = dollyInspector.lookAt.transform;
+        dollyInspector.lookAt = _player;
+        dollyInspector.follow = _player;
+
+        CinemachineVirtualCamera cmVirtualCamera = gameObject.GetComponentInChildren<CinemachineVirtualCamera>();
+
+        cmVirtualCamera.m_Follow = dollyInspector.follow.transform;
+        cmVirtualCamera.m_LookAt = dollyInspector.lookAt.transform;
 
     }
 }
