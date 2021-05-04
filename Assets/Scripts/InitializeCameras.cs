@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEditor.Experimental.SceneManagement;
 using System;
+using System.Text.RegularExpressions;
 
 [ExecuteAlways]
 public class InitializeCameras : MonoBehaviour
@@ -24,21 +25,28 @@ public class InitializeCameras : MonoBehaviour
     {
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
+            Regex dollyPattern = new Regex("^DollyCamera.*");
+            Regex clearShotPattern = new Regex("(^Tracking|^Fixed)Cameras.*");
+
             try
             {
-                if (name == "DollyCamera")
+                if (dollyPattern.IsMatch(name))
                 {
                     InitializeDolly();
                     return;
                 }
 
-                if (name == "TrackingCameras" || name == "FixedCameras")
+                if (clearShotPattern.IsMatch(name))
                 {
                     InitializeClearShot();
                     return;
                 }
 
-                throw new Exception("Multiple camera prefab instances and/or prefab name changes are not supported");
+                throw new Exception(
+                    "Type of camera prefab not recognized. " +
+                    "When renaming camera prefabs in scene hierarchy, please keep the original name first followed by the new name. Example:\n" +
+                    "\t'TrackingCameras' -> 'TrackingCameras<custom name>'"
+                    );
 
             } catch (Exception e) {
                 Debug.LogException(e);
