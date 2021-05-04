@@ -9,9 +9,6 @@ public class InitializeCamerasEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        //prefabType = (PrefabType)EditorGUILayout.EnumPopup("Type", prefabType);
-        //EditorGUILayout.Space();
-
         initializeCameras = (InitializeCameras)target;
 
         switch (initializeCameras.prefabEnum)
@@ -23,8 +20,6 @@ public class InitializeCamerasEditor : Editor
                 ShowDollyInspector();
                 break;
         }
-
-        //base.OnInspectorGUI();
 
         serializedObject.ApplyModifiedProperties();
     }

@@ -22,6 +22,7 @@ public class InitializeCameras : MonoBehaviour
     public ClearShotInspector clearShotInspector;
     public DollyInspector dollyInspector;
 
+    private const string _PlayerTagName = "Player";
     private const string _DollyPattern = "^DollyCamera.*";
     private const string _ClearShotPattern = "(^Tracking|^Fixed)Cameras.*";
 
@@ -70,11 +71,11 @@ public class InitializeCameras : MonoBehaviour
             else
                 gObjParent = null;
 
-            if (gObj.GetComponent<CharacterController>() && gObj.CompareTag("Player"))
+            if (gObj.GetComponent<CharacterController>() && gObj.CompareTag(_PlayerTagName))
                 return gObj;
-            else if (gObjParent && gObjParent.CompareTag("Player"))
+            else if (gObjParent && gObjParent.CompareTag(_PlayerTagName))
                 return FindPlayerObject(ref gArr, gObjParent);
-            else if (!gObjParent && !gObj.GetComponent<CharacterController>() && gObj.CompareTag("Player"))
+            else if (!gObjParent && !gObj.GetComponent<CharacterController>() && gObj.CompareTag(_PlayerTagName))
                 throw new Exception("No GameObject tagged as 'Player' has CharacterController component!");
             else
                 throw new Exception("No 'Player' GameObject not found in array!");
@@ -89,7 +90,7 @@ public class InitializeCameras : MonoBehaviour
 
     private bool SetPlayerObject()
     {
-        _gameObjects = GameObject.FindGameObjectsWithTag("Player");
+        _gameObjects = GameObject.FindGameObjectsWithTag(_PlayerTagName);
 
         //validation; should be forwards compatible with Unity 2020.3+
         try
@@ -111,7 +112,7 @@ public class InitializeCameras : MonoBehaviour
 
         //default values
         if (clearShotInspector.ignoreTag == "")
-            clearShotInspector.ignoreTag = "Player";
+            clearShotInspector.ignoreTag = _PlayerTagName;
         if (clearShotInspector.optimalTargetDistance == 0.0)
             clearShotInspector.optimalTargetDistance = 2;
 
