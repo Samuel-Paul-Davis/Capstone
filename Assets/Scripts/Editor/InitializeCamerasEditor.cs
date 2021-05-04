@@ -11,8 +11,31 @@ public class InitializeCamerasEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
+        prefabType = (PrefabType)EditorGUILayout.EnumPopup("Type", prefabType);
+        EditorGUILayout.Space();
+
+        switch (prefabType)
+        {
+            case PrefabType.ClearShot:
+                ShowClearShotInspector();
+                break;
+            case PrefabType.Dolly:
+                ShowDollyInspector();
+                break;
+        }
+
+        //base.OnInspectorGUI();
 
         serializedObject.ApplyModifiedProperties();
+    }
+
+    private void ShowClearShotInspector()
+    {
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("clearShotInspector"));
+    }
+
+    private void ShowDollyInspector()
+    {
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("dollyInspector"));
     }
 }
