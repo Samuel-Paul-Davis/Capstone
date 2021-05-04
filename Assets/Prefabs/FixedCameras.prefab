@@ -218,9 +218,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cecc3974226b7e4887c46727b75b3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAt: {fileID: 0}
-  ignoreTag: 
-  optimalTargetDistance: 0
+  prefabEnum: 0
+  clearShotInspector:
+    lookAt: {fileID: 0}
+    ignoreTag: 
+    optimalTargetDistance: 0
+  dollyInspector:
+    lookAt: {fileID: 0}
+    follow: {fileID: 0}
 --- !u!1 &3042125260104126696
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +279,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3042125260425557259}
   - component: {fileID: 3042125260425557258}
-  - component: {fileID: 3042125260425557257}
   - component: {fileID: 3042125260425557256}
   - component: {fileID: 3042125260425557261}
   - component: {fileID: 3042125260425557260}
@@ -342,14 +346,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &3042125260425557257
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3042125260425557255}
-  m_Enabled: 1
 --- !u!114 &3042125260425557256
 MonoBehaviour:
   m_ObjectHideFlags: 0
