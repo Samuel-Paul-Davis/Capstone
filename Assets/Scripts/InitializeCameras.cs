@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEditor.Experimental.SceneManagement;
-
 using System;
 
 [ExecuteAlways]
 public class InitializeCameras : MonoBehaviour
 {
+    public enum PrefabEnum
+    {
+        ClearShot,
+        Dolly
+    }
+
     private GameObject[] gameObjects;
+    public PrefabEnum prefabEnum;
     public ClearShotInspector clearShotInspector;
     public DollyInspector dollyInspector;
 
@@ -62,6 +68,8 @@ public class InitializeCameras : MonoBehaviour
 
     private void InitializeClearShot()
     {
+        prefabEnum = PrefabEnum.ClearShot;
+
         //default values
         if (clearShotInspector.ignoreTag == "") clearShotInspector.ignoreTag = "Player";
         if (clearShotInspector.optimalTargetDistance == 0.0) clearShotInspector.optimalTargetDistance = 2;
@@ -93,6 +101,8 @@ public class InitializeCameras : MonoBehaviour
 
     private void InitializeDolly()
     {
+        prefabEnum = PrefabEnum.Dolly;
+
         gameObjects = GameObject.FindGameObjectsWithTag("Player");
 
         //validation; should be forwards compatible with Unity 2020.3+

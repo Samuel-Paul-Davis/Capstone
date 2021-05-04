@@ -5,21 +5,21 @@ using UnityEditor;
 [CustomEditor(typeof(InitializeCameras))]
 public class InitializeCamerasEditor : Editor
 {
-    public enum PrefabType { ClearShot, Dolly }
-
-    public PrefabType prefabType;
+    public InitializeCameras initializeCameras;
 
     public override void OnInspectorGUI()
     {
-        prefabType = (PrefabType)EditorGUILayout.EnumPopup("Type", prefabType);
-        EditorGUILayout.Space();
+        //prefabType = (PrefabType)EditorGUILayout.EnumPopup("Type", prefabType);
+        //EditorGUILayout.Space();
 
-        switch (prefabType)
+        initializeCameras = (InitializeCameras)target;
+
+        switch (initializeCameras.prefabEnum)
         {
-            case PrefabType.ClearShot:
+            case InitializeCameras.PrefabEnum.ClearShot:
                 ShowClearShotInspector();
                 break;
-            case PrefabType.Dolly:
+            case InitializeCameras.PrefabEnum.Dolly:
                 ShowDollyInspector();
                 break;
         }

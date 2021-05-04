@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 4612.871, g: 2946.2402, b: 2180.9023, a: 1}
+  m_IndirectSpecularColor: {r: 4602.5586, g: 2947.0566, b: 2194.2578, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -594,43 +594,43 @@ PrefabInstance:
       objectReference: {fileID: 2994450026324174698}
     - target: {fileID: 8132283497166376124, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: field of view
-      value: 60
+      value: 60.000004
       objectReference: {fileID: 0}
     - target: {fileID: 8132283497166376124, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: far clip plane
-      value: 1000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 8132283497166376124, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: near clip plane
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8132283497166376125, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -27.291306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8132283497166376125, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9332466
+      value: 0.88
       objectReference: {fileID: 0}
     - target: {fileID: 8132283497166376125, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.2119874
+      value: 1.2119868
       objectReference: {fileID: 0}
     - target: {fileID: 8132283497166376125, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.71325046
+      value: 0.70673865
       objectReference: {fileID: 0}
     - target: {fileID: 8132283497166376125, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.70090926
+      value: 0.022806888
       objectReference: {fileID: 0}
     - target: {fileID: 8132283497166376125, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.7067392
       objectReference: {fileID: 0}
     - target: {fileID: 8132283497166376125, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.022806909
       objectReference: {fileID: 0}
     - target: {fileID: 8132283498250854357, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_Name
@@ -690,19 +690,19 @@ PrefabInstance:
       objectReference: {fileID: 2994450026324174699}
     - target: {fileID: 8132283498966594845, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7067392
+      value: 0.70673865
       objectReference: {fileID: 0}
     - target: {fileID: 8132283498966594845, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.022806909
+      value: 0.022806888
       objectReference: {fileID: 0}
     - target: {fileID: 8132283498966594845, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70673865
+      value: -0.7067392
       objectReference: {fileID: 0}
     - target: {fileID: 8132283498966594845, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.022806888
+      value: 0.022806909
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad72486048ff19746b9a3a270c44b83b, type: 3}
@@ -933,6 +933,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackingCameras
       objectReference: {fileID: 0}
+    - target: {fileID: 3042125260425557258, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: field of view
+      value: 60.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042125260425557258, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: far clip plane
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042125260425557258, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042125260425557259, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 27.291306
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042125260425557259, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.8132466
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042125260425557259, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00000059604645
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042125260425557259, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7067392
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042125260425557259, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.022806909
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042125260425557259, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70673865
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042125260425557259, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.022806888
+      objectReference: {fileID: 0}
     - target: {fileID: 3960944134744224686, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
       propertyPath: clearShotInspector.lookAt
       value: 
@@ -943,7 +983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3960944134744224686, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
       propertyPath: clearShotInspector.optimalTargetDistance
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d635b9bbff88ab4b812cf831f8b09bd, type: 3}
