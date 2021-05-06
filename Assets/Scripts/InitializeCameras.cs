@@ -27,60 +27,10 @@ public class InitializeCameras : MonoBehaviour
     private const string _ClearShotPattern = "(^Tracking|^Fixed)Cameras.*";
 
     // Awake is called when the script is initialized
-    void Awake()
+    private void Awake()
     {
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            InitializeClearShot();
-=======
-            //default values
-            if (ignoreTag == "") ignoreTag = "Player";
-            if (optimalTargetDistance == 0.0) optimalTargetDistance = 2;
-=======
-            Regex dollyRegex = new Regex(_DollyPattern);
-            Regex clearShotRegex = new Regex(_ClearShotPattern);
->>>>>>> 6a5a6d609ac10feeed67b9286e6b427c536f4121
-
-            try
-            {
-                if (dollyRegex.IsMatch(name))
-                {
-                    InitializeDolly();
-                    return;
-                }
-
-                if (clearShotRegex.IsMatch(name))
-                {
-                    InitializeClearShot();
-                    return;
-                }
-
-                throw new Exception(
-                    "Type of camera prefab not recognized. " +
-                    "When renaming camera prefabs in scene hierarchy, please keep the original name first followed by the new name. Example:\n" +
-                    "\t'TrackingCameras' -> 'TrackingCameras<custom name>'"
-                    );
-
-            } catch (Exception e) {
-                Debug.LogException(e);
-            }
-<<<<<<< HEAD
-
-            CinemachineClearShot clearShot = gameObject.GetComponentInChildren<CinemachineClearShot>();
-            CinemachineCollider collider = gameObject.GetComponentInChildren<CinemachineCollider>();
-
-            if (!clearShot.LookAt)
-                clearShot.LookAt = lookAt.transform;
-
-            if (collider.m_IgnoreTag == "")
-                collider.m_IgnoreTag = ignoreTag;
-            if (collider.m_OptimalTargetDistance == 0.0)
-                collider.m_OptimalTargetDistance = optimalTargetDistance;
->>>>>>> 2d374d7f83c238d17c626d34259408a4b6ad0bdd
-=======
             Regex dollyRegex = new Regex(_DollyPattern);
             Regex clearShotRegex = new Regex(_ClearShotPattern);
 
@@ -103,13 +53,11 @@ public class InitializeCameras : MonoBehaviour
                     "When renaming camera prefabs in scene hierarchy, please keep the original name first followed by the new name. Example:\n" +
                     "\t'TrackingCameras' -> 'TrackingCameras<custom name>'"
                     );
-
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Debug.LogException(e);
             }
->>>>>>> 395201fa83564bd0cd0816f376f723d30bb61398
-=======
->>>>>>> 6a5a6d609ac10feeed67b9286e6b427c536f4121
         }
     }
 
@@ -119,7 +67,7 @@ public class InitializeCameras : MonoBehaviour
         {
             GameObject gObjParent;
 
-            if (gObj.transform != gObj.transform.root) 
+            if (gObj.transform != gObj.transform.root)
                 gObjParent = gObj.transform.parent.gameObject;
             else
                 gObjParent = null;
@@ -132,7 +80,8 @@ public class InitializeCameras : MonoBehaviour
                 throw new Exception("No GameObject tagged as 'Player' has CharacterController component!");
             else
                 throw new Exception("No 'Player' GameObject not found in array!");
-        } else
+        }
+        else
         {
             if (gArr != null && gArr.Length > 0)
                 return FindPlayerObject(ref gArr, gArr[gArr.Length - 1]);
@@ -184,7 +133,6 @@ public class InitializeCameras : MonoBehaviour
             collider.m_IgnoreTag = clearShotInspector.ignoreTag;
         if (collider.m_OptimalTargetDistance == 0.0)
             collider.m_OptimalTargetDistance = clearShotInspector.optimalTargetDistance;
-<<<<<<< HEAD
     }
 
     private void InitializeDolly()
@@ -201,32 +149,7 @@ public class InitializeCameras : MonoBehaviour
 
         cmVirtualCamera.m_Follow = dollyInspector.follow.transform;
         cmVirtualCamera.m_LookAt = dollyInspector.lookAt.transform;
-
     }
-<<<<<<< HEAD
-=======
->>>>>>> 2d374d7f83c238d17c626d34259408a4b6ad0bdd
-=======
-=======
-    }
-
-    private void InitializeDolly()
-    {
-        prefabEnum = PrefabEnum.Dolly;
-
-        if (!SetPlayerObject())
-            return;
-
-        dollyInspector.lookAt = _player;
-        dollyInspector.follow = _player;
-
-        CinemachineVirtualCamera cmVirtualCamera = gameObject.GetComponentInChildren<CinemachineVirtualCamera>();
-
-        cmVirtualCamera.m_Follow = dollyInspector.follow.transform;
-        cmVirtualCamera.m_LookAt = dollyInspector.lookAt.transform;
-
-    }
->>>>>>> 6a5a6d609ac10feeed67b9286e6b427c536f4121
 }
 
 [Serializable]
@@ -237,6 +160,7 @@ public struct ClearShotInspector
 
     [Header("CM Collider")]
     public string ignoreTag;
+
     public float optimalTargetDistance;
 };
 
@@ -245,8 +169,4 @@ public struct DollyInspector
 {
     public GameObject lookAt;
     public GameObject follow;
-<<<<<<< HEAD
->>>>>>> 395201fa83564bd0cd0816f376f723d30bb61398
-=======
->>>>>>> 6a5a6d609ac10feeed67b9286e6b427c536f4121
 }
