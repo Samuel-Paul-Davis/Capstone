@@ -776,6 +776,8 @@ MonoBehaviour:
   wallDetection: {fileID: 880084122}
   boxxy: {fileID: 5568556761775211665}
   _climbing: 0
+  handPosition: {fileID: 2099372195}
+  HangingDistance: {fileID: 4658659299016186044}
 --- !u!1 &1474722497954237365
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,7 +987,7 @@ GameObject:
   - component: {fileID: 7801114155736236303}
   - component: {fileID: 5568556761775211665}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: HangingDistance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -999,7 +1001,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4658659299016186044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.027, y: 2.009, z: 0.359}
+  m_LocalPosition: {x: 0.027, y: 1.918, z: 0.359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1474722496800166257}
@@ -1044,18 +1046,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4719284704717666058}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_RigLayers:
   - m_Rig: {fileID: 462727770}
-    m_Active: 0
+    m_Active: 1
   - m_Rig: {fileID: 922420135}
-    m_Active: 0
+    m_Active: 1
   - m_Rig: {fileID: 1743003862}
-    m_Active: 0
+    m_Active: 1
   m_Effectors: []
 --- !u!114 &2994450026324174702
 MonoBehaviour:

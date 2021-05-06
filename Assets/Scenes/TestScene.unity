@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 4609, g: 2945.5117, b: 2184.004, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -980,6 +980,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0749e301b4c50149aa724f3de8ce928, type: 3}
+--- !u!1 &1386053149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2099372195, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+  m_PrefabInstance: {fileID: 2994450026324174697}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1391961607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1041,6 +1046,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0749e301b4c50149aa724f3de8ce928, type: 3}
+--- !u!1 &1636361108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4658659299016186044, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+  m_PrefabInstance: {fileID: 2994450026324174697}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1730952141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,6 +1485,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2801270270712739497, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+      propertyPath: handPosition
+      value: 
+      objectReference: {fileID: 1386053149}
+    - target: {fileID: 2801270270712739497, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+      propertyPath: HangingDistance
+      value: 
+      objectReference: {fileID: 1636361108}
     - target: {fileID: 2994450026324174701, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1490,6 +1508,10 @@ PrefabInstance:
     - target: {fileID: 2994450026324174701, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
       propertyPath: m_RigLayers.Array.data[2].m_Active
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658659299016186044, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+      propertyPath: m_Name
+      value: HangingDistance
       objectReference: {fileID: 0}
     - target: {fileID: 6841584676964890714, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
       propertyPath: m_RootOrder
@@ -1538,6 +1560,10 @@ PrefabInstance:
     - target: {fileID: 6841584676964890715, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
       propertyPath: m_Name
       value: Third Person
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801114155736236303, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.918
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
