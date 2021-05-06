@@ -33,24 +33,41 @@ public class InitializeCameras : MonoBehaviour
         {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             InitializeClearShot();
 =======
             //default values
             if (ignoreTag == "") ignoreTag = "Player";
             if (optimalTargetDistance == 0.0) optimalTargetDistance = 2;
+=======
+            Regex dollyRegex = new Regex(_DollyPattern);
+            Regex clearShotRegex = new Regex(_ClearShotPattern);
+>>>>>>> 6a5a6d609ac10feeed67b9286e6b427c536f4121
 
-            gameObjects = GameObject.FindGameObjectsWithTag("Player");
-
-            //validation; should be forwards compatible with Unity 2020.3+
             try
             {
-                lookAt = FindPlayerObject(ref gameObjects);
-            }
-            catch (Exception e)
-            {
+                if (dollyRegex.IsMatch(name))
+                {
+                    InitializeDolly();
+                    return;
+                }
+
+                if (clearShotRegex.IsMatch(name))
+                {
+                    InitializeClearShot();
+                    return;
+                }
+
+                throw new Exception(
+                    "Type of camera prefab not recognized. " +
+                    "When renaming camera prefabs in scene hierarchy, please keep the original name first followed by the new name. Example:\n" +
+                    "\t'TrackingCameras' -> 'TrackingCameras<custom name>'"
+                    );
+
+            } catch (Exception e) {
                 Debug.LogException(e);
-                return;
             }
+<<<<<<< HEAD
 
             CinemachineClearShot clearShot = gameObject.GetComponentInChildren<CinemachineClearShot>();
             CinemachineCollider collider = gameObject.GetComponentInChildren<CinemachineCollider>();
@@ -91,6 +108,8 @@ public class InitializeCameras : MonoBehaviour
                 Debug.LogException(e);
             }
 >>>>>>> 395201fa83564bd0cd0816f376f723d30bb61398
+=======
+>>>>>>> 6a5a6d609ac10feeed67b9286e6b427c536f4121
         }
     }
 
@@ -121,7 +140,6 @@ public class InitializeCameras : MonoBehaviour
                 throw new Exception("Array of 'Players' is null; are you sure there is a GameObject tagged 'Player'?");
         }
     }
-<<<<<<< HEAD
 
     private bool SetPlayerObject()
     {
@@ -166,6 +184,7 @@ public class InitializeCameras : MonoBehaviour
             collider.m_IgnoreTag = clearShotInspector.ignoreTag;
         if (collider.m_OptimalTargetDistance == 0.0)
             collider.m_OptimalTargetDistance = clearShotInspector.optimalTargetDistance;
+<<<<<<< HEAD
     }
 
     private void InitializeDolly()
@@ -188,6 +207,26 @@ public class InitializeCameras : MonoBehaviour
 =======
 >>>>>>> 2d374d7f83c238d17c626d34259408a4b6ad0bdd
 =======
+=======
+    }
+
+    private void InitializeDolly()
+    {
+        prefabEnum = PrefabEnum.Dolly;
+
+        if (!SetPlayerObject())
+            return;
+
+        dollyInspector.lookAt = _player;
+        dollyInspector.follow = _player;
+
+        CinemachineVirtualCamera cmVirtualCamera = gameObject.GetComponentInChildren<CinemachineVirtualCamera>();
+
+        cmVirtualCamera.m_Follow = dollyInspector.follow.transform;
+        cmVirtualCamera.m_LookAt = dollyInspector.lookAt.transform;
+
+    }
+>>>>>>> 6a5a6d609ac10feeed67b9286e6b427c536f4121
 }
 
 [Serializable]
@@ -206,5 +245,8 @@ public struct DollyInspector
 {
     public GameObject lookAt;
     public GameObject follow;
+<<<<<<< HEAD
 >>>>>>> 395201fa83564bd0cd0816f376f723d30bb61398
+=======
+>>>>>>> 6a5a6d609ac10feeed67b9286e6b427c536f4121
 }
