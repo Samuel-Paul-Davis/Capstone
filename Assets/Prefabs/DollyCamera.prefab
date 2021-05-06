@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8132283497166376121}
-  m_LocalRotation: {x: 0.022806888, y: -0.7067392, z: 0.022806909, w: 0.70673865}
+  m_LocalRotation: {x: -0.48361197, y: -0.5158678, z: -0.483614, w: 0.5158657}
   m_LocalPosition: {x: 0, y: 0.88, z: 1.2119868}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -287,6 +287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8132283498250854358}
+  - component: {fileID: 6435299586942715421}
   m_Layer: 0
   m_Name: DollyCamera
   m_TagString: Untagged
@@ -311,6 +312,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6435299586942715421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8132283498250854357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cecc3974226b7e4887c46727b75b3f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clearShotInspector:
+    lookAt: {fileID: 0}
+    ignoreTag: 
+    optimalTargetDistance: 0
+  dollyInspector:
+    lookAt: {fileID: 0}
+    follow: {fileID: 0}
 --- !u!1 &8132283498370045555
 GameObject:
   m_ObjectHideFlags: 0
