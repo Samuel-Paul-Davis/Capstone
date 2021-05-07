@@ -6,6 +6,9 @@ using UnityEditor.Experimental.SceneManagement;
 using System;
 using System.Text.RegularExpressions;
 
+/// <summary>
+/// Finds player object and automatically generates references where needed (e.g. sets player object as “look at” target)
+/// </summary>
 [ExecuteAlways]
 public class InitializeCameras : MonoBehaviour
 {
@@ -29,11 +32,17 @@ public class InitializeCameras : MonoBehaviour
     // Awake is called when the script is initialized
     void Awake()
     {
+        /// <summary>
+        /// Checks IF the inspector is editing a prefab, and does not execute to avoid modifying the prefab
+        /// </summary>
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
             Regex dollyRegex = new Regex(_DollyPattern);
             Regex clearShotRegex = new Regex(_ClearShotPattern);
 
+            /// <summary>
+            /// Operations are different depending on whether the script is running on a DollyCamera.prefab or FixedCameras.prefab/TrackingCameras.prefab
+            /// </summary>
             try
             {
                 if (dollyRegex.IsMatch(name))
@@ -60,6 +69,12 @@ public class InitializeCameras : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method is a recursive search algorithm that finds the player GameObject by walking from the deepest nested GameObject in gArr back to the root Object
+    /// </summary>
+    /// <param name="gArr">'gArr' is the list of GameObjects to be searched</param>
+    /// <param name="gObj">gObj is designed to be used internally. It would be possible to use overloading to obfuscate this further.</param>
+    /// <returns>This method returns the player as a GameObject.</returns>
     private GameObject FindPlayerObject(ref GameObject[] gArr, GameObject gObj = null)
     {
         if (gObj)
@@ -106,6 +121,9 @@ public class InitializeCameras : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// This method performs all operations related to prefilling CM ClearShot prefabs
+    /// </summary>
     private void InitializeClearShot()
     {
         prefabEnum = PrefabEnum.ClearShot;
@@ -133,6 +151,9 @@ public class InitializeCameras : MonoBehaviour
             collider.m_OptimalTargetDistance = clearShotInspector.optimalTargetDistance;
     }
 
+    /// <summary>
+    /// This method performs all operatations related to CM Dolly Camera prefabs
+    /// </summary>
     private void InitializeDolly()
     {
         prefabEnum = PrefabEnum.Dolly;
@@ -151,6 +172,9 @@ public class InitializeCameras : MonoBehaviour
     }
 }
 
+/// <summary>
+/// This structure stores the fields displayed in the Inspector for CM Clear Shot prefabs
+/// </summary>
 [Serializable]
 public struct ClearShotInspector
 {
@@ -162,6 +186,9 @@ public struct ClearShotInspector
     public float optimalTargetDistance;
 };
 
+/// <summary>
+/// This structure stores the fields displayed in the Inspector for CM Dolly prefabs
+/// </summary>
 [Serializable]
 public struct DollyInspector
 {
