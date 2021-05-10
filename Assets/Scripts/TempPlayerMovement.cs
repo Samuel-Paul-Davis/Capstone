@@ -27,22 +27,21 @@ public class TempPlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (isArea && gameObject != null)
+            if ( gameObject != null)
             {
-                gameObject.GetComponent<InteractableObject>().ObjectInteraction();
+                gameObject.GetComponent<AbstractObjectInteraction>().ObjectInteraction();
             }
         }
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        isArea = true;
         gameObject = other.gameObject;
     }
 
     public void OnTriggerExit(Collider other)
     {
-        isArea = false;
-        gameObject = null;
+        if (gameObject == other.gameObject)
+            gameObject = null;
     }
 }

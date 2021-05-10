@@ -5,7 +5,7 @@ using UnityEngine;
 public class PuzzleInteractionObject : AbstractObjectInteraction
 {
     [SerializeField]
-    private PuzzleState puzzleState = PuzzleState.Off;
+    public PuzzleState puzzleState = PuzzleState.Off;
 
     // Start is called before the first frame update
     void Start()
@@ -27,5 +27,6 @@ public class PuzzleInteractionObject : AbstractObjectInteraction
     public override void ObjectInteraction()
     {
         puzzleState = PuzzleState.On;
+        Debug.Log("Yep");
     }
 }
