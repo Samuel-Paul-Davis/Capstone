@@ -38,6 +38,12 @@ public class ClimbingController : TFPExtension
     private bool _wallWithinRange;
     private Vector3 _climbingTarget;
     private Vector3 startingPosition;
+    private Vector3 lerpTarget;
+
+    [Header("Climbing")]
+    [SerializeField] private Vector3 playerHangingPosition;
+
+    [SerializeField] private Vector3 playerHandsPosition;
 
     private ClimbingState currentState;
 
@@ -51,6 +57,7 @@ public class ClimbingController : TFPExtension
             rigBuilder = GetComponentInChildren<RigBuilder>();
             wallDetection = GetComponent<WallDetection>();
             vertDistance = HangingDistance.transform.position.y - transform.position.y;
+
             print("VertDistance = " + vertDistance);
         }
         catch (System.NullReferenceException e)
@@ -64,66 +71,8 @@ public class ClimbingController : TFPExtension
     {
         if (_canBeginClimb)
         {
-            StartIK();
-            Vector3 lerpTarget = new Vector3(transform.position.x, _climbingTarget.y - vertDistance, transform.position.z);
-
-            if (currentState == ClimbingState.ClimbStart)
-            {
-                if (transform.position != lerpTarget)
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, lerpTarget, Time.deltaTime * 2f);
-                }
-                else if (transform.position == lerpTarget)
-                {
-                    currentState = ClimbingState.ClimbLedgeHangIdle;
-                }
-            }
-
-            if (currentState == ClimbingState.ClimbLedgeHangIdle)
-            {
-                if (Input.GetKeyDown("w"))
-                {
-                    currentState = ClimbingState.ClimbUpLedgeStart;
-                }
-                if (Input.GetKeyDown("s"))
-                {
-                    currentState = ClimbingState.ClimbDrop;
-                }
-            }
-
-            if (currentState == ClimbingState.ClimbUpLedgeStart)
-            {
-                EndIK();
-                animator.SetTrigger("climbingUpLedge");
-                currentState = ClimbingState.ClimbUpLedgeCurrent;
-            }
-
-            if (currentState == ClimbingState.ClimbUpLedgeCurrent)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, _climbingTarget, Time.deltaTime * 2f);
-                if (transform.position == _climbingTarget)
-                {
-                    currentState = ClimbingState.ClimbUpLedgeEnd;
-                }
-            }
-
-            if (currentState == ClimbingState.ClimbUpLedgeEnd)
-            {
-                print("Climbing has been completed");
-                _canBeginClimb = false;
-                _climbing = false;
-                animator.SetBool("isHanging", false);
-            }
-            if (currentState == ClimbingState.ClimbDrop)
-            {
-                _canBeginClimb = false;
-                _climbing = false;
-                animator.SetBool("isHanging", false);
-                currentState = ClimbingState.ClimbEnd;
-                EndIK();
-            }
+            setStateVariables();
         }
-        print(currentState);
     }
 
     private void EndIK()
@@ -138,6 +87,10 @@ public class ClimbingController : TFPExtension
         rigBuilder.enabled = true;
     }
 
+    /// <summary>
+    /// Begins character climbing
+    /// </summary>
+    /// <param name="climbingPoint"></param>
     public void ClimbUpLedge(Vector3 climbingPoint)
     {
         if (!_climbing)
@@ -145,37 +98,100 @@ public class ClimbingController : TFPExtension
             // Begin Animation
             print("Climbing up ledge has begun");
             startingPosition = transform.position;
-            _climbingTarget = climbingPoint;
             _canBeginClimb = true;
+            _climbingTarget = climbingPoint;
             _climbing = true;
             rigBuilder.enabled = true;
+            lerpTarget = new Vector3(transform.position.x, _climbingTarget.y - vertDistance, transform.position.z);
+
             animator.SetBool("isHanging", true);
             currentState = ClimbingState.ClimbStart;
         }
     }
 
-    public void HangOnLedge()
+    public void ClimbEnd()
     {
-        StartIK();
+        print("Ending Climb");
+        currentState = ClimbingState.ClimbEnd;
     }
 
-    public void ClimbUpLedge()
+    private void ClimbStart()
     {
+        StartIK();
+        handPosition.transform.position = _climbingTarget + playerHandsPosition;
+
+        print(lerpTarget);
+        if (transform.position != lerpTarget)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, lerpTarget, Time.deltaTime * 2f);
+        }
+        else if (transform.position == lerpTarget)
+        {
+            startingPosition = transform.position;
+            currentState = ClimbingState.ClimbPointHangIdle;
+        }
+    }
+
+    private void ClimbPointHangIdle()
+    {
+        if (transform.position != lerpTarget)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, lerpTarget, Time.deltaTime * 2f);
+        }
+        else if (transform.position == lerpTarget)
+        {
+            lerpTarget = playerHangingPosition + startingPosition;
+        }
+        handPosition.transform.position = _climbingTarget + playerHandsPosition;
+
+        print(lerpTarget);
+    }
+
+    private void ClimbLedgeHangIdle()
+    {
+        if (Input.GetKeyDown("w"))
+        {
+            currentState = ClimbingState.ClimbUpLedgeStart;
+        }
+        if (Input.GetKeyDown("s"))
+        {
+            currentState = ClimbingState.ClimbDrop;
+        }
+    }
+
+    private void ClimbUpLedgeStart()
+    {
+        //EndIK();
+        animator.SetTrigger("climbingUpLedge");
+        currentState = ClimbingState.ClimbUpLedgeCurrent;
+    }
+
+    private void ClimbUpLedgeCurrent()
+    {
+    }
+
+    private void ClimbDrop()
+    {
+        _canBeginClimb = false;
+        _climbing = false;
+        animator.SetBool("isHanging", false);
+        currentState = ClimbingState.ClimbEnd;
         EndIK();
     }
 
-    private void BeginClimb()
+    private void ClimbUpLedgeEnd()
     {
-        //Opposite normal to the wall
-        //Play animation
-        //If player is close enough to ledge grab
+        print("Climbing has been completed");
+        _canBeginClimb = false;
+        _climbing = false;
+        animator.SetBool("isHanging", false);
     }
 
-    private void DropOffLedge()
+    public void ClimbUpLedgeEndEvent()
     {
+        currentState = ClimbingState.ClimbUpLedgeEnd;
     }
 
-    //TODO: Use ClimbingState in functions
     /// <summary>
     /// Sets the relevant variables for climbing state
     /// </summary>
@@ -183,8 +199,11 @@ public class ClimbingController : TFPExtension
     {
         switch (currentState)
         {
-            case ClimbingState.ClimbStart:
+            case ClimbingState.ClimbFalse:
+                break;
 
+            case ClimbingState.ClimbStart:
+                ClimbStart();
                 break;
 
             case ClimbingState.ClimbStartEnd:
@@ -194,6 +213,7 @@ public class ClimbingController : TFPExtension
                 break;
 
             case ClimbingState.ClimbPointHangIdle:
+                ClimbPointHangIdle();
                 break;
 
             case ClimbingState.ClimbNextPointStart:
@@ -206,18 +226,30 @@ public class ClimbingController : TFPExtension
                 break;
 
             case ClimbingState.ClimbLedgeHangIdle:
+                ClimbLedgeHangIdle();
+
                 break;
 
             case ClimbingState.ClimbLedgeHangEnd:
                 break;
 
             case ClimbingState.ClimbUpLedgeStart:
+                ClimbUpLedgeStart();
+
+                break;
+
+            case ClimbingState.ClimbUpLedgeCurrent:
+                ClimbUpLedgeCurrent();
                 break;
 
             case ClimbingState.ClimbUpLedgeEnd:
+                ClimbUpLedgeEnd();
+
                 break;
 
             case ClimbingState.ClimbDrop:
+                ClimbDrop();
+
                 break;
 
             case ClimbingState.ClimbEnd:

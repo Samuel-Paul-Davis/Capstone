@@ -779,6 +779,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0749e301b4c50149aa724f3de8ce928, type: 3}
+--- !u!1 &1276913075 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4719284704717666058, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+  m_PrefabInstance: {fileID: 2994450026324174697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1276913080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276913075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85fdfb2bb909494fb5300e4e2a8a4fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1300009341
 GameObject:
   m_ObjectHideFlags: 1
@@ -1493,6 +1510,22 @@ PrefabInstance:
       propertyPath: HangingDistance
       value: 
       objectReference: {fileID: 1636361108}
+    - target: {fileID: 2801270270712739497, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+      propertyPath: playerHandsPosition.y
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2801270270712739497, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+      propertyPath: playerHandsPosition.z
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2801270270712739497, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+      propertyPath: playerHangingPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2801270270712739497, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
+      propertyPath: playerHangingPosition.z
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2994450026324174701, guid: 60c5db76e312ebd45a42cd9c0eee57d2, type: 3}
       propertyPath: m_Enabled
       value: 0
