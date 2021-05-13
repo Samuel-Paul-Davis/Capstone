@@ -320,10 +320,9 @@ namespace TheFirstPerson
         private string yInName = "Vertical";
         private string xMouseName = "Mouse X";
         private string yMouseName = "Mouse Y";
-        //Key binding for mouse moving
-        KeyCode mouseUnlock = KeyCode.LeftAlt;
 
-        TFPInfo controllerInfo;
+        //Key binding for mouse moving
+        private KeyCode mouseUnlock = KeyCode.LeftAlt;
 
         private TFPInfo controllerInfo;
 
@@ -651,7 +650,8 @@ namespace TheFirstPerson
             groundAngle = Vector3.Angle(hitNormal, Vector3.up);
             hitPoint = hit.point;
         }
-        void setCurrentMoveVars()
+
+        private void setCurrentMoveVars()
         {
             currentTurnMult = 1.0f;
             if (grounded)
@@ -851,7 +851,7 @@ namespace TheFirstPerson
 
         private void UpdateInput()
         {
-            Debug.Log(Camera.current.name);
+            //Debug.Log(Camera.current.name);
             //cam = Camera.current.GetComponentInParent<Transform>();
 
             bool standard = customInputSystem == null;

@@ -41,7 +41,7 @@ public class WallDetection : MonoBehaviour
             }
             CanBeClimbed(rayCastHit.point);
 
-            if (hit && Input.GetKeyDown("w"))
+            if (hit && Input.GetKeyDown("e"))
             {
                 print("Climbing inputs gotten");
                 StartClimbing(rayCastHit);
@@ -68,6 +68,7 @@ public class WallDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print("Entered: " + other.name);
         wallDetected = true;
     }
 

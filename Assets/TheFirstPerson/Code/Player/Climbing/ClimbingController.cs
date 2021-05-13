@@ -128,7 +128,7 @@ public class ClimbingController : TFPExtension
         else if (transform.position == lerpTarget)
         {
             startingPosition = transform.position;
-            currentState = ClimbingState.ClimbPointHangIdle;
+            currentState = ClimbingState.ClimbLedgeHangIdle;
         }
     }
 
@@ -161,13 +161,18 @@ public class ClimbingController : TFPExtension
 
     private void ClimbUpLedgeStart()
     {
-        //EndIK();
+        EndIK();
         animator.SetTrigger("climbingUpLedge");
         currentState = ClimbingState.ClimbUpLedgeCurrent;
     }
 
     private void ClimbUpLedgeCurrent()
     {
+        transform.position = Vector3.MoveTowards(transform.position, _climbingTarget, Time.deltaTime * 2f);
+        if (transform.position == _climbingTarget)
+        {
+            currentState = ClimbingState.ClimbUpLedgeEnd;
+        }
     }
 
     private void ClimbDrop()
