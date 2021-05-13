@@ -320,6 +320,10 @@ namespace TheFirstPerson
         private string yInName = "Vertical";
         private string xMouseName = "Mouse X";
         private string yMouseName = "Mouse Y";
+        //Key binding for mouse moving
+        KeyCode mouseUnlock = KeyCode.LeftAlt;
+
+        TFPInfo controllerInfo;
 
         private TFPInfo controllerInfo;
 
@@ -388,7 +392,23 @@ namespace TheFirstPerson
                 UpdateInput();
             }
 
-            UpdateMouseLock();
+            //UpdateMouseLock();
+            if (Input.GetKeyDown(mouseUnlock))
+            {
+                if (mouseLocked)
+                {
+                    mouseLocked = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+                else
+                {
+                    mouseLocked = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+            }
+
             ExecuteExtension(ExtFunc.PostInput);
             if (thirdPersonMode && movementEnabled)
             {
@@ -631,8 +651,7 @@ namespace TheFirstPerson
             groundAngle = Vector3.Angle(hitNormal, Vector3.up);
             hitPoint = hit.point;
         }
-
-        private void setCurrentMoveVars()
+        void setCurrentMoveVars()
         {
             currentTurnMult = 1.0f;
             if (grounded)
@@ -832,6 +851,9 @@ namespace TheFirstPerson
 
         private void UpdateInput()
         {
+            Debug.Log(Camera.current.name);
+            //cam = Camera.current.GetComponentInParent<Transform>();
+
             bool standard = customInputSystem == null;
             xIn = standard ? Input.GetAxisRaw(xInName) : customInputSystem.XAxis();
             yIn = standard ? Input.GetAxisRaw(yInName) : customInputSystem.YAxis();
