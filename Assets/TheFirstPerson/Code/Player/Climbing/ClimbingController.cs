@@ -104,7 +104,7 @@ public class ClimbingController : TFPExtension
             rigBuilder.enabled = true;
             lerpTarget = new Vector3(transform.position.x, _climbingTarget.y - vertDistance, transform.position.z);
 
-            animator.SetBool("isHanging", true);
+            animator.SetBool("beginClimb", true);
             currentState = ClimbingState.ClimbStart;
         }
     }
@@ -123,32 +123,35 @@ public class ClimbingController : TFPExtension
         print(lerpTarget);
         if (transform.position != lerpTarget)
         {
-            transform.position = Vector3.MoveTowards(transform.position, lerpTarget, Time.deltaTime * 2f);
+            transform.position = Vector3.MoveTowards(transform.position, lerpTarget, Time.deltaTime);
         }
         else if (transform.position == lerpTarget)
         {
             startingPosition = transform.position;
-            currentState = ClimbingState.ClimbLedgeHangIdle;
+            currentState = ClimbingState.ClimbPointHangIdle;
         }
     }
 
     private void ClimbPointHangIdle()
     {
+        lerpTarget = playerHangingPosition + startingPosition;
+
+
         if (transform.position != lerpTarget)
         {
-            transform.position = Vector3.MoveTowards(transform.position, lerpTarget, Time.deltaTime * 2f);
+            transform.position = Vector3.MoveTowards(transform.position, lerpTarget, Time.deltaTime);
+            handPosition.transform.position = _climbingTarget + playerHandsPosition;
         }
         else if (transform.position == lerpTarget)
         {
-            lerpTarget = playerHangingPosition + startingPosition;
+            currentState = ClimbingState.ClimbLedgeHangIdle;
         }
-        handPosition.transform.position = _climbingTarget + playerHandsPosition;
-
-        print(lerpTarget);
     }
 
     private void ClimbLedgeHangIdle()
     {
+        animator.SetBool("isHanging", true);
+        animator.SetBool("beginClimb", false);
         if (Input.GetKeyDown("w"))
         {
             currentState = ClimbingState.ClimbUpLedgeStart;
