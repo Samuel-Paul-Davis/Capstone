@@ -93,3 +93,9 @@ fmod_editor.log
 # FMOD 1.10.x (Legacy)
 /Assets/FMODAssets/*
 /Assets/FMODStudioCache.meta
+
+### End Paalo's lines ###
+
+# Ignore project folders, per: https://qa.fmod.com/t/fmod-studio-unity-gitignore/13114/3
+/fmod/**/.unsaved/
+/fmod/**/.user/
