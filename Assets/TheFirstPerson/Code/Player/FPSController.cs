@@ -328,6 +328,10 @@ namespace TheFirstPerson
 
         private void Start()
         {
+            //mouseLocked = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
             controller = GetComponent<CharacterController>();
             //get the transform of a child with a camera component
             if (!customCameraTransform && !thirdPersonMode)
@@ -394,15 +398,13 @@ namespace TheFirstPerson
             //UpdateMouseLock();
             if (Input.GetKeyDown(mouseUnlock))
             {
-                if (mouseLocked)
+                if (Cursor.lockState == CursorLockMode.None)
                 {
-                    mouseLocked = false;
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
                 }
                 else
                 {
-                    mouseLocked = true;
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                 }
@@ -851,9 +853,6 @@ namespace TheFirstPerson
 
         private void UpdateInput()
         {
-            //Debug.Log(Camera.current.name);
-            //cam = Camera.current.GetComponentInParent<Transform>();
-
             bool standard = customInputSystem == null;
             xIn = standard ? Input.GetAxisRaw(xInName) : customInputSystem.XAxis();
             yIn = standard ? Input.GetAxisRaw(yInName) : customInputSystem.YAxis();

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4465644637203459789}
   - component: {fileID: 4465644637203459786}
   - component: {fileID: 4465644637203459787}
+  - component: {fileID: 4298775399347179593}
   m_Layer: 8
   m_Name: ThirdPersonPlayer
   m_TagString: Player
@@ -291,6 +292,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4298775399347179593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4465644637203459785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381670871bb3ba949bc12a1a40adfceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: 0.05
 --- !u!1 &4465644638341444619
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,6 +443,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -453,6 +468,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8609859308820970242
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,6 +779,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -787,6 +804,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8609859309864585189
 GameObject:
   m_ObjectHideFlags: 0
