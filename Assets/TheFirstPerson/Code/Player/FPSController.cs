@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TheFirstPerson.Helper;
+using Cinemachine;
 
 namespace TheFirstPerson
 {
@@ -264,6 +265,10 @@ namespace TheFirstPerson
 
         TFPInfo controllerInfo;
 
+        // Variables for fixing movement for fixed cameras
+        [SerializeField]
+        CinemachineClearShot cinemachineClearShot;
+
         void Start()
         {
             //mouseLocked = false;
@@ -274,7 +279,7 @@ namespace TheFirstPerson
             //get the transform of a child with a camera component
             if (!customCameraTransform && !thirdPersonMode)
             {
-                cam = transform.GetComponentInChildren<Camera>().transform;
+                cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
             }
 
             standingHeight = controller.height;
@@ -666,7 +671,11 @@ namespace TheFirstPerson
                     }
                     else
                     {
+                        cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
+                        
                         targetMove += forward * currentMoveSpeed * new Vector2(xIn, yIn).magnitude;
+
+                        //Debug.Log($"Local forward: {forward} Cam forward: {cam.forward} Target move: {targetMove}");
                     }
                 }
                 else
