@@ -268,6 +268,7 @@ namespace TheFirstPerson
         // Variables for fixing movement for fixed cameras
         [SerializeField]
         CinemachineClearShot cinemachineClearShot;
+        Vector2 PreviousMovement = Vector2.zero;
 
         void Start()
         {
@@ -671,11 +672,13 @@ namespace TheFirstPerson
                     }
                     else
                     {
-                        cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
+                        Vector2 vectorMove = new Vector2(xIn, yIn);
                         
-                        targetMove += forward * currentMoveSpeed * new Vector2(xIn, yIn).magnitude;
-
-                        //Debug.Log($"Local forward: {forward} Cam forward: {cam.forward} Target move: {targetMove}");
+                        if (vectorMove != PreviousMovement)
+                            cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
+                        
+                        targetMove += forward * currentMoveSpeed * vectorMove.magnitude;
+                        PreviousMovement = vectorMove;
                     }
                 }
                 else
