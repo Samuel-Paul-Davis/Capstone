@@ -22,66 +22,84 @@ namespace TheFirstPerson
     [RequireComponent(typeof(CharacterController))]
     public class FPSController : MonoBehaviour
     {
-
-        CharacterController controller;
-
+        private CharacterController controller;
 
         [Header("Options")]
         public bool movementEnabled = true;
+
         public bool extensionsEnabled = false;
         public bool slopeSlideEnabled = true;
         public bool sprintEnabled = true;
         public bool momentumEnabled = true;
         public bool crouchEnabled = true;
         public bool jumpEnabled = true;
-        public bool thirdPersonMode = false; 
+        public bool thirdPersonMode = false;
+
         [ConditionalHide("thirdPersonMode", true, true)]
         public bool mouseLookEnabled = true;
+
         [ConditionalHide("thirdPersonMode", true, true)]
         public bool verticalLookEnabled = true;
+
         public bool customCameraTransform = false;
         public bool customInputNames = false;
+
         [Range(0f, 1f)]
         [Tooltip("1 is full air control exactly how you control on the ground. 0 is none, you will have no control in the air.")]
         public float airControl = 0.5f;
+
         public bool airSprintEnabled = true;
+
         [Tooltip("This will put a limit of 1 on the magnitude of the horizontal movement input.")]
         public bool normaliseMoveInput = false;
+
         public bool moveInFixedUpdate = false;
-        [ConditionalHide(new string[] { "customCameraTransform" , "thirdPersonMode"}, false, false, true)]
+
+        [ConditionalHide(new string[] { "customCameraTransform", "thirdPersonMode" }, false, false, true)]
         public Transform cam;
 
         [Header("Jump Settings")]
         [ConditionalHide("jumpEnabled", true)]
         public bool definedByHeight = false;
+
         [ConditionalHide("jumpEnabled", true)]
         public bool variableHeight = true;
+
         [ConditionalHide("jumpEnabled", true)]
         [Tooltip("Time in seconds after you leave an edge that you can still jump.")]
         public float coyoteTime = 0.1f;
+
         [ConditionalHide("jumpEnabled", true)]
         [Tooltip("Time in seconds before you hit the ground where you can press jump to jump when you land.")]
         public float bunnyhopTolerance = 0.1f;
+
         [ConditionalHide(new string[] { "jumpEnabled", "definedByHeight" }, new bool[] { false, true }, true, false)]
         [Tooltip("Initial in units per second upward velocity of your jump.")]
         public float jumpSpeed = 9;
+
         [ConditionalHide(new string[] { "jumpEnabled", "definedByHeight" }, new bool[] { false, true }, true, false)]
         [Tooltip("Gravity that is applied on the upward section of your jump. This multiplies the base gravity variable.")]
         public float jumpGravityMult = 0.6f;
+
         [ConditionalHide(new string[] { "jumpEnabled", "definedByHeight" }, true, false)]
         [Tooltip("Maximum height in units that your jump will reach.")]
         public float maxJumpHeight = 4;
+
         [ConditionalHide(new string[] { "jumpEnabled", "definedByHeight" }, true, false)]
         [Tooltip("Maximum length of time in seconds your jump will last.")]
         public float maxJumpTime = 1;
-        [ConditionalHide(new string[] { "jumpEnabled", "variableHeight", "definedByHeight" }, new bool[]{ false, false, true }, true, false)]
+
+        [ConditionalHide(new string[] { "jumpEnabled", "variableHeight", "definedByHeight" }, new bool[] { false, false, true }, true, false)]
         [Tooltip("Gravity that is applied while you are traveling upwards after you have let go of the jump button. This multiplies the base gravity variable.")]
         public float postJumpGravityMult = 3;
+
         [ConditionalHide(new string[] { "jumpEnabled", "variableHeight", "definedByHeight" }, new bool[] { false, false, false }, true, false)]
         [Tooltip("Maximum height in units that your jump will reach if you let go of the jump button early.")]
         public float minJumpHeight = 1;
+
         [ConditionalHide(new string[] { "jumpEnabled", "slopeSlideEnabled" }, true, false)]
         public bool jumpWhileSliding = false;
+
         [ConditionalHide(new string[] { "jumpEnabled", "slopeSlideEnabled", "jumpWhileSliding" }, true, false)]
         [Tooltip("Force in units per second to be applied to the controller away from the surface of a slope too steep to traverse.")]
         public float slopeJumpKickbackSpeed = 10;
@@ -89,24 +107,32 @@ namespace TheFirstPerson
         [Header("Gravity Settings")]
         [Tooltip("Gravity variable this is the change in units per second that will be applied to your y velocity.")]
         public float gravity = 15;
+
         [Tooltip("Minimum force in units per second pushing you downwards while grounded. This applies on flat ground.")]
         public float baseGroundForce = 3;
+
         [Tooltip("Maximum force in units per second pushing you downwards while grounded. This applies on steep slopes.")]
         public float maxGroundForce = 30;
+
         [Tooltip("Maximum downwards velocity in units per second.")]
         public float gravityCap = 50;
+
         [Tooltip("Base downward velocity applied after walking off an edge in units per second.")]
         public float baseFallVelocity = 5;
 
         [Header("Air Control Settings")]
         [Tooltip("Speed in units per second that your horizontal velocity returns to 0 in air without any input.")]
         public float airResistance = 4;
+
         [Tooltip("Speed in units per second that you move forward in the air.")]
         public float airMoveSpeed = 6;
+
         [Tooltip("Speed that you strafe in the air relative to Air Move Speed.")]
         public float airStrafeMult = 0.8f;
+
         [Tooltip("Speed that you move backwards in the air relative to Air Move Speed.")]
         public float airBackwardMult = 0.6f;
+
         [ConditionalHide("airSprintEnabled", true)]
         [Tooltip("Speed that you sprint in the air relative to Air Move Speed.")]
         public float airSprintMult = 2;
@@ -114,33 +140,44 @@ namespace TheFirstPerson
         [Header("Speed Settings")]
         [Tooltip("Base forward speed in units per second.")]
         public float moveSpeed = 5;
+
         [ConditionalHide("slopeSlideEnabled", true)]
         [Tooltip("Horizontal speed while sliding in units per second.")]
         public float slopeSlideSpeed = 10;
+
         [ConditionalHide("momentumEnabled", true)]
         [Tooltip("Horizontal acceleration in units per second towards target horizontal speed if it is greater than current speed.")]
         public float acceleration = 50;
+
         [ConditionalHide("momentumEnabled", true)]
         [Tooltip("Horizontal deceleration in units per second towards target horizontal speed if it is less than current speed.")]
         public float deceleration = 40;
+
         [ConditionalHide("sprintEnabled", true)]
         public bool sprintToggleStyle = false;
+
         [ConditionalHide("sprintEnabled", true)]
         public bool sprintByDefault = false;
+
         [ConditionalHide("sprintEnabled", true)]
         [Tooltip("Speed that you sprint relative to Move Speed.")]
         public float sprintMult = 2;
+
         [Tooltip("Speed that you strafe relative to Move Speed.")]
         public float strafeMult = 0.8f;
+
         [Tooltip("Speed that you move backwards relative to Move Speed.")]
         public float backwardMult = 0.6f;
 
         [Header("Mouse Look Settings")]
         [Tooltip("Mouse sensitivity.")]
         public float sensitivity = 10;
+
         [Tooltip("In editor this may not work correctly but it will in build")]
         public bool mouseLockToggleEnabled = true;
+
         public bool startMouseLock = true;
+
         [ConditionalHide("verticalLookEnabled", true)]
         [Tooltip("Maximum upward or downward angle of the mouselook camera.")]
         public float verticalLookLimit = 80;
@@ -148,15 +185,19 @@ namespace TheFirstPerson
         [Header("CrouchSettings")]
         [ConditionalHide("crouchEnabled", true)]
         public bool crouchToggleStyle = false;
+
         [ConditionalHide("crouchEnabled", true)]
         [Tooltip("Height of the crouch collider. Must be least twice the radius of the controller.")]
         public float crouchColliderHeight = 0.6f;
+
         [ConditionalHide("crouchEnabled", true)]
         [Tooltip("Horizontal speed when crouched relative to Move Speed.")]
         public float crouchMult = 0.5f;
+
         [ConditionalHide("crouchEnabled", true)]
         [Tooltip("Speed of transition to and from crouch in units per second.")]
         public float crouchTransitionSpeed = 6;
+
         [ConditionalHide("crouchEnabled", true)]
         public LayerMask crouchHeadHitLayerMask;
 
@@ -164,15 +205,19 @@ namespace TheFirstPerson
         [ConditionalHide("thirdPersonMode")]
         [Tooltip("Is it possible to walk backwards or should the player turn")]
         public bool walkBackwards = false;
+
         [ConditionalHide(new string[] { "thirdPersonMode", "walkBackwards" }, true, false)]
         [Tooltip("Is it possible to strafe or should the player turn")]
         public bool strafe = false;
+
         [ConditionalHide("thirdPersonMode")]
         [Tooltip("Speed of character turning in degrees per second. Set to 0 for instant turning")]
         public float turnSpeed = 360f;
-        [ConditionalHide(new string[]{ "thirdPersonMode", "sprintEnabled" },true,false)]
+
+        [ConditionalHide(new string[] { "thirdPersonMode", "sprintEnabled" }, true, false)]
         [Tooltip("Speed that you turn when sprinting relative to Turn Speed.")]
         public float sprintTurnMult = 2.0f;
+
         [ConditionalHide("thirdPersonMode")]
         [Tooltip("Speed of character aligning to the canera direction in degrees per second. Set to 0 for instant turning")]
         public float cameraAlignSpeed = 0;
@@ -180,90 +225,107 @@ namespace TheFirstPerson
         [Header("Input Settings")]
         [Tooltip("If left empty TFP will use its default input system, if you put a TFPInput object in it will use the input functions from that")]
         public TFPInput customInputSystem;
+
         [ConditionalHide("customInputNames", true)]
         public string jumpBtnCustom = "Jump";
+
         [ConditionalHide("customInputNames", true)]
         public string crouchBtnCustom = "Fire1";
+
         [ConditionalHide("customInputNames", true)]
         public string runBtnCustom = "Fire3";
+
         [ConditionalHide("customInputNames", true)]
         public string unlockMouseBtnCustom = "Cancel";
+
         [ConditionalHide("customInputNames", true)]
         public string xInNameCustom = "Horizontal";
+
         [ConditionalHide("customInputNames", true)]
         public string yInNameCustom = "Vertical";
+
         [ConditionalHide("customInputNames", true)]
         public string xMouseNameCustom = "Mouse X";
+
         [ConditionalHide("customInputNames", true)]
         public string yMouseNameCustom = "Mouse Y";
 
         public TFPExtension[] Extensions;
 
         //Input
-        bool moving;
-        bool jumpHeld;
-        bool crouching;
-        bool running;
-        bool mouseLocked;
-        float jumpPressed;
-        float xIn;
-        float yIn;
-        float xMouse;
-        float yMouse;
+        private bool moving;
+
+        private bool jumpHeld;
+        private bool crouching;
+        private bool running;
+        private bool mouseLocked;
+        private float jumpPressed;
+        private float xIn;
+        private float yIn;
+        private float xMouse;
+        private float yMouse;
+        private bool climbing;
 
         //Vertical Movement
-        bool jumping;
-        bool grounded;
-        float timeSinceGrounded;
-        float yVel;
-        float gravMult = 1;
-        float originalMaxJH;
-        float originalMinJH;
-        float originalJT;
-        float minJumpTime;
+        private bool jumping;
+
+        private bool grounded;
+        private float timeSinceGrounded;
+        private float yVel;
+        private float gravMult = 1;
+        private float originalMaxJH;
+        private float originalMinJH;
+        private float originalJT;
+        private float minJumpTime;
 
         //General movement
-        Vector3 lastMove;
-        Vector3 currentMove;
-        Vector3 forward;
-        Vector3 side;
-        Vector3 moveDelta;
-        float currentStrafeMult;
-        float currentBackwardMult;
-        float currentMoveSpeed;
-        float groundAngle;
-        bool instantMomentumChange = false;
+        private Vector3 lastMove;
+
+        private Vector3 currentMove;
+        private Vector3 forward;
+        private Vector3 side;
+        private Vector3 moveDelta;
+        private float currentStrafeMult;
+        private float currentBackwardMult;
+        private float currentMoveSpeed;
+        private float groundAngle;
+        private bool instantMomentumChange = false;
 
         //sliding
-        bool slide;
-        Vector3 hitNormal;
-        Vector3 hitPoint;
-        Vector3 slideMove;
-        RaycastHit ledgeCheck;
+        private bool slide;
+
+        private Vector3 hitNormal;
+        private Vector3 hitPoint;
+        private Vector3 slideMove;
+        private RaycastHit ledgeCheck;
 
         //crouching
-        float standingHeight;
-        float cameraOffset;
-        RaycastHit headHit;
+        private float standingHeight;
+
+        private float cameraOffset;
+        private RaycastHit headHit;
 
         //third person
-        float currentTurnMult;
-        float cameraAngle;
+        private float currentTurnMult;
+
+        private float cameraAngle;
+        private bool grabbingLedge;
 
         //Input Name Defaults (assuming default unity axes are set up)
-        string jumpBtn = "Jump";
-        string crouchBtn = "Fire1";
-        string runBtn = "Fire3";
-        string unlockMouseBtn = "Cancel";
-        string xInName = "Horizontal";
-        string yInName = "Vertical";
-        string xMouseName = "Mouse X";
-        string yMouseName = "Mouse Y";
+        private string jumpBtn = "Jump";
+
+        private string crouchBtn = "Fire1";
+        private string runBtn = "Fire3";
+        private string unlockMouseBtn = "Cancel";
+        private string xInName = "Horizontal";
+        private string yInName = "Vertical";
+        private string xMouseName = "Mouse X";
+        private string yMouseName = "Mouse Y";
 
         //Key binding for mouse moving
-        KeyCode mouseUnlock = KeyCode.LeftAlt;
+        private KeyCode mouseUnlock = KeyCode.LeftAlt;
 
-        TFPInfo controllerInfo;
+        private TFPInfo controllerInfo;
 
         // Variables for fixing movement for fixed cameras
         [SerializeField]
@@ -323,9 +385,9 @@ namespace TheFirstPerson
             ExecuteExtension(ExtFunc.Start);
         }
 
-        void Update()
+        private void Update()
         {
-            if(definedByHeight && (originalJT != maxJumpTime || originalMaxJH != maxJumpHeight || originalMinJH != minJumpHeight))
+            if (definedByHeight && (originalJT != maxJumpTime || originalMaxJH != maxJumpHeight || originalMinJH != minJumpHeight))
             {
                 RecalculateJumpValues();
                 originalJT = maxJumpTime;
@@ -373,7 +435,7 @@ namespace TheFirstPerson
             ExecuteExtension(ExtFunc.PostUpdate);
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             ExecuteExtension(ExtFunc.PreFixedUpdate);
             if (moveInFixedUpdate && movementEnabled)
@@ -383,7 +445,7 @@ namespace TheFirstPerson
             ExecuteExtension(ExtFunc.PostFixedUpdate);
         }
 
-        void UpdateMovement(float dt)
+        private void UpdateMovement(float dt)
         {
             if (dt > 0)
             {
@@ -596,7 +658,8 @@ namespace TheFirstPerson
             groundAngle = Vector3.Angle(hitNormal, Vector3.up);
             hitPoint = hit.point;
         }
-        void setCurrentMoveVars()
+
+        private void setCurrentMoveVars()
         {
             currentTurnMult = 1.0f;
             if (grounded)
@@ -655,7 +718,7 @@ namespace TheFirstPerson
             }
         }
 
-        Vector3 GetHorizontalMove()
+        private Vector3 GetHorizontalMove()
         {
             Vector3 targetMove = Vector3.zero;
             if (moving)
@@ -694,14 +757,19 @@ namespace TheFirstPerson
             return targetMove;
         }
 
-        void Jump()
+        private void Jump()
         {
             jumping = true;
             yVel = Mathf.Max(yVel, jumpSpeed);
             jumpPressed = 0;
         }
 
-        void UpdateMouseLock()
+        private void Hang()
+        {
+            Vector3 targetMove = Vector3.zero;
+        }
+
+        private void UpdateMouseLock()
         {
             if (mouseLockToggleEnabled && Time.timeScale > 0)
             {
@@ -725,10 +793,9 @@ namespace TheFirstPerson
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
-
         }
 
-        void MouseLook()
+        private void MouseLook()
         {
             if (mouseLookEnabled)
             {
@@ -756,7 +823,7 @@ namespace TheFirstPerson
             }
         }
 
-        void ThirdPersonSteering()
+        private void ThirdPersonSteering()
         {
             bool snap = Mathf.Abs(lastMove.x) + Mathf.Abs(lastMove.x) < Time.deltaTime * currentMoveSpeed * 0.5f;
             Vector3 inputDir = new Vector3(xIn, 0, yIn);
@@ -764,7 +831,7 @@ namespace TheFirstPerson
             {
                 inputDir = new Vector3(-xIn, 0, -yIn);
             }
-            
+
             if (inputDir.magnitude > 0.01f)
             {
                 if (cameraAlignSpeed > 0 && !snap)
@@ -796,7 +863,7 @@ namespace TheFirstPerson
             }
         }
 
-        void UpdateInput()
+        private void UpdateInput()
         {
             bool standard = customInputSystem == null;
             xIn = standard ? Input.GetAxisRaw(xInName) : customInputSystem.XAxis();
@@ -838,7 +905,7 @@ namespace TheFirstPerson
             {
                 running = runHeld;
             }
-            	jumpHeld = standard ? Input.GetButton(jumpBtn) : customInputSystem.JumpHeld();
+            jumpHeld = standard ? Input.GetButton(jumpBtn) : customInputSystem.JumpHeld();
             if (standard ? Input.GetButtonDown(jumpBtn) : customInputSystem.JumpPressed())
             {
                 jumpPressed = coyoteTime;
@@ -849,7 +916,7 @@ namespace TheFirstPerson
             }
         }
 
-        void RecalculateJumpValues()
+        private void RecalculateJumpValues()
         {
             jumpGravityMult = ((2 * maxJumpHeight) / Mathf.Pow(maxJumpTime, 2)) / gravity;
             jumpSpeed = (2 * maxJumpHeight) / maxJumpTime;
@@ -864,13 +931,13 @@ namespace TheFirstPerson
                 controller = gameObject.GetComponent<CharacterController>();
             }
             Vector3 pos = transform.position + controller.center;
-            GizmoUtilities.DrawWireCapsule(pos, Quaternion.identity, controller.radius + controller.skinWidth, controller.height + (2*controller.skinWidth), Color.cyan);
+            GizmoUtilities.DrawWireCapsule(pos, Quaternion.identity, controller.radius + controller.skinWidth, controller.height + (2 * controller.skinWidth), Color.cyan);
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position + new Vector3(-controller.radius, controller.stepOffset,0), transform.position + new Vector3(controller.radius, controller.stepOffset, 0));
+            Gizmos.DrawLine(transform.position + new Vector3(-controller.radius, controller.stepOffset, 0), transform.position + new Vector3(controller.radius, controller.stepOffset, 0));
             Gizmos.DrawLine(transform.position + new Vector3(0, controller.stepOffset, -controller.radius), transform.position + new Vector3(0, controller.stepOffset, controller.radius));
         }
 
-        TFPData GetData()
+        private TFPData GetData()
         {
             return new TFPData(movementEnabled, moving, jumpHeld, crouching, running, mouseLocked, mouseLookEnabled,
                 jumpPressed, xIn, yIn, xMouse, yMouse, jumping, grounded, timeSinceGrounded, yVel, slide,
@@ -879,7 +946,7 @@ namespace TheFirstPerson
                 standingHeight, cameraOffset);
         }
 
-        TFPInfo GetInfo()
+        private TFPInfo GetInfo()
         {
             return new TFPInfo(controller, cam, extensionsEnabled, slopeSlideEnabled,
                 sprintEnabled, momentumEnabled, crouchEnabled, jumpEnabled, verticalLookEnabled,
@@ -895,7 +962,7 @@ namespace TheFirstPerson
                 startMouseLock);
         }
 
-        void SetData(TFPData newData)
+        private void SetData(TFPData newData)
         {
             movementEnabled = newData.movementEnabled;
             moving = newData.moving;
@@ -931,7 +998,7 @@ namespace TheFirstPerson
             cameraOffset = newData.cameraOffset;
         }
 
-        void ExecuteExtension(ExtFunc command)
+        private void ExecuteExtension(ExtFunc command)
         {
             if (!extensionsEnabled)
             {
@@ -945,34 +1012,42 @@ namespace TheFirstPerson
                     case ExtFunc.Start:
                         extension.ExStart(ref data, controllerInfo);
                         break;
+
                     case ExtFunc.PreUpdate:
                         extension.ExPreUpdate(ref data, controllerInfo);
                         break;
+
                     case ExtFunc.PostUpdate:
                         extension.ExPostUpdate(ref data, controllerInfo);
                         break;
+
                     case ExtFunc.PreFixedUpdate:
                         extension.ExPreFixedUpdate(ref data, controllerInfo);
                         break;
+
                     case ExtFunc.PostFixedUpdate:
                         extension.ExPostFixedUpdate(ref data, controllerInfo);
                         break;
+
                     case ExtFunc.PreMove:
                         extension.ExPreMove(ref data, controllerInfo);
                         break;
+
                     case ExtFunc.PreMoveCalc:
                         extension.ExPreMoveCalc(ref data, controllerInfo);
                         break;
+
                     case ExtFunc.PostMove:
                         extension.ExPostMove(ref data, controllerInfo);
                         break;
+
                     case ExtFunc.PostInput:
                         extension.ExPostInput(ref data, controllerInfo);
                         break;
+
                     default:
                         break;
                 }
-
             }
             SetData(data);
         }
