@@ -16,13 +16,16 @@ public class LedgeDetection : MonoBehaviour
     /// <returns></returns>
     public static RaycastHit DetectLedge(Vector3 center, Vector3 halfExtents, Vector3 direction, Quaternion orientation, float maxDistance, bool drawCube)
     {
-        LayerMask mask = 1 << 10;
+        //TODO: Only climable walls
+        //Layer
+        //mask = 1 << 10;
+
+        LayerMask mask = ~0;
 
         //Physics.BoxCast(center, halfExtents, direction, out RaycastHit raycastHit, orientation, maxDistance, mask);
         Physics.SphereCast(center, 1, direction, out RaycastHit raycastHit, maxDistance, mask);
         if (drawCube)
             DrawCubePoints(CubePoints(center, halfExtents, orientation, raycastHit.point));
-
         return raycastHit;
     }
 
