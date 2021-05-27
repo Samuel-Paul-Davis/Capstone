@@ -37,8 +37,8 @@ public class InitializeCameras : MonoBehaviour
         /// </summary>
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
-            InitializeDolly();
             InitializeClearShot();
+            InitializeDolly();
 
             //Regex dollyRegex = new Regex(_DollyPattern);
             //Regex clearShotRegex = new Regex(_ClearShotPattern);
@@ -131,7 +131,7 @@ public class InitializeCameras : MonoBehaviour
     /// </summary>
     private void InitializeClearShot()
     {
-        prefabEnum = PrefabEnum.ClearShot;
+        //prefabEnum = PrefabEnum.ClearShot;
 
         //default values
         if (clearShotInspector.ignoreTag == "")
@@ -161,7 +161,7 @@ public class InitializeCameras : MonoBehaviour
     /// </summary>
     private void InitializeDolly()
     {
-        prefabEnum = PrefabEnum.Dolly;
+        //prefabEnum = PrefabEnum.Dolly;
 
         if (!SetPlayerObject())
             return;
