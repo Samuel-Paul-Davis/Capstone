@@ -26,8 +26,8 @@ public class InitializeCameras : MonoBehaviour
     public DollyInspector dollyInspector;
 
     private const string _PlayerTagName = "Player";
-    private const string _DollyPattern = "^DollyCamera.*";
-    private const string _ClearShotPattern = "(^Tracking|^Fixed)Cameras.*";
+//    private const string _DollyPattern = "^DollyCamera.*";
+//    private const string _ClearShotPattern = "(^Tracking|^Fixed)Cameras.*";
 
     // Awake is called when the script is initialized
     private void Awake()
@@ -37,13 +37,16 @@ public class InitializeCameras : MonoBehaviour
         /// </summary>
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
-            Regex dollyRegex = new Regex(_DollyPattern);
-            Regex clearShotRegex = new Regex(_ClearShotPattern);
+            InitializeDolly();
+            InitializeClearShot();
+
+            //Regex dollyRegex = new Regex(_DollyPattern);
+            //Regex clearShotRegex = new Regex(_ClearShotPattern);
 
             /// <summary>
             /// Operations are different depending on whether the script is running on a DollyCamera.prefab or FixedCameras.prefab/TrackingCameras.prefab
             /// </summary>
-            try
+            /*try
             {
                 if (dollyRegex.IsMatch(name))
                 {
@@ -66,7 +69,7 @@ public class InitializeCameras : MonoBehaviour
             catch (Exception e)
             {
                 Debug.LogException(e);
-            }
+            }*/
         }
     }
 
