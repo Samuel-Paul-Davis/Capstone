@@ -35,6 +35,11 @@ public class ColourPuzzleManager : MonoBehaviour
         int total = puzzleElements.Length;
         int counting = 0;
 
+        for (int i = 0; i < puzzleElements.Length; i++)
+        {
+            if 
+        }
+
         foreach (PuzzleInteractionObject interactionObject in puzzleElements)
         {
             if (interactionObject.puzzleState == PuzzleState.On)
