@@ -37,7 +37,7 @@ public class ColourPuzzleManager : MonoBehaviour
 
         for (int i = 0; i < puzzleElements.Length; i++)
         {
-            if 
+            
         }
 
         foreach (PuzzleInteractionObject interactionObject in puzzleElements)

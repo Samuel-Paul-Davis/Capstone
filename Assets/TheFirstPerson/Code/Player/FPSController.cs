@@ -736,9 +736,9 @@ namespace TheFirstPerson
                     else
                     {
                         Vector2 vectorMove = new Vector2(xIn, yIn);
-                        
+
                         if (vectorMove != PreviousMovement)
-                            cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
+                            cam = Camera.main.transform; //cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
                         
                         targetMove += forward * currentMoveSpeed * vectorMove.magnitude;
                         PreviousMovement = vectorMove;
