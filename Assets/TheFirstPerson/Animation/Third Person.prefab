@@ -1037,13 +1037,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.79
   m_Radius: 0.5
   m_SlopeLimit: 44
   m_StepOffset: 0.4
   m_SkinWidth: 0.1
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &8488773628168852410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,13 +1275,13 @@ MonoBehaviour:
   airStrafeMult: 0.8
   airBackwardMult: 0.6
   airSprintMult: 2
-  moveSpeed: 5
+  moveSpeed: 4
   slopeSlideSpeed: 20
   acceleration: 50
   deceleration: 40
   sprintToggleStyle: 0
   sprintByDefault: 0
-  sprintMult: 2
+  sprintMult: 1.5
   strafeMult: 0.8
   backwardMult: 0.5
   sensitivity: 10
@@ -1289,7 +1289,7 @@ MonoBehaviour:
   startMouseLock: 1
   verticalLookLimit: 80
   crouchToggleStyle: 0
-  crouchColliderHeight: 1.1
+  crouchColliderHeight: 1.79
   crouchMult: 0.5
   crouchTransitionSpeed: 6
   crouchHeadHitLayerMask:
