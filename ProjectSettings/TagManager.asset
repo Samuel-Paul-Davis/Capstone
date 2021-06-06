@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Object
+  - Climbable
+  - Puzzle
   layers:
   - Default
   - TransparentFX
@@ -15,8 +18,8 @@ TagManager:
   - 
   - PostProcessing
   - Not in Reflection
-  - 
-  - 
+  - ClimableWall
+  - WallDetector
   - 
   - 
   - 
