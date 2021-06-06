@@ -12,7 +12,7 @@ public class CanvasController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        GamePausePanel.SetActive(false);
+        Resume();
     }
 
     // Update is called once per frame
