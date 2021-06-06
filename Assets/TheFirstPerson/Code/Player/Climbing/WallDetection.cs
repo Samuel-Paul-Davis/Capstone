@@ -68,14 +68,11 @@ public class WallDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Entered: " + other.name);
-        if (other.gameObject.tag == "Climbable")
-            wallDetected = true;
+        wallDetected = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Climbable")
-            wallDetected = false;
+        wallDetected = false;
     }
 }
