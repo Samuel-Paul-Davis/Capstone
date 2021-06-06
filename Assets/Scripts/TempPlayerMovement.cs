@@ -26,7 +26,8 @@ public class TempPlayerMovement : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        gameObject = other.gameObject;
+        if (other.gameObject.tag == "Puzzle")
+            gameObject = other.gameObject;
     }
 
     public void OnTriggerExit(Collider other)

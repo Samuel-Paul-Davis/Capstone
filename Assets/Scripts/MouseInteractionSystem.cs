@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class MouseInteractionSystem : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(MOUSELEFTCLICK))
             {
+                
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 

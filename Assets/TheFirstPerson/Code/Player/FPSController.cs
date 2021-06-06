@@ -408,11 +408,13 @@ namespace TheFirstPerson
                 {
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
+                    GetComponent<MouseInteractionSystem>().isMouseActive = false;
                 }
                 else
                 {
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
+                    GetComponent<MouseInteractionSystem>().isMouseActive = true;
                 }
             }
 
@@ -738,7 +740,14 @@ namespace TheFirstPerson
                         Vector2 vectorMove = new Vector2(xIn, yIn);
 
                         if (vectorMove != PreviousMovement)
-                            cam = Camera.main.transform; //cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
+                        {
+                            cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
+                            //cam = Camera.main.transform;
+                            standingHeight = controller.height;
+                            cameraOffset = standingHeight - cam.localPosition.y;
+                            cameraAngle = cam.eulerAngles.y;
+                        }
+                             
                         
                         targetMove += forward * currentMoveSpeed * vectorMove.magnitude;
                         PreviousMovement = vectorMove;
