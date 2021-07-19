@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,11 @@ public class ColourPuzzleManager : MonoBehaviour
             intPuzzleElements.Add(i);
         }
 
-        intPuzzleElements = intPuzzleElements.OrderBy(x => Random.value).ToList();
+        ColourPuzzleExtensions.Shuffle(intPuzzleElements);
 
         foreach(int i in intPuzzleElements)
         {
-            Debug.Log(puzzleElements[i]);
+            Debug.Log(i);
             puzzleElementsEndState.Add(puzzleElements[i]);
         }
     }
@@ -64,6 +65,8 @@ public class ColourPuzzleManager : MonoBehaviour
     {
         puzzleElementsActiveState.Add(colourObject);
     }
+
+    
 }
 
 public enum ColourObject
@@ -71,4 +74,21 @@ public enum ColourObject
     one,
     two,
     three
+}
+
+public static class ColourPuzzleExtensions
+{
+    public static void Shuffle<T>(this IList<T> list)
+    {
+        System.Random rng = new System.Random();
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
 }
