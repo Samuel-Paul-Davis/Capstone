@@ -68,7 +68,6 @@ public class WallDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Entered: " + other.name);
         wallDetected = true;
     }
 

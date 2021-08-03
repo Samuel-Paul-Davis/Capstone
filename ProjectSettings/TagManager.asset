@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Object
+  - Climbable
+  - Puzzle
   layers:
   - Default
   - TransparentFX

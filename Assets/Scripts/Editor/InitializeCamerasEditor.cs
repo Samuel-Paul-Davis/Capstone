@@ -25,10 +25,13 @@ public class InitializeCamerasEditor : Editor
         /// </summary>
         initializeCameras = (InitializeCameras)target;
 
+        ShowClearShotInspector();
+        ShowDollyInspector();
+
         /// <summary>
         /// Calls <see cref="ShowClearShotInspector"/>ShowClearShotInspector()</see> or <see cref="ShowDollyInspector"/>ShowDollyInspector</see> depending on the value of <see cref="InitializeCameras.PrefabEnum"/>PrefabEnum</see>
         /// </summary>
-        switch (initializeCameras.prefabEnum)
+        /*switch (initializeCameras.prefabEnum)
         {
             case InitializeCameras.PrefabEnum.ClearShot:
                 ShowClearShotInspector();
@@ -36,7 +39,7 @@ public class InitializeCamerasEditor : Editor
             case InitializeCameras.PrefabEnum.Dolly:
                 ShowDollyInspector();
                 break;
-        }
+        }*/
 
         /// <summary>
         /// Applies changes to the Inspector

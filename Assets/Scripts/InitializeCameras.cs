@@ -2,7 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+
+#if UNITY_EDITOR
+
 using UnityEditor.Experimental.SceneManagement;
+
+#endif
+
 using System;
 using System.Text.RegularExpressions;
 
@@ -26,8 +32,8 @@ public class InitializeCameras : MonoBehaviour
     public DollyInspector dollyInspector;
 
     private const string _PlayerTagName = "Player";
-    private const string _DollyPattern = "^DollyCamera.*";
-    private const string _ClearShotPattern = "(^Tracking|^Fixed)Cameras.*";
+    //    private const string _DollyPattern = "^DollyCamera.*";
+    //    private const string _ClearShotPattern = "(^Tracking|^Fixed)Cameras.*";
 
     // Awake is called when the script is initialized
     private void Awake()
@@ -35,15 +41,19 @@ public class InitializeCameras : MonoBehaviour
         /// <summary>
         /// Checks IF the inspector is editing a prefab, and does not execute to avoid modifying the prefab
         /// </summary>
+#if UNITY_EDITOR
         if (!PrefabStageUtility.GetCurrentPrefabStage()) //should not run in Prefab Mode (experimental API)
         {
-            Regex dollyRegex = new Regex(_DollyPattern);
-            Regex clearShotRegex = new Regex(_ClearShotPattern);
+            InitializeClearShot();
+            InitializeDolly();
+
+            //Regex dollyRegex = new Regex(_DollyPattern);
+            //Regex clearShotRegex = new Regex(_ClearShotPattern);
 
             /// <summary>
             /// Operations are different depending on whether the script is running on a DollyCamera.prefab or FixedCameras.prefab/TrackingCameras.prefab
             /// </summary>
-            try
+            /*try
             {
                 if (dollyRegex.IsMatch(name))
                 {
@@ -66,8 +76,12 @@ public class InitializeCameras : MonoBehaviour
             catch (Exception e)
             {
                 Debug.LogException(e);
-            }
+            }*/
         }
+#else
+            InitializeClearShot();
+            InitializeDolly();
+#endif
     }
 
     /// <summary>
@@ -128,7 +142,7 @@ public class InitializeCameras : MonoBehaviour
     /// </summary>
     private void InitializeClearShot()
     {
-        prefabEnum = PrefabEnum.ClearShot;
+        //prefabEnum = PrefabEnum.ClearShot;
 
         //default values
         if (clearShotInspector.ignoreTag == "")
@@ -158,7 +172,7 @@ public class InitializeCameras : MonoBehaviour
     /// </summary>
     private void InitializeDolly()
     {
-        prefabEnum = PrefabEnum.Dolly;
+        //prefabEnum = PrefabEnum.Dolly;
 
         if (!SetPlayerObject())
             return;

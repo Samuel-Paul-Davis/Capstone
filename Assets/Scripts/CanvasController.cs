@@ -12,7 +12,7 @@ public class CanvasController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        GamePausePanel.SetActive(false);
+        Resume();
     }
 
     // Update is called once per frame
@@ -22,16 +22,29 @@ public class CanvasController : MonoBehaviour
         {
             if (isGamePaused)
             {
-                isGamePaused = false;
-                Time.timeScale = 1;
-                GamePausePanel.SetActive(false);
+                Resume();
             }
             else
             {
-                isGamePaused = true;
-                Time.timeScale = 0;
-                GamePausePanel.SetActive(true);
+                Pause();
             }
         }
+    }
+
+    public void Pause()
+    {
+        isGamePaused = true;
+        Time.timeScale = 0;
+        GamePausePanel.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void Resume()
+    {
+        isGamePaused = false;
+        Time.timeScale = 1;
+        GamePausePanel.SetActive(false);
+        Cursor.visible = false;
     }
 }
