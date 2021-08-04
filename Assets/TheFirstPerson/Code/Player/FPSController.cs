@@ -342,7 +342,7 @@ namespace TheFirstPerson
             //get the transform of a child with a camera component
             if (!customCameraTransform && !thirdPersonMode)
             {
-                cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
+                cam = Camera.main.transform;
             }
 
             standingHeight = controller.height;
@@ -741,8 +741,8 @@ namespace TheFirstPerson
 
                         if (vectorMove != PreviousMovement)
                         {
-                            cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
-                            //cam = Camera.main.transform;
+                            //cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
+                            cam = Camera.main.transform;
                             standingHeight = controller.height;
                             cameraOffset = standingHeight - cam.localPosition.y;
                             cameraAngle = cam.eulerAngles.y;
