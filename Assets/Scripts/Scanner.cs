@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class Scanner : MonoBehaviour
 {
-    public Material material;
+    public Material[] materials;
+
+    private Dictionary<Renderer, Material[]> oldMats = new Dictionary<Renderer, Material[]>();
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Working");
+        oldMats.Add(other.gameObject.GetComponent<Renderer>(), other.gameObject.GetComponent<Renderer>().materials);
 
-        other.gameObject.GetComponent<Renderer>().material = material;
+        other.gameObject.GetComponent<Renderer>().materials = materials;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Renderer otherRenderer = other.gameObject.GetComponent<Renderer>();
+
+        otherRenderer.materials = oldMats[otherRenderer];
+
+        oldMats.Remove(otherRenderer);
     }
 }
