@@ -401,22 +401,7 @@ namespace TheFirstPerson
                 UpdateInput();
             }
 
-            //UpdateMouseLock();
-            if (Input.GetKeyDown(mouseUnlock))
-            {
-                if (Cursor.lockState == CursorLockMode.None)
-                {
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                    GetComponent<MouseInteractionSystem>().isMouseActive = false;
-                }
-                else
-                {
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                    GetComponent<MouseInteractionSystem>().isMouseActive = true;
-                }
-            }
+            UpdateMouseLock();
 
             ExecuteExtension(ExtFunc.PostInput);
             if (thirdPersonMode && movementEnabled)
@@ -427,7 +412,7 @@ namespace TheFirstPerson
             {
                 if (mouseLocked)
                 {
-                    MouseLook();
+                    //MouseLook();
                 }
             }
             if (!moveInFixedUpdate && movementEnabled)
@@ -741,7 +726,6 @@ namespace TheFirstPerson
 
                         if (vectorMove != PreviousMovement)
                         {
-                            //cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
                             cam = Camera.main.transform;
                             standingHeight = controller.height;
                             cameraOffset = standingHeight - cam.localPosition.y;
@@ -784,11 +768,14 @@ namespace TheFirstPerson
             {
                 if (customInputSystem == null ? Input.GetButtonDown(unlockMouseBtn) : customInputSystem.UnlockMouseButton())
                 {
-                    mouseLocked = false;
-                }
-                else if (Input.GetMouseButtonDown(0))
-                {
-                    mouseLocked = true;
+                    if (mouseLocked == false)
+                    {
+                        mouseLocked = true;
+                    }
+                    else
+                    {
+                        mouseLocked = false;
+                    }
                 }
             }
 
@@ -796,11 +783,13 @@ namespace TheFirstPerson
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                GetComponent<MouseInteractionSystem>().isMouseActive = false;
             }
             else
             {
-                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
+                GetComponent<MouseInteractionSystem>().isMouseActive = true;
             }
         }
 
