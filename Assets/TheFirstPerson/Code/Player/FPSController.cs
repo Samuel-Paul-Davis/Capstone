@@ -321,9 +321,14 @@ namespace TheFirstPerson
         private string yInName = "Vertical";
         private string xMouseName = "Mouse X";
         private string yMouseName = "Mouse Y";
+        private string MouseHori = "MouseHorizontal";
+        private string MouseVert = "MouseVertical";
 
-        //Key binding for mouse moving
-        private KeyCode mouseUnlock = KeyCode.LeftAlt;
+        public struct MousePosition
+        {
+            public int x;
+            public int y;
+        }
 
         private TFPInfo controllerInfo;
 
@@ -410,9 +415,9 @@ namespace TheFirstPerson
             }
             else
             {
-                if (mouseLocked)
+                if (!mouseLocked)
                 {
-                    //MouseLook();
+                    MouseMove();
                 }
             }
             if (!moveInFixedUpdate && movementEnabled)
@@ -793,32 +798,15 @@ namespace TheFirstPerson
             }
         }
 
-        private void MouseLook()
+        private void MouseMove()
         {
-            if (mouseLookEnabled)
-            {
-                float horizontalLook = transform.localEulerAngles.y;
-                float verticalLook = cam.localEulerAngles.x;
+            MousePosition mp;
+            MousePosition mouseAddative;
 
-                horizontalLook += xMouse * sensitivity;
+            mouseAddative.x = (int)Input.GetAxisRaw(MouseHori);
+            mouseAddative.y = (int)Input.GetAxisRaw(MouseVert);
 
-                if (verticalLookEnabled)
-                {
-                    verticalLook -= yMouse * sensitivity;
-                    if (verticalLook > verticalLookLimit && verticalLook < 180)
-                    {
-                        verticalLook = verticalLookLimit;
-                    }
-                    else if (verticalLook > 180 && verticalLook < 360 - verticalLookLimit)
-                    {
-                        verticalLook = 360 - verticalLookLimit;
-                    }
-
-                    cam.localEulerAngles = new Vector3(verticalLook, 0, 0);
-                }
-
-                transform.localEulerAngles = new Vector3(0, horizontalLook, 0);
-            }
+            // TODO: Add logic here to move the thing around, not sure I can TBH
         }
 
         private void ThirdPersonSteering()
