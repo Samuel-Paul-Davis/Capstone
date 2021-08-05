@@ -8,6 +8,25 @@ public class Scanner : MonoBehaviour
 
     private Dictionary<Renderer, Material[]> oldMats = new Dictionary<Renderer, Material[]>();
 
+    private void Start()
+    {
+        transform.Find("BeamContainer/Beam").gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            transform.Find("BeamContainer/Beam").gameObject.SetActive(true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha1))
+        {
+            transform.Find("BeamContainer/Beam").gameObject.SetActive(false);
+            UnpaintAllTargets();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Interactive"))
@@ -27,6 +46,18 @@ public class Scanner : MonoBehaviour
             otherRenderer.materials = oldMats[otherRenderer];
 
             oldMats.Remove(otherRenderer);
+        }
+    }
+
+    private void UnpaintAllTargets()
+    {
+        foreach (KeyValuePair<Renderer, Material[]> kvp in oldMats)
+        {
+            Renderer r = kvp.Key;
+            
+            r.materials = kvp.Value;
+
+            //oldMats.Remove(kvp.Key);
         }
     }
 }
