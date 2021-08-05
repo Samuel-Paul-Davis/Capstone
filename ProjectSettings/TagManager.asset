@@ -7,6 +7,7 @@ TagManager:
   - Object
   - Climbable
   - Puzzle
+  - Interactive
   layers:
   - Default
   - TransparentFX

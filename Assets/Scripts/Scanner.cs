@@ -10,17 +10,23 @@ public class Scanner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        oldMats.Add(other.gameObject.GetComponent<Renderer>(), other.gameObject.GetComponent<Renderer>().materials);
+        if (other.CompareTag("Interactive"))
+        {
+            oldMats.Add(other.gameObject.GetComponent<Renderer>(), other.gameObject.GetComponent<Renderer>().materials);
 
-        other.gameObject.GetComponent<Renderer>().materials = materials;
+            other.gameObject.GetComponent<Renderer>().materials = materials;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Renderer otherRenderer = other.gameObject.GetComponent<Renderer>();
+        if (other.CompareTag("Interactive"))
+        {
+            Renderer otherRenderer = other.gameObject.GetComponent<Renderer>();
 
-        otherRenderer.materials = oldMats[otherRenderer];
+            otherRenderer.materials = oldMats[otherRenderer];
 
-        oldMats.Remove(otherRenderer);
+            oldMats.Remove(otherRenderer);
+        }
     }
 }
