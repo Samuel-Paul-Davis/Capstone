@@ -313,8 +313,8 @@ namespace TheFirstPerson
 
         //Input Name Defaults (assuming default unity axes are set up)
         private string jumpBtn = "Jump";
-
         private string crouchBtn = "Fire1";
+        private string interactionBtn = "Fire2";
         private string runBtn = "Fire3";
         private string unlockMouseBtn = "Cancel";
         private string xInName = "Horizontal";
@@ -328,6 +328,11 @@ namespace TheFirstPerson
         {
             public int x;
             public int y;
+        }
+
+        public string GetInteractionBtn()
+        {
+            return interactionBtn;
         }
 
         private TFPInfo controllerInfo;

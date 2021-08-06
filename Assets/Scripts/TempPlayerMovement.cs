@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TheFirstPerson;
 using UnityEngine;
 
 public class TempPlayerMovement : MonoBehaviour
 {
     GameObject gameObject = null;
+
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +17,7 @@ public class TempPlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetButtonDown(GetComponent<FPSController>().GetInteractionBtn()))
         {
             if ( gameObject != null)
             {
