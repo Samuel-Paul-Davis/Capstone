@@ -1081,7 +1081,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920c4951b88debd4e90fbefcf0c10763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beam: {fileID: 0}
+  key: 102
+  beam: {fileID: 919132148725006416}
 --- !u!54 &1388107268
 Rigidbody:
   m_ObjectHideFlags: 0

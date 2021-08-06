@@ -14,13 +14,6 @@ public class ScannerBeam : MonoBehaviour
         {
             oldMats.Add(other.gameObject.GetComponent<Renderer>(), other.gameObject.GetComponent<Renderer>().materials);
 
-            foreach (KeyValuePair<Renderer, Material[]> kvp in oldMats)
-            {
-                Debug.Log(kvp);
-                foreach (Material m in oldMats[kvp.Key])
-                    Debug.Log(m);
-            }
-
             other.gameObject.GetComponent<Renderer>().materials = materials;
         }
     }
