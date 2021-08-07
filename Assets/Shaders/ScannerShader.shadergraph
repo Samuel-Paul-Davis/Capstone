@@ -420,8 +420,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 154.39981079101563,
-            "y": -19.200027465820314
+            "x": 312.0000305175781,
+            "y": -39.9999885559082
         },
         "m_Blocks": [
             {
@@ -437,8 +437,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 154.39981079101563,
-            "y": 180.80015563964845
+            "x": 312.0000305175781,
+            "y": 160.0
         },
         "m_Blocks": [
             {
@@ -986,10 +986,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -216.8000030517578,
-            "y": 182.39999389648438,
-            "width": 128.0,
-            "height": 34.39999771118164
+            "x": -157.5999755859375,
+            "y": 154.39999389648438,
+            "width": 128.8000030517578,
+            "height": 33.600006103515628
         }
     },
     "m_Slots": [
@@ -2822,7 +2822,7 @@
     "m_TransparentDepthPrepass": false,
     "m_TransparentDepthPostpass": false,
     "m_SupportLodCrossFade": false,
-    "m_DoubleSidedMode": 0,
+    "m_DoubleSidedMode": 1,
     "m_DOTSInstancing": false,
     "m_Version": 0,
     "m_FirstTimeMigrationExecuted": true,
