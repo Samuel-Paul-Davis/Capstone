@@ -32,7 +32,7 @@ public class MouseInteractionSystem : MonoBehaviour
                 {
                     if (hit.rigidbody != null)
                     {
-                        if (hit.rigidbody.gameObject.tag == "Object")
+                        if (hit.rigidbody.gameObject.tag == "Puzzle")
                         {
                             currentObject = hit.rigidbody.gameObject;
                             currentObject.GetComponent<AbstractObjectInteraction>().ObjectInteraction();
