@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TheFirstPerson;
 
-public class PlayerHovering : MonoBehaviour
+public class PlayerHovering : TFPExtension
 {
     public float length;
     public float strength;
     public float dapeningAmount;
 
     private float lastHitDist;
-    private Rigidbody rb;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         lastHitDist = 10;
     }
 
-    private void FixedUpdate()
+    public override void ExPostFixedUpdate(ref TFPData data, TFPInfo info)
     {
+        base.ExPostFixedUpdate(ref data, info);
+
         RaycastHit hit;
         Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.up), Color.red);
         if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), out hit, length))
@@ -26,16 +28,16 @@ public class PlayerHovering : MonoBehaviour
             print(hit.collider.gameObject.name);
             float forceAmount = HooksLawDampen(hit.distance);
 
-            rb.AddForceAtPosition(transform.up * forceAmount, transform.position);
+            data.yVel = strength;
+            print(hit.collider.gameObject.name);
         }
         else
         {
             lastHitDist = length;
             Debug.Log(hit.collider.gameObject.name);
         }
-
+        print("Working");
     }
-
     /// <summary>
     /// Applies hooks law and dampens the forces to make the object 'springy'
     /// </summary>
