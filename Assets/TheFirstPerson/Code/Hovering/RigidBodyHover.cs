@@ -1,26 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TheFirstPerson;
 
-public class PlayerHovering : TFPExtension
+/// <summary>
+/// Adds force to a rigidbody to cause hovering
+/// </summary>
+public class RiggidBodyHover : MonoBehaviour
 {
     public float length;
     public float strength;
-    public float dapeningAmount;
+    public float dampeningAmount;
 
     private float lastHitDist;
+    public Rigidbody rb;
 
     private void Start()
     {
-        //rb = GetComponent<Rigidbody>();
         lastHitDist = 10;
     }
 
-    public override void ExPostFixedUpdate(ref TFPData data, TFPInfo info)
+    private void FixedUpdate()
     {
-        base.ExPostFixedUpdate(ref data, info);
-
         RaycastHit hit;
         Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.up), Color.red);
         if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), out hit, length))
@@ -28,16 +28,15 @@ public class PlayerHovering : TFPExtension
             print(hit.collider.gameObject.name);
             float forceAmount = HooksLawDampen(hit.distance);
 
-            data.yVel = strength;
-            print(hit.collider.gameObject.name);
+            rb.AddForceAtPosition(transform.up * forceAmount, transform.position);
         }
         else
         {
             lastHitDist = length;
-            Debug.Log(hit.collider.gameObject.name);
         }
-        print("Working");
+
     }
+
     /// <summary>
     /// Applies hooks law and dampens the forces to make the object 'springy'
     /// </summary>
@@ -59,7 +58,7 @@ public class PlayerHovering : TFPExtension
 
     private float DampenAmount(float hitDistance)
     {
-        float dampen = dapeningAmount * (lastHitDist - hitDistance);
+        float dampen = dampeningAmount * (lastHitDist - hitDistance);
         return dampen;
     }
 }
