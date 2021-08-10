@@ -323,6 +323,7 @@ namespace TheFirstPerson
         private string yMouseName = "Mouse Y";
         private string MouseHori = "MouseHorizontal";
         private string MouseVert = "MouseVertical";
+        private string TargetingBtn = "ItemTargeting";
 
         public struct MousePosition
         {
@@ -333,6 +334,11 @@ namespace TheFirstPerson
         public string GetInteractionBtn()
         {
             return interactionBtn;
+        }
+
+        public string GetTargetingBtn()
+        {
+            return TargetingBtn;
         }
 
         private TFPInfo controllerInfo;

@@ -5,12 +5,13 @@ using UnityEngine;
 public class ScannerBeam : MonoBehaviour
 {
     public Material[] materials;
+    public string targetTag;
 
     private Dictionary<Renderer, Material[]> oldMats = new Dictionary<Renderer, Material[]>();
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Interactive"))
+        if (other.CompareTag(targetTag) && other.gameObject.GetComponent<Renderer>())
         {
             oldMats.Add(other.gameObject.GetComponent<Renderer>(), other.gameObject.GetComponent<Renderer>().materials);
 
@@ -20,7 +21,7 @@ public class ScannerBeam : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Interactive"))
+        if (other.CompareTag(targetTag) && other.gameObject.GetComponent<Renderer>())
         {
             Renderer otherRenderer = other.gameObject.GetComponent<Renderer>();
 

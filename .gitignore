@@ -99,3 +99,4 @@ fmod_editor.log
 # Ignore project folders, per: https://qa.fmod.com/t/fmod-studio-unity-gitignore/13114/3
 /fmod/**/.unsaved/
 /fmod/**/.user/
+Assets/Scenes/Desert Start Area.unity.meta
