@@ -455,7 +455,7 @@ namespace TheFirstPerson
                 forward = transform.forward;
                 side = transform.right;
                 currentMove = Vector3.zero;
-                grounded = controller.isGrounded;
+                grounded = false;
                 slideMove = Vector3.zero;
                 Vector3 lastMoveH = Vector3.Scale(lastMove, new Vector3(1, 0, 1));
 
