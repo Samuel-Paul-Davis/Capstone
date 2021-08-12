@@ -31,19 +31,15 @@ public class MouseInteractionSystem : MonoBehaviour
 
             foreach (GameObject gameObject in tempObjectList)
             {
-                if (gameObject.GetComponent<Renderer>().isVisible && gameObject.TryGetComponent<MovableObject>(out movableObject))
+                if (gameObject.GetComponent<Renderer>().IsVisibleFrom(Camera.main) && gameObject.TryGetComponent<MovableObject>(out movableObject))
                 {
-                    Ray ray = new Ray(gameObject.transform.position, Camera.main.transform.position - gameObject.transform.position);
-                    RaycastHit hit;
-
-                    if (Physics.Raycast(ray, out hit))
-                        if (hit.rigidbody != null)
-                            if (hit.rigidbody.gameObject.tag == "Puzzle")
-                                targetList.Add(gameObject);
+                    Debug.Log(gameObject.name);
+                    targetList.Add(gameObject);
                 }
             }
+
             foreach (GameObject gmObject in targetList)
-                Debug.Log(gmObject.name);
+                Debug.Log("Result " + gmObject.name);
         }
         if (isMouseActive)
         {
