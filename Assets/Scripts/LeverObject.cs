@@ -6,9 +6,6 @@ public class LeverObject : AbstractObjectInteraction
 {
     public bool isOn = false;
 
-
-    private float targetPos;
-
     private void Update()
     {
         Debug.Log(GetComponent<HingeJoint>().angle > 0);
@@ -26,8 +23,6 @@ public class LeverObject : AbstractObjectInteraction
         js.targetPosition *= -1;
 
         GetComponent<HingeJoint>().spring = js;
-
-        targetPos = js.targetPosition;
     }
 
     public override void ObjectDeselectInteraction() {}

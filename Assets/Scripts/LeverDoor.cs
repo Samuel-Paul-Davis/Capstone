@@ -14,12 +14,12 @@ public class LeverDoor : MonoBehaviour
         closedPosition = transform.position;
 
         openPosition = transform.position;
-        openPosition.x -= 1;
+        openPosition.x -= (transform.localScale.x * 1);
     }
 
     private void Update()
     {
-        Debug.Log("Door signal: " + lever.isOn);
+        Debug.Log(transform.position.x);
 
         if (lever.isOn)
             Open();
@@ -30,12 +30,12 @@ public class LeverDoor : MonoBehaviour
     private void Open()
     {
         if (transform.position != openPosition)
-            transform.position = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
-    }
+            transform.position = openPosition;
+     }
 
     private void Close()
     {
         if (transform.position != closedPosition)
-            transform.position = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+            transform.position = closedPosition;
     }
 }
