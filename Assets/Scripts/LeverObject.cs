@@ -11,16 +11,12 @@ public class LeverObject : AbstractObjectInteraction
 
     private void Update()
     {
-        Debug.Log(GetComponent<HingeJoint>().angle + ", " + targetPos);
-        Debug.Log(GetComponent<HingeJoint>().angle == targetPos);
+        Debug.Log(GetComponent<HingeJoint>().angle > 0);
 
-        if (Mathf.Approximately(GetComponent<HingeJoint>().angle,targetPos))
-        {
-            if (isOn)
-                isOn = false;
-            else
-                isOn = true;
-        }
+        if (GetComponent<HingeJoint>().angle > 0)
+            isOn = true;
+        else
+            isOn = false;
     }
 
     public override void ObjectInteraction()
