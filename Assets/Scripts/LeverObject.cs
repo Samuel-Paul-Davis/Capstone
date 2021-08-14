@@ -8,8 +8,6 @@ public class LeverObject : AbstractObjectInteraction
 
     private void Update()
     {
-        Debug.Log(GetComponent<HingeJoint>().angle > 0);
-
         if (GetComponent<HingeJoint>().angle > 0)
             isOn = true;
         else

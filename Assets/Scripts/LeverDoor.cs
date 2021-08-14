@@ -19,8 +19,6 @@ public class LeverDoor : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(transform.position.x);
-
         if (lever.isOn)
             Open();
         else
