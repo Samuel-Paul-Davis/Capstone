@@ -17,7 +17,7 @@ public class HoverController : TFPExtension
 
     private void Start()
     {
-        lastHitDist = 10;
+        lastHitDist = 1;
     }
 
 
