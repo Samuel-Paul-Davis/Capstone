@@ -455,7 +455,6 @@ namespace TheFirstPerson
                 forward = transform.forward;
                 side = transform.right;
                 currentMove = Vector3.zero;
-                grounded = false;
                 slideMove = Vector3.zero;
                 Vector3 lastMoveH = Vector3.Scale(lastMove, new Vector3(1, 0, 1));
 
@@ -570,15 +569,6 @@ namespace TheFirstPerson
                     else
                     {
                         currentMove = targetMove;
-                    }
-                    var targetYVel = -baseGroundForce + (-maxGroundForce * (groundAngle / 90.0f));
-                    if (lastMove.y < 0)
-                    {
-                        yVel = Mathf.Lerp(lastMove.y, targetYVel, gravity * dt);
-                    }
-                    else
-                    {
-                        yVel = targetYVel;
                     }
                     timeSinceGrounded = 0;
                     jumping = false;

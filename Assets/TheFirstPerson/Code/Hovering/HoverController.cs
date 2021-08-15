@@ -34,10 +34,12 @@ public class HoverController : TFPExtension
             //rb.AddForceAtPosition(transform.up * forceAmount, transform.position);
 
             data.yVel += forceAmount;
+            data.grounded = true;
             print("Added " + forceAmount + " to yVel");
         }
         else
         {
+            data.grounded = false;
             lastHitDist = length;
             print("Nothing hit");
         }
