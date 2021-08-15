@@ -38,7 +38,6 @@ public class HoverController : TFPExtension
             {
                 forceAmount = HooksLawDampen(hit.distance);
             }
-            print(forceAmount);
             data.yVel += forceAmount;
             data.grounded = true;
         }

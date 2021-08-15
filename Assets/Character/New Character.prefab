@@ -581,11 +581,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceBetweenFootsteps: 2
-  leftFoot: {fileID: 0}
-  rightFoot: {fileID: 0}
+  hoveringSound: {fileID: 0}
   footsteps:
   - {fileID: 11400000, guid: c23245070adcf634c865d5386e3030a4, type: 2}
   - {fileID: 11400000, guid: bfcbe97c948957c448c8e2a7b4dc2c47, type: 2}
+  hoveringSoundEffect: {fileID: 6594811549823017868, guid: 7f9cf7c9ab48136418627e4fcd1eabf3, type: 3}
   defaultFootsteps: {fileID: 11400000, guid: c23245070adcf634c865d5386e3030a4, type: 2}
 --- !u!114 &4740603191323045152
 MonoBehaviour:
