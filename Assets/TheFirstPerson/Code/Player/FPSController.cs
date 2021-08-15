@@ -455,7 +455,6 @@ namespace TheFirstPerson
                 forward = transform.forward;
                 side = transform.right;
                 currentMove = Vector3.zero;
-                grounded = controller.isGrounded;
                 slideMove = Vector3.zero;
                 Vector3 lastMoveH = Vector3.Scale(lastMove, new Vector3(1, 0, 1));
 
@@ -502,6 +501,7 @@ namespace TheFirstPerson
                     {
                         if (Vector3.Angle(ledgeCheck.normal, Vector3.up) >= controller.slopeLimit)
                         {
+                            print("Sliding");
                             slide = true;
                         }
                         else
@@ -554,32 +554,25 @@ namespace TheFirstPerson
                     }
                 }
 
+                if (momentumEnabled && !instantMomentumChange)
+                {
+                    if (moving || targetMove.magnitude < lastMoveH.magnitude)
+                    {
+                        currentMove = Vector3.MoveTowards(lastMoveH, targetMove, dt * deceleration);
+                    }
+                    else
+                    {
+                        currentMove = Vector3.MoveTowards(lastMoveH, targetMove, dt * acceleration);
+                    }
+                }
+                else
+                {
+                    currentMove = targetMove;
+                }
+
                 if (grounded)
                 {
-                    if (momentumEnabled && !instantMomentumChange)
-                    {
-                        if (moving || targetMove.magnitude < lastMoveH.magnitude)
-                        {
-                            currentMove = Vector3.MoveTowards(lastMoveH, targetMove, dt * deceleration);
-                        }
-                        else
-                        {
-                            currentMove = Vector3.MoveTowards(lastMoveH, targetMove, dt * acceleration);
-                        }
-                    }
-                    else
-                    {
-                        currentMove = targetMove;
-                    }
-                    var targetYVel = -baseGroundForce + (-maxGroundForce * (groundAngle / 90.0f));
-                    if (lastMove.y < 0)
-                    {
-                        yVel = Mathf.Lerp(lastMove.y, targetYVel, gravity * dt);
-                    }
-                    else
-                    {
-                        yVel = targetYVel;
-                    }
+
                     timeSinceGrounded = 0;
                     jumping = false;
                     if (jumpEnabled && (jumpWhileSliding || !slide))
@@ -603,14 +596,7 @@ namespace TheFirstPerson
                     {
                         yVel = 0;
                     }
-                    if (moving)
-                    {
-                        currentMove = Vector3.Lerp(lastMoveH, targetMove, airControl);
-                    }
-                    else
-                    {
-                        currentMove = Vector3.MoveTowards(lastMoveH, targetMove, airResistance * dt);
-                    }
+
                     if (timeSinceGrounded <= 0 && !jumping)
                     {
                         if (lastMove.y < -baseFallVelocity)
