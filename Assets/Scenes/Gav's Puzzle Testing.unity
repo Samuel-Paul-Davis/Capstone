@@ -21256,8 +21256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903c44a33c2047240ba00a4d3c223ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot1_transform: {fileID: 1723106768}
-  slot2_transform: {fileID: 230919343}
+  slot1: {fileID: 1723106768}
+  slot2: {fileID: 230919343}
 --- !u!1 &1870932596
 GameObject:
   m_ObjectHideFlags: 0
