@@ -15,6 +15,9 @@ public class DialogHandler : MonoBehaviour
     private Text speakerText;
     [SerializeField]
     private Text dialogText;
+    [SerializeField]
+    private GameObject dialogPanel;
+    private bool isInCutsceen = true;
 
     // Start is called before the first frame update
     void Start()
@@ -26,27 +29,35 @@ public class DialogHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isInCutsceen)
+        {
+            if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape))
+            {
+                Debug.Log(currentDialog + " : " + dialog.Count);
+                if (currentDialog >= dialog.Count)
+                {
+                    isInCutsceen = false;
+                    dialogPanel.SetActive(false);
+                }
+                else
+                {                   
+                    ShowDialog();
+                    NextDialog();
+                }             
+            }
+        }
     }
 
     void GenerateDialog()
     {
-        Debug.Log("YEP1");
-        StreamReader reader = new StreamReader(rawDialogText);
-        Debug.Log("YEP2");
-        string rawDialog = reader.ReadToEnd();
-        //string rawDialog = System.IO.File.ReadAllText(rawDialogText);
-        Debug.Log("YEP3");
-        Debug.Log(rawDialog);
-        Debug.Log("YEP4");
-
-        string[] rawLines = rawDialog.Split('[');
+        string rawDialog = string.Join(" ", File.ReadAllLines(rawDialogText));
+        string[] rawLines = rawDialog.Split(']');
 
         foreach (string rawLine in rawLines)
         {
-            string[] splitLine = rawLine.Trim().Split(']');
+            string[] splitLine = rawLine.Trim().Split('[');
 
-            DialogSection dialogSection = new DialogSection(splitLine[0].Trim(), splitLine[1].Trim());
+            DialogSection dialogSection = new DialogSection(splitLine[0].Trim(), splitLine[1].Replace('*', '\n'));
             dialog.Add(dialogSection);
         }
     }
