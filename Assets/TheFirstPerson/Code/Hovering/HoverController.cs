@@ -39,7 +39,7 @@ public class HoverController : TFPExtension
                 forceAmount = HooksLawDampen(hit.distance);
             }
             data.yVel += forceAmount;
-            data.grounded = true;
+            data.grounded = false;
         }
         else
         {
