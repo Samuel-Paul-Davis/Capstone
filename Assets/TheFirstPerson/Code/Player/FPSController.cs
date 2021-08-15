@@ -653,9 +653,12 @@ namespace TheFirstPerson
             currentTurnMult = 1.0f;
             if (grounded)
             {
-                currentMoveSpeed = moveSpeed;
-                currentStrafeMult = strafeMult;
-                currentBackwardMult = backwardMult;
+                //currentMoveSpeed = moveSpeed;
+                //currentStrafeMult = strafeMult;
+                //currentBackwardMult = backwardMult;
+                currentMoveSpeed = airMoveSpeed;
+                currentStrafeMult = airStrafeMult;
+                currentBackwardMult = airBackwardMult;
                 if (crouching && crouchEnabled)
                 {
                     currentMoveSpeed *= crouchMult;
