@@ -23,25 +23,29 @@ public class HoverController : TFPExtension
 
     public override void ExPostFixedUpdate(ref TFPData data, TFPInfo info)
     {
+
         base.ExPostFixedUpdate(ref data, info);
         RaycastHit hit;
         Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.up), Color.red);
         if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), out hit, length, layerMask))
         {
-            print(hit.collider.gameObject.name);
-            float forceAmount = HooksLawDampen(hit.distance);
-
-            //rb.AddForceAtPosition(transform.up * forceAmount, transform.position);
-
+            float forceAmount;
+            if (NormalCheck(hit.normal, info.controller))
+            {
+                forceAmount = 0.03f;
+            }
+            else
+            {
+                forceAmount = HooksLawDampen(hit.distance);
+            }
+            print(forceAmount);
             data.yVel += forceAmount;
             data.grounded = true;
-            print("Added " + forceAmount + " to yVel");
         }
         else
         {
             data.grounded = false;
             lastHitDist = length;
-            print("Nothing hit");
         }
     }
 
@@ -73,5 +77,15 @@ public class HoverController : TFPExtension
     {
         float dampen = dampeningAmount * (lastHitDist - hitDistance);
         return dampen;
+    }
+
+    private bool NormalCheck(Vector3 normal, CharacterController controller)
+    {
+        if (Vector3.Angle(normal, Vector3.up) >= controller.slopeLimit)
+        {
+            print(Vector3.Angle(normal, Vector3.up));
+            return true;
+        }
+        return false;
     }
 }
