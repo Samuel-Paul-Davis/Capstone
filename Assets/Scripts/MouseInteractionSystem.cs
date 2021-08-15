@@ -31,13 +31,15 @@ public class MouseInteractionSystem : MonoBehaviour
 
             foreach (GameObject gameObject in tempObjectList)
             {
-                if (gameObject.GetComponent<Renderer>().isVisible && gameObject.TryGetComponent<MovableObject>(out movableObject))
+                if (gameObject.GetComponent<Renderer>().IsVisibleFrom(Camera.main) && gameObject.TryGetComponent<MovableObject>(out movableObject))
                 {
+                    Debug.Log(gameObject.name);
                     targetList.Add(gameObject);
                 }
             }
+
             foreach (GameObject gmObject in targetList)
-                Debug.Log(gmObject.name);
+                Debug.Log("Result " + gmObject.name);
         }
         if (isMouseActive)
         {
