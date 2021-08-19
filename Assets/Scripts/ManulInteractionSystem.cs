@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TheFirstPerson;
 using UnityEngine;
 
-public class TempPlayerMovement : MonoBehaviour
+public class ManulInteractionSystem : MonoBehaviour
 {
     GameObject gameObject = null;
 
