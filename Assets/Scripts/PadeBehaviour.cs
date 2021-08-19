@@ -14,13 +14,13 @@ public class PadeBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Object")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Puzzle")
             PadeState = PuzzleState.On;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Object")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Puzzle")
             PadeState = PuzzleState.Off;
     }
 }

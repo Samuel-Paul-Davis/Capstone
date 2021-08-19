@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 936354883232017995}
   - component: {fileID: 936354883232017988}
   m_Layer: 0
-  m_Name: Cube (35)
-  m_TagString: Puzzle
+  m_Name: SmallBreakableCude
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

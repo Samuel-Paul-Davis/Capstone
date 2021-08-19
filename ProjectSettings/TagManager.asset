@@ -8,6 +8,7 @@ TagManager:
   - Climbable
   - Puzzle
   - Interactive
+  - IgnoreRaycast
   layers:
   - Default
   - TransparentFX

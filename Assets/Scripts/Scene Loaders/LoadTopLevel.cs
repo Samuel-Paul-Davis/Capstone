@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class LoadTopLevel : MonoBehaviour
 {
+    [SerializeField]
+    private string TopLevelName;
     public void Load()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(TopLevelName);
     }
 }
