@@ -33,5 +33,8 @@ public class CardReader : MonoBehaviour
             slot2_key = collision.GetContact(0).otherCollider.gameObject;
 
         collision.GetContact(0).thisCollider.enabled = false;
+
+        collision.GetContact(0).otherCollider.gameObject.GetComponent<KeyCoreObject>().enabled = false;
+        collision.GetContact(0).otherCollider.gameObject.tag = "Untagged";
     }
 }
