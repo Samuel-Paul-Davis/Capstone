@@ -113,7 +113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022685877323021323}
   m_LocalRotation: {x: 0.49999997, y: 0.5000001, z: -0.5, w: -0.49999988}
-  m_LocalPosition: {x: 100, y: -0, z: -0}
+  m_LocalPosition: {x: 100.007, y: -0.023, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 7632505941181137649}
@@ -452,7 +452,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 0.7
   m_Radius: 0.4
-  m_SlopeLimit: 25
+  m_SlopeLimit: 50
   m_StepOffset: 0.4
   m_SkinWidth: 0.1
   m_MinMoveDistance: 0
@@ -808,7 +808,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 188123746, guid: ab7ad894695575548bb79921a9ef9a9f, type: 3}
       propertyPath: length
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 188123746, guid: ab7ad894695575548bb79921a9ef9a9f, type: 3}
       propertyPath: strength
@@ -862,7 +862,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7418659475631373176, guid: ab7ad894695575548bb79921a9ef9a9f, type: 3}
+    - {fileID: 7418659475631373177, guid: ab7ad894695575548bb79921a9ef9a9f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ab7ad894695575548bb79921a9ef9a9f, type: 3}
 --- !u!4 &7418659475581011704 stripped
 Transform:
