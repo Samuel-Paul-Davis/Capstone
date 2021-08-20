@@ -22,17 +22,18 @@ public class SlotPuzzle : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        collision.GetContact(0).otherCollider.gameObject.GetComponent<KeyCoreObject>().isActive = false;
-        collision.GetContact(0).otherCollider.gameObject.GetComponent<KeyCoreObject>().isMoving = false;
+        collision.GetContact(0).otherCollider.gameObject.GetComponent<SlotPartObject>().isActive = false;
+        collision.GetContact(0).otherCollider.gameObject.GetComponent<SlotPartObject>().isMoving = false;
         collision.GetContact(0).otherCollider.attachedRigidbody.isKinematic = true;
 
         collision.GetContact(0).otherCollider.transform.position = collision.GetContact(0).thisCollider.transform.position;
+        collision.GetContact(0).otherCollider.transform.rotation = collision.GetContact(0).thisCollider.transform.rotation;
 
         slot_parts[slots.IndexOf(collision.GetContact(0).thisCollider.gameObject)] = collision.GetContact(0).otherCollider.gameObject;
 
         collision.GetContact(0).thisCollider.enabled = false;
 
-        collision.GetContact(0).otherCollider.gameObject.GetComponent<KeyCoreObject>().enabled = false;
+        collision.GetContact(0).otherCollider.gameObject.GetComponent<SlotPartObject>().enabled = false;
         collision.GetContact(0).otherCollider.gameObject.tag = "Untagged";
     }
 }
