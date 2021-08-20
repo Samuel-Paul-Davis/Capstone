@@ -25,6 +25,8 @@ public class TempEndGameScript : MonoBehaviour
     {
         GameObject.Find(PlayerName).SetActive(false);
         TempEndGamePanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public void ExitGame()
