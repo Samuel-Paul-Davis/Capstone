@@ -9,7 +9,7 @@ public class SlotPuzzle : MonoBehaviour
     [SerializeField]
     protected GameObject[] slot_parts;
 
-    private void Start()
+    protected void Start()
     {
         Transform[] children = transform.GetComponentsInChildren<Transform>();
 
