@@ -7,7 +7,7 @@ public class SlotPuzzle : MonoBehaviour
     public List<GameObject> slots;
 
     [SerializeField]
-    private GameObject[] slot_parts;
+    protected GameObject[] slot_parts;
 
     private void Start()
     {
