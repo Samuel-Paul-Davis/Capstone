@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class DialogHandler : MonoBehaviour
 {
-    public string rawDialogText = "Assets/Recourses/RawDialogText.txt";
+    public string rawDialogText = "RawDialogText.txt";
     [SerializeField]
     private int currentDialog = 0;
     private List<DialogSection> dialog = new List<DialogSection>();
