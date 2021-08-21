@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class DialogHandler : MonoBehaviour
 {
-    public string rawDialogText = "Assets/Recourses/RawDialogText.txt";
+    public string rawDialogText = "RawDialogText.txt";
     [SerializeField]
     private int currentDialog = 0;
     private List<DialogSection> dialog = new List<DialogSection>();
@@ -33,7 +33,6 @@ public class DialogHandler : MonoBehaviour
         {
             if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape))
             {
-                Debug.Log(currentDialog + " : " + dialog.Count);
                 if (currentDialog >= dialog.Count)
                 {
                     isInCutsceen = false;
@@ -50,6 +49,7 @@ public class DialogHandler : MonoBehaviour
 
     void GenerateDialog()
     {
+        rawDialogText = Path.Combine(Application.streamingAssetsPath, rawDialogText);
         string rawDialog = string.Join(" ", File.ReadAllLines(rawDialogText));
         string[] rawLines = rawDialog.Split(']');
 
