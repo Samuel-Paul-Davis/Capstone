@@ -8,8 +8,16 @@ public class KeyReader : SlotPuzzle
 
     private void Update()
     {
-        if (slot_parts[0] && slot_parts[1] && slot_parts[0].GetComponent<KeyCoreObject>() && slot_parts[1].GetComponent<KeyCoreObject>())
-            unlocked = true;
+        for (int i=0; i<slots.Count;i++)
+        {
+            if (slot_parts[i] && slot_parts[i].GetComponent<KeyCoreObject>())
+                unlocked = true;
+            else
+            {
+                unlocked = false;
+                break;
+            }
+        }
     }
 
     /*private void Start()
