@@ -50,6 +50,7 @@ public class DialogHandler : MonoBehaviour
 
     void GenerateDialog()
     {
+        rawDialogText = Path.Combine(Application.streamingAssetsPath, rawDialogText);
         string rawDialog = string.Join(" ", File.ReadAllLines(rawDialogText));
         string[] rawLines = rawDialog.Split(']');
 
