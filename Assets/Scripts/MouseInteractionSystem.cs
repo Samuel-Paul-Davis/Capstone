@@ -1,6 +1,8 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TheFirstPerson;
 using UnityEngine;
 
 public class MouseInteractionSystem : MonoBehaviour
@@ -10,6 +12,7 @@ public class MouseInteractionSystem : MonoBehaviour
     private GameObject currentObject;
     [SerializeField]
     public bool isMouseActive = false;
+    private List<GameObject> targetList = new List<GameObject>();
 
     // Start is called before the first frame update
     void Awake()
@@ -20,6 +23,24 @@ public class MouseInteractionSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown(GetComponent<FPSController>().GetTargetingBtn()))
+        {
+            MovableObject movableObject;
+            List<GameObject> tempObjectList = GameObject.FindGameObjectsWithTag("Puzzle").ToList();
+            targetList.Clear();
+
+            foreach (GameObject gameObject in tempObjectList)
+            {
+                if (gameObject.GetComponent<Renderer>().IsVisibleFrom(Camera.main) && gameObject.TryGetComponent<MovableObject>(out movableObject))
+                {
+                    Debug.Log(gameObject.name);
+                    targetList.Add(gameObject);
+                }
+            }
+
+            foreach (GameObject gmObject in targetList)
+                Debug.Log("Result " + gmObject.name);
+        }
         if (isMouseActive)
         {
             if (Input.GetMouseButtonDown(MOUSELEFTCLICK))
@@ -32,16 +53,15 @@ public class MouseInteractionSystem : MonoBehaviour
                 {
                     if (hit.rigidbody != null)
                     {
-                        if (hit.rigidbody.gameObject.tag == "Object")
+                        if (hit.rigidbody.gameObject.tag == "Puzzle")
                         {
                             currentObject = hit.rigidbody.gameObject;
                             currentObject.GetComponent<AbstractObjectInteraction>().ObjectInteraction();
                         }
                     }
                 }
-            }
-            
-            if (Input.GetMouseButtonDown(MOUSERIGHTCLICK))
+            }            
+            if (Input.GetMouseButtonUp(MOUSELEFTCLICK))
             {
                 if (currentObject != null)
                     currentObject.GetComponent<AbstractObjectInteraction>().ObjectDeselectInteraction();

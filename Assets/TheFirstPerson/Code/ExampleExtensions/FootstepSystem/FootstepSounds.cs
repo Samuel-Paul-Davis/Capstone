@@ -11,43 +11,25 @@ public class FootstepSounds : TFPExtension
 {
 
     public float distanceBetweenFootsteps;
-    public AudioSource leftFoot, rightFoot;
+    public AudioClip hoveringSound;
     public FootstepGroup[] footsteps;
-
+    public AudioSource hoveringSoundEffect;
     public FootstepGroup defaultFootsteps;
     float leftDistance, rightDistance;
 
     RaycastHit groundTypeCheck;
 
-    public override void ExStart(ref TFPData data, TFPInfo info)
-    {
-        leftDistance = 0;
-        rightDistance = distanceBetweenFootsteps;
-    }
 
     public override void ExPostUpdate(ref TFPData data, TFPInfo info)
     {
-        if (data.moving && data.grounded)
+        if (data.moving)
         {
-            float deltaMove = Vector3.Scale(data.lastMove, new Vector3(1, 0, 1)).magnitude * Time.deltaTime;
-            leftDistance -= deltaMove;
-            rightDistance -= deltaMove;
-            if (leftDistance <= 0)
-            {
-                leftDistance += distanceBetweenFootsteps * 2;
-                leftFoot.PlayOneShot(GetClip(info));
-            }
-            if (rightDistance <= 0)
-            {
-                rightDistance += distanceBetweenFootsteps * 2;
-                rightFoot.PlayOneShot(GetClip(info));
-
-            }
+            if(!hoveringSoundEffect.isPlaying)
+                hoveringSoundEffect.Play();
         }
         else
         {
-            leftDistance = 0;
-            rightDistance = distanceBetweenFootsteps;
+            hoveringSoundEffect.Stop();
         }
 
     }

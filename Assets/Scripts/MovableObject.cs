@@ -32,12 +32,14 @@ public class MovableObject : AbstractObjectInteraction
     public override void ObjectInteraction()
     {
         isActive = true;
+        GetComponent<Rigidbody>().useGravity = false;
     }
 
     public override void ObjectDeselectInteraction()
     {
         isActive = false;
         isMoving = false;
+        GetComponent<Rigidbody>().useGravity = true;
     }
 
     void SetTarggetPosition()

@@ -7,11 +7,13 @@ TagManager:
   - Object
   - Climbable
   - Puzzle
+  - Interactive
+  - IgnoreRaycast
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 

@@ -313,17 +313,33 @@ namespace TheFirstPerson
 
         //Input Name Defaults (assuming default unity axes are set up)
         private string jumpBtn = "Jump";
-
         private string crouchBtn = "Fire1";
+        private string interactionBtn = "Fire2";
         private string runBtn = "Fire3";
         private string unlockMouseBtn = "Cancel";
         private string xInName = "Horizontal";
         private string yInName = "Vertical";
         private string xMouseName = "Mouse X";
         private string yMouseName = "Mouse Y";
+        private string MouseHori = "MouseHorizontal";
+        private string MouseVert = "MouseVertical";
+        private string TargetingBtn = "ItemTargeting";
 
-        //Key binding for mouse moving
-        private KeyCode mouseUnlock = KeyCode.LeftAlt;
+        public struct MousePosition
+        {
+            public int x;
+            public int y;
+        }
+
+        public string GetInteractionBtn()
+        {
+            return interactionBtn;
+        }
+
+        public string GetTargetingBtn()
+        {
+            return TargetingBtn;
+        }
 
         private TFPInfo controllerInfo;
 
@@ -342,7 +358,7 @@ namespace TheFirstPerson
             //get the transform of a child with a camera component
             if (!customCameraTransform && !thirdPersonMode)
             {
-                cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
+                cam = Camera.main.transform;
             }
 
             standingHeight = controller.height;
@@ -401,22 +417,7 @@ namespace TheFirstPerson
                 UpdateInput();
             }
 
-            //UpdateMouseLock();
-            if (Input.GetKeyDown(mouseUnlock))
-            {
-                if (Cursor.lockState == CursorLockMode.None)
-                {
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                    GetComponent<MouseInteractionSystem>().isMouseActive = false;
-                }
-                else
-                {
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                    GetComponent<MouseInteractionSystem>().isMouseActive = true;
-                }
-            }
+            UpdateMouseLock();
 
             ExecuteExtension(ExtFunc.PostInput);
             if (thirdPersonMode && movementEnabled)
@@ -425,9 +426,9 @@ namespace TheFirstPerson
             }
             else
             {
-                if (mouseLocked)
+                if (!mouseLocked)
                 {
-                    MouseLook();
+                    MouseMove();
                 }
             }
             if (!moveInFixedUpdate && movementEnabled)
@@ -454,7 +455,6 @@ namespace TheFirstPerson
                 forward = transform.forward;
                 side = transform.right;
                 currentMove = Vector3.zero;
-                grounded = controller.isGrounded;
                 slideMove = Vector3.zero;
                 Vector3 lastMoveH = Vector3.Scale(lastMove, new Vector3(1, 0, 1));
 
@@ -501,6 +501,7 @@ namespace TheFirstPerson
                     {
                         if (Vector3.Angle(ledgeCheck.normal, Vector3.up) >= controller.slopeLimit)
                         {
+                            print("Sliding");
                             slide = true;
                         }
                         else
@@ -553,32 +554,25 @@ namespace TheFirstPerson
                     }
                 }
 
+                if (momentumEnabled && !instantMomentumChange)
+                {
+                    if (moving || targetMove.magnitude < lastMoveH.magnitude)
+                    {
+                        currentMove = Vector3.MoveTowards(lastMoveH, targetMove, dt * deceleration);
+                    }
+                    else
+                    {
+                        currentMove = Vector3.MoveTowards(lastMoveH, targetMove, dt * acceleration);
+                    }
+                }
+                else
+                {
+                    currentMove = targetMove;
+                }
+
                 if (grounded)
                 {
-                    if (momentumEnabled && !instantMomentumChange)
-                    {
-                        if (moving || targetMove.magnitude < lastMoveH.magnitude)
-                        {
-                            currentMove = Vector3.MoveTowards(lastMoveH, targetMove, dt * deceleration);
-                        }
-                        else
-                        {
-                            currentMove = Vector3.MoveTowards(lastMoveH, targetMove, dt * acceleration);
-                        }
-                    }
-                    else
-                    {
-                        currentMove = targetMove;
-                    }
-                    var targetYVel = -baseGroundForce + (-maxGroundForce * (groundAngle / 90.0f));
-                    if (lastMove.y < 0)
-                    {
-                        yVel = Mathf.Lerp(lastMove.y, targetYVel, gravity * dt);
-                    }
-                    else
-                    {
-                        yVel = targetYVel;
-                    }
+
                     timeSinceGrounded = 0;
                     jumping = false;
                     if (jumpEnabled && (jumpWhileSliding || !slide))
@@ -602,14 +596,7 @@ namespace TheFirstPerson
                     {
                         yVel = 0;
                     }
-                    if (moving)
-                    {
-                        currentMove = Vector3.Lerp(lastMoveH, targetMove, airControl);
-                    }
-                    else
-                    {
-                        currentMove = Vector3.MoveTowards(lastMoveH, targetMove, airResistance * dt);
-                    }
+
                     if (timeSinceGrounded <= 0 && !jumping)
                     {
                         if (lastMove.y < -baseFallVelocity)
@@ -666,9 +653,12 @@ namespace TheFirstPerson
             currentTurnMult = 1.0f;
             if (grounded)
             {
-                currentMoveSpeed = moveSpeed;
-                currentStrafeMult = strafeMult;
-                currentBackwardMult = backwardMult;
+                //currentMoveSpeed = moveSpeed;
+                //currentStrafeMult = strafeMult;
+                //currentBackwardMult = backwardMult;
+                currentMoveSpeed = airMoveSpeed;
+                currentStrafeMult = airStrafeMult;
+                currentBackwardMult = airBackwardMult;
                 if (crouching && crouchEnabled)
                 {
                     currentMoveSpeed *= crouchMult;
@@ -741,8 +731,7 @@ namespace TheFirstPerson
 
                         if (vectorMove != PreviousMovement)
                         {
-                            cam = cinemachineClearShot.LiveChild.VirtualCameraGameObject.transform;
-                            //cam = Camera.main.transform;
+                            cam = Camera.main.transform;
                             standingHeight = controller.height;
                             cameraOffset = standingHeight - cam.localPosition.y;
                             cameraAngle = cam.eulerAngles.y;
@@ -784,11 +773,14 @@ namespace TheFirstPerson
             {
                 if (customInputSystem == null ? Input.GetButtonDown(unlockMouseBtn) : customInputSystem.UnlockMouseButton())
                 {
-                    mouseLocked = false;
-                }
-                else if (Input.GetMouseButtonDown(0))
-                {
-                    mouseLocked = true;
+                    if (mouseLocked == false)
+                    {
+                        mouseLocked = true;
+                    }
+                    else
+                    {
+                        mouseLocked = false;
+                    }
                 }
             }
 
@@ -796,40 +788,25 @@ namespace TheFirstPerson
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                GetComponent<MouseInteractionSystem>().isMouseActive = false;
             }
             else
             {
-                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
+                GetComponent<MouseInteractionSystem>().isMouseActive = true;
             }
         }
 
-        private void MouseLook()
+        private void MouseMove()
         {
-            if (mouseLookEnabled)
-            {
-                float horizontalLook = transform.localEulerAngles.y;
-                float verticalLook = cam.localEulerAngles.x;
+            MousePosition mp;
+            MousePosition mouseAddative;
 
-                horizontalLook += xMouse * sensitivity;
+            mouseAddative.x = (int)Input.GetAxisRaw(MouseHori);
+            mouseAddative.y = (int)Input.GetAxisRaw(MouseVert);
 
-                if (verticalLookEnabled)
-                {
-                    verticalLook -= yMouse * sensitivity;
-                    if (verticalLook > verticalLookLimit && verticalLook < 180)
-                    {
-                        verticalLook = verticalLookLimit;
-                    }
-                    else if (verticalLook > 180 && verticalLook < 360 - verticalLookLimit)
-                    {
-                        verticalLook = 360 - verticalLookLimit;
-                    }
-
-                    cam.localEulerAngles = new Vector3(verticalLook, 0, 0);
-                }
-
-                transform.localEulerAngles = new Vector3(0, horizontalLook, 0);
-            }
+            // TODO: Add logic here to move the thing around, not sure I can TBH
         }
 
         private void ThirdPersonSteering()
