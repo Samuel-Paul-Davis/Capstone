@@ -8,7 +8,7 @@ public class MovableObject : AbstractObjectInteraction
     public Vector3 targetPos;
     public bool isMoving;
     public bool isActive;
-    public Material mat;
+    public Material highlightMaterial;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +68,7 @@ public class MovableObject : AbstractObjectInteraction
     {
         base.Discover();
 
-        gameObject.GetComponent<Renderer>().material = mat;
+        if (gameObject.GetComponent<Renderer>().IsVisibleFrom(Camera.main))
+            gameObject.GetComponent<Renderer>().material = highlightMaterial;
     }
 }
