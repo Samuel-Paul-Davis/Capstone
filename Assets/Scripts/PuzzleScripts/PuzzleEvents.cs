@@ -13,9 +13,15 @@ public class PuzzleEvents : MonoBehaviour
     }
 
     public event Action<int> OnWeightTrigger;
+    public event Action<int> OffWeightTrigger;
 
-    public void WeightTrigger(int id)
+    public void WeightTriggered(int id)
     {
         OnWeightTrigger?.Invoke(id);
     }
+    public void WeightDeTriggered(int id)
+    {
+        OffWeightTrigger?.Invoke(id);
+    }
+
 }

@@ -7,6 +7,7 @@ public class WeightTrigger : MonoBehaviour
     [Header("Weight Options")]
     [Range(0f, 100f), Tooltip("Anthing >= WeightLimit will 'trigger' the weight")]
     public float weightLimit;
+    public int triggerID;
 
 
     [SerializeField]
@@ -16,7 +17,12 @@ public class WeightTrigger : MonoBehaviour
 
     private void EventTriggerActive()
     {
-        PuzzleEvents.current.WeightTrigger(GetInstanceID());
+        PuzzleEvents.current.WeightTriggered(triggerID);
+    }
+
+    private void EventTriggerDeactive()
+    {
+        PuzzleEvents.current.WeightDeTriggered(triggerID);
     }
 
 
@@ -29,11 +35,12 @@ public class WeightTrigger : MonoBehaviour
         {
             if (isTriggered)
             {
-                EventTrigger();
+                EventTriggerDeactive();
                 transform.position = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
             }
             else
             {
+                EventTriggerActive();
                 transform.position = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
             }
             isTriggered = tempTrigger;
@@ -77,7 +84,6 @@ public class WeightTrigger : MonoBehaviour
         Rigidbody rb;
         if (other.TryGetComponent<Rigidbody>(out rb))
         {
-            print(other.name + " has rigidbody " + rb.mass + "kg");
             currentRigidBodies.Add(rb);
             TriggerWeight();
         }
