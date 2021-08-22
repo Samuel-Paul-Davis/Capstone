@@ -8,6 +8,10 @@ public class Scanner : MonoBehaviour
     private KeyCode key;
     [SerializeField]
     private GameObject beam;
+    [SerializeField]
+    private float speed = 100f;
+
+    private Vector3 beamScale;
 
     private void Start()
     {
@@ -17,14 +21,16 @@ public class Scanner : MonoBehaviour
 
         if (key == KeyCode.None)
             key = KeyCode.F;
+
+        beamScale = beam.transform.localScale;
     }
 
     private void Update()
     {
-       if (Input.GetKeyDown(key))
+       if (Input.GetKey(key)) 
         {
             beam.SetActive(true);
-            beam.transform.localScale += Vector3.one * Time.deltaTime * 100; //increases size in bursts
+            beam.transform.localScale += Vector3.one * Time.deltaTime * speed;
         }
 
         if (Input.GetKeyUp(key))
@@ -32,6 +38,8 @@ public class Scanner : MonoBehaviour
             //beam.GetComponent<ScannerBeam>().UnpaintAllTargets();
 
             beam.SetActive(false);
+
+            beam.transform.localScale = beamScale;
         }
     }
 }
