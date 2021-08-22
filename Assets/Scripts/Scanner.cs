@@ -24,6 +24,7 @@ public class Scanner : MonoBehaviour
        if (Input.GetKeyDown(key))
         {
             beam.SetActive(true);
+            beam.transform.localScale += Vector3.one * Time.deltaTime * 100; //increases size in bursts
         }
 
         if (Input.GetKeyUp(key))
