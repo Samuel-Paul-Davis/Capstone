@@ -8,6 +8,7 @@ public class MovableObject : AbstractObjectInteraction
     public Vector3 targetPos;
     public bool isMoving;
     public bool isActive;
+    public Material mat;
 
     // Start is called before the first frame update
     void Start()
@@ -61,5 +62,12 @@ public class MovableObject : AbstractObjectInteraction
 
         if (transform.position == targetPos)
             isMoving = false;
+    }
+
+    public new void Discover()
+    {
+        base.Discover();
+
+        gameObject.GetComponent<Renderer>().material = mat;
     }
 }

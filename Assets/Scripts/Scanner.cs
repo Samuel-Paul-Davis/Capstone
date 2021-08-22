@@ -21,14 +21,14 @@ public class Scanner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(key))
+       if (Input.GetKeyDown(key))
         {
             beam.SetActive(true);
         }
 
         if (Input.GetKeyUp(key))
         {
-            beam.GetComponent<ScannerBeam>().UnpaintAllTargets();
+            //beam.GetComponent<ScannerBeam>().UnpaintAllTargets();
 
             beam.SetActive(false);
         }
