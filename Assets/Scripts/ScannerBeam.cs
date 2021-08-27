@@ -7,8 +7,6 @@ public class ScannerBeam : MonoBehaviour
     public Material[] materials;
     public string targetTag;
 
-    //private Dictionary<Renderer, Material[]> oldMats = new Dictionary<Renderer, Material[]>();
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(targetTag) && other.gameObject.GetComponent<Renderer>())
@@ -16,20 +14,4 @@ public class ScannerBeam : MonoBehaviour
             other.GetComponent<MovableObject>().Discover(materials);
         }
     }
-
-    /*private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag(targetTag) && other.gameObject.GetComponent<Renderer>())
-        {
-            
-        }
-    }*/
-
-    /*public void UnpaintAllTargets()
-    {
-        foreach (KeyValuePair<Renderer, Material[]> kvp in oldMats)
-            kvp.Key.materials = oldMats[kvp.Key];
-
-        oldMats.Clear();
-    }*/
 }

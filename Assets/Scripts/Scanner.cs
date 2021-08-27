@@ -35,8 +35,6 @@ public class Scanner : MonoBehaviour
 
         if (Input.GetKeyUp(key))
         {
-            //beam.GetComponent<ScannerBeam>().UnpaintAllTargets();
-
             beam.SetActive(false);
 
             beam.transform.localScale = beamScale;
