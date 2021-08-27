@@ -57,7 +57,7 @@ Material:
     m_Floats:
     - Vector1_4b71ba4ef5694c8080d12d634dfb11dc: 0.01
     - Vector1_4fc13bb46fd64870943c9179cfb3947b: 0.5
-    - Vector1_88c810a89dc6438b8418ff543ac0f6ad: 0.6
+    - Vector1_88c810a89dc6438b8418ff543ac0f6ad: 0.01
     - Vector1_9353337c035441218f5ec8a923aba858: 5
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0

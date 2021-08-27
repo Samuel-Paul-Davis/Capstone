@@ -62,4 +62,13 @@ public class MovableObject : AbstractObjectInteraction
         if (transform.position == targetPos)
             isMoving = false;
     }
+
+    //overloading Discover() -- used by Scanner Tool
+    public void Discover(Material[] materials)
+    {
+        Discover();
+
+        if (gameObject.GetComponent<Renderer>().IsVisibleFrom(Camera.main))
+            gameObject.GetComponent<Renderer>().materials = materials;
+    }
 }
