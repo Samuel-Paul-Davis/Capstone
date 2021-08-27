@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,22 +6,19 @@ public class WeightTrigger : MonoBehaviour
     [Header("Weight Options")]
     [Range(0f, 10f), Tooltip("Anthing >= WeightLimit will 'trigger' the weight")]
     public float weightLimit;
-    public int triggerID;
 
+    [Tooltip("Puzzle Objects with this ID will be activated")]
+    public int triggerID;
 
     [SerializeField]
     private bool isTriggered = false;
+
     private List<Rigidbody> currentRigidBodies = new List<Rigidbody>();
     private float currentTotalWeight;
 
-    private void EventTriggerActive()
+    private void Start()
     {
-        PuzzleEvents.current.WeightTriggered(triggerID);
-    }
-
-    private void EventTriggerDeactive()
-    {
-        PuzzleEvents.current.WeightDeTriggered(triggerID);
+        ShowDoorLocations();    
     }
 
 
@@ -31,7 +27,7 @@ public class WeightTrigger : MonoBehaviour
         currentTotalWeight = CalculateWeight();
         bool tempTrigger;
         tempTrigger = CheckWeight();
-        if(isTriggered != tempTrigger)
+        if (isTriggered != tempTrigger)
         {
             if (isTriggered)
             {
@@ -87,7 +83,6 @@ public class WeightTrigger : MonoBehaviour
             currentRigidBodies.Add(rb);
             TriggerWeight();
         }
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -100,6 +95,23 @@ public class WeightTrigger : MonoBehaviour
         TriggerWeight();
     }
 
-    
 
+    private void EventTriggerActive()
+    {
+        PuzzleEvents.current.WeightTriggered(triggerID);
+    }
+
+    private void EventTriggerDeactive()
+    {
+        PuzzleEvents.current.WeightDeTriggered(triggerID);
+    }
+
+
+    /// <summary>
+    /// Calls ShowDoorLocations, which draws a line to all puzzle elements that are effected by this trigger
+    /// </summary>
+    private void ShowDoorLocations()
+    {
+        PuzzleEvents.current.ShowDoorLocations(triggerID, transform.position);
+    }
 }
