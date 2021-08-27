@@ -8,7 +8,6 @@ public class MovableObject : AbstractObjectInteraction
     public Vector3 targetPos;
     public bool isMoving;
     public bool isActive;
-    public Material highlightMaterial;
 
     // Start is called before the first frame update
     void Start()
@@ -64,11 +63,12 @@ public class MovableObject : AbstractObjectInteraction
             isMoving = false;
     }
 
-    public new void Discover()
+    //overloading Discover() -- used by Scanner Tool
+    public void Discover(Material[] materials)
     {
-        base.Discover();
+        Discover();
 
         if (gameObject.GetComponent<Renderer>().IsVisibleFrom(Camera.main))
-            gameObject.GetComponent<Renderer>().material = highlightMaterial;
+            gameObject.GetComponent<Renderer>().materials = materials;
     }
 }

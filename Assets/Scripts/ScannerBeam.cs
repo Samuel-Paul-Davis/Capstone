@@ -13,7 +13,7 @@ public class ScannerBeam : MonoBehaviour
     {
         if (other.CompareTag(targetTag) && other.gameObject.GetComponent<Renderer>())
         {
-            other.GetComponent<MovableObject>().Discover();
+            other.GetComponent<MovableObject>().Discover(materials);
         }
     }
 
