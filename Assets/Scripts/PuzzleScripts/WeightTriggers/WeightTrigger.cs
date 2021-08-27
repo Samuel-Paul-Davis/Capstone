@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeightTrigger : MonoBehaviour
 {
     [Header("Weight Options")]
-    [Range(0f, 100f), Tooltip("Anthing >= WeightLimit will 'trigger' the weight")]
+    [Range(0f, 10f), Tooltip("Anthing >= WeightLimit will 'trigger' the weight")]
     public float weightLimit;
     public int triggerID;
 
