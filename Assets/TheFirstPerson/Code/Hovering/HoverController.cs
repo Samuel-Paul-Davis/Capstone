@@ -13,6 +13,9 @@ public class HoverController : TFPExtension
 
     private float lastHitDist;
 
+    private const float MaxYVel = 0.5f;
+    private const float MinYVel = -1;
+
     public LayerMask layerMask;
 
     private void Start()
@@ -33,14 +36,21 @@ public class HoverController : TFPExtension
             float forceAmount;
             if (NormalCheck(hit.normal, info.controller))
             {
-                forceAmount = 0.03f;
+                print("Slide = true");
             }
             else
             {
-                forceAmount = HooksLawDampen(hit.distance);
+                print("Slide = false");
+            }
+            forceAmount = HooksLawDampen(hit.distance);
+
+            if (data.grounded)
+            {
+                Mathf.Clamp(data.yVel, MinYVel, MaxYVel);
             }
             data.yVel += forceAmount;
             data.grounded = true;
+            print($"Current yVel: {data.yVel}");
         }
         else
         {
@@ -83,7 +93,6 @@ public class HoverController : TFPExtension
     {
         if (Vector3.Angle(normal, Vector3.up) >= controller.slopeLimit)
         {
-            print(Vector3.Angle(normal, Vector3.up));
             return true;
         }
         return false;
