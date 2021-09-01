@@ -325,6 +325,9 @@ namespace TheFirstPerson
         private string MouseVert = "MouseVertical";
         private string TargetingBtn = "ItemTargeting";
 
+        [Header("Stamina")]
+        public PlayerStamina playerStamina;
+
         public struct MousePosition
         {
             public int x;
@@ -663,7 +666,7 @@ namespace TheFirstPerson
                 {
                     currentMoveSpeed *= crouchMult;
                 }
-                else if (running && sprintEnabled)
+                else if (running && sprintEnabled && playerStamina.UseStamina())
                 {
                     if (thirdPersonMode)
                     {
@@ -677,7 +680,7 @@ namespace TheFirstPerson
                 currentMoveSpeed = airMoveSpeed;
                 currentStrafeMult = airStrafeMult;
                 currentBackwardMult = airBackwardMult;
-                if (running && airSprintEnabled && !(crouching && crouchEnabled))
+                if (running && airSprintEnabled && !(crouching && crouchEnabled) && playerStamina.UseStamina())
                 {
                     if (thirdPersonMode)
                     {
