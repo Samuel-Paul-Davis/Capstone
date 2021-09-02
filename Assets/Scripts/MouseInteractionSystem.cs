@@ -31,6 +31,14 @@ public class MouseInteractionSystem : MonoBehaviour
 
             foreach (GameObject gameObject in tempObjectList)
             {
+                //Ray ray = Camera.main.ScreenPointToRay();
+                RaycastHit hit;
+
+                /*if (Physics.Raycast(ray, out hit))
+                {
+
+                }*/
+
                 if (gameObject.GetComponent<Renderer>().IsVisibleFrom(Camera.main) && gameObject.TryGetComponent<MovableObject>(out movableObject))
                 {
                     Debug.Log(gameObject.name);

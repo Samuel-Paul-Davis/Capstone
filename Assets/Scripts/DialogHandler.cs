@@ -39,10 +39,10 @@ public class DialogHandler : MonoBehaviour
                     dialogPanel.SetActive(false);
                 }
                 else
-                {                   
+                {
                     ShowDialog();
                     NextDialog();
-                }             
+                }
             }
         }
     }

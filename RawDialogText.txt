@@ -1,0 +1,18 @@
+P3R-C[
+P3R-C Unit: 001*
+Status: Deployed*
+Systems: Stable*
+Receiver: Functional*
+Objective: Awaiting Orders]
+P3R-C[ P3R-C unit online.]
+Supervisor[ Welcome to planet Exanium, Percy.]
+Supervisor[ Our first order of business is to restore a source of water for the planet. Radars are picking up signals to the East - I suggest you head towards there.]
+Supervisor[ Perhaps you need a moment to refamilarise yourself with your auxiliary systems. You may move using the (WASD) keys, and can propel yourself upwards using (SPACE). Take a moment to test the operation of these systems.]
+Supervisor[ Once you are ready, please head East.]
+P3R-C[
+P3R-C Unit: 001*
+Status: Active*
+Systems: Stable*
+Receiver: Functional*
+Objective: Head East*
+Sub-Objective: Locate Water Source

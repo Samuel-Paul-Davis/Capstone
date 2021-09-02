@@ -27,7 +27,8 @@ public class HoverController : TFPExtension
         base.ExPostFixedUpdate(ref data, info);
         RaycastHit hit;
         Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.up), Color.red);
-        if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), out hit, length, layerMask, QueryTriggerInteraction.Ignore))
+        bool hasHit = Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), out hit, length, layerMask, QueryTriggerInteraction.Ignore);
+        if (hasHit)
         {
             float forceAmount;
             if (NormalCheck(hit.normal, info.controller))
