@@ -31,26 +31,15 @@ public class MouseInteractionSystem : MonoBehaviour
 
             foreach (GameObject gameObject in tempObjectList)
             {
-                //Ray ray = Camera.main.ScreenPointToRay();
                 RaycastHit hit;
-
-                //if (Physics.Raycast(ray, out hit))
-                //{
-
-                //}
 
                 if (Physics.Raycast(transform.position, (gameObject.transform.position - transform.position), out hit))
                 {
                     if (hit.collider.gameObject.tag == "Puzzle")
                     {
                         Debug.Log("Raycast: " + gameObject.name);
+                        targetList.Add(gameObject);
                     }
-                }
-
-                if (gameObject.GetComponent<Renderer>().IsVisibleFrom(Camera.main) && gameObject.TryGetComponent<MovableObject>(out movableObject))
-                {
-                    Debug.Log("Visible: " + gameObject.name);
-                    targetList.Add(gameObject);
                 }
             }
         }
