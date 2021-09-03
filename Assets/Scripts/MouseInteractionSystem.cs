@@ -27,21 +27,37 @@ public class MouseInteractionSystem : MonoBehaviour
         {
             MovableObject movableObject;
             List<GameObject> tempObjectList = GameObject.FindGameObjectsWithTag("Puzzle").ToList();
-            targetList.Clear();
+            List<GameObject> newTargetList = new List<GameObject>();
 
             foreach (GameObject gameObject in tempObjectList)
             {
                 RaycastHit hit;
 
-                if (Physics.Raycast(transform.position, (gameObject.transform.position - transform.position), out hit))
+                if (Physics.Raycast(transform.position, (gameObject.transform.position - transform.position), out hit) && gameObject.GetComponent<Renderer>().isVisible)
                 {
                     if (hit.collider.gameObject.tag == "Puzzle")
                     {
-                        Debug.Log("Raycast: " + gameObject.name);
-                        targetList.Add(gameObject);
+                        //Debug.Log("Raycast: " + gameObject.name);
+                        newTargetList.Add(gameObject);
                     }
                 }
             }
+
+            tempObjectList.Clear();
+
+            foreach (GameObject gameObject in targetList)
+                if (!newTargetList.Contains(gameObject))
+                    tempObjectList.Add(gameObject);
+
+            tempObjectList.ForEach(tempObject => targetList.Remove(tempObject));
+
+            foreach (GameObject gameObject in newTargetList)
+                if (!targetList.Contains(gameObject))
+                    targetList.Add(gameObject);
+
+            string tempString = "Raycast & IsVisible: ";
+            targetList.ForEach(gameObject => tempString += gameObject.name + ", ");
+            Debug.Log(tempString);
         }
         if (isMouseActive)
         {
