@@ -264,7 +264,6 @@ namespace TheFirstPerson
         private float yIn;
         private float xMouse;
         private float yMouse;
-        private bool climbing;
 
         //Vertical Movement
         private bool jumping;

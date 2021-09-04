@@ -409,7 +409,6 @@ GameObject:
   - component: {fileID: 4740603191323045159}
   - component: {fileID: 4740603191323045152}
   - component: {fileID: 4740603191323045153}
-  - component: {fileID: 8312898654551165693}
   - component: {fileID: 3748173427271572741}
   - component: {fileID: 3748173427271572739}
   - component: {fileID: 615444585492082495}
@@ -603,25 +602,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8312898654551165693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4740603191323045155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47127cecaa3f78b4ba0471929989e772, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallDetection: {fileID: 0}
-  boxxy: {fileID: 0}
-  _climbing: 0
-  handPosition: {fileID: 0}
-  HangingDistance: {fileID: 0}
-  playerHangingPosition: {x: 0, y: 0.1, z: 0.1}
-  playerHandsPosition: {x: 0, y: -0.1, z: 0.05}
 --- !u!54 &3748173427271572741
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -727,7 +707,6 @@ MonoBehaviour:
   - {fileID: 4740603191323045154}
   - {fileID: 4740603191323045159}
   - {fileID: 4740603191323045152}
-  - {fileID: 8312898654551165693}
   - {fileID: 1983313892}
   playerStamina: {fileID: 575576732}
   cinemachineClearShot: {fileID: 0}
