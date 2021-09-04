@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TheFirstPerson;
+using UnityEngine;
+
 /// <summary>
 /// Controls player hovering. Attaches to player controller. (Remember to add it to the PlayerController TFPExtensions.
 /// </summary>
@@ -13,6 +12,9 @@ public class HoverController : TFPExtension
 
     private float lastHitDist;
 
+    private const float MaxYVel = 0.5f;
+    private const float MinYVel = -1;
+
     public LayerMask layerMask;
 
     private void Start()
@@ -20,10 +22,8 @@ public class HoverController : TFPExtension
         lastHitDist = 1;
     }
 
-
     public override void ExPostFixedUpdate(ref TFPData data, TFPInfo info)
     {
-
         base.ExPostFixedUpdate(ref data, info);
         RaycastHit hit;
         Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.up), Color.red);
@@ -31,13 +31,12 @@ public class HoverController : TFPExtension
         if (hasHit)
         {
             float forceAmount;
-            if (NormalCheck(hit.normal, info.controller))
+
+            forceAmount = HooksLawDampen(hit.distance);
+
+            if (data.grounded)
             {
-                forceAmount = 0.03f;
-            }
-            else
-            {
-                forceAmount = HooksLawDampen(hit.distance);
+                Mathf.Clamp(data.yVel, MinYVel, MaxYVel);
             }
             data.yVel += forceAmount;
             data.grounded = true;
@@ -65,7 +64,6 @@ public class HoverController : TFPExtension
         lastHitDist = hitDistance;
 
         return forceAmount;
-
     }
 
     /// <summary>
@@ -83,7 +81,6 @@ public class HoverController : TFPExtension
     {
         if (Vector3.Angle(normal, Vector3.up) >= controller.slopeLimit)
         {
-            print(Vector3.Angle(normal, Vector3.up));
             return true;
         }
         return false;
