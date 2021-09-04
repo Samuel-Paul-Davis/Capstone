@@ -813,7 +813,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188123746, guid: ab7ad894695575548bb79921a9ef9a9f, type: 3}
       propertyPath: strength
-      value: 1
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 188123746, guid: ab7ad894695575548bb79921a9ef9a9f, type: 3}
+      propertyPath: dampeningAmount
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7418659475631373172, guid: ab7ad894695575548bb79921a9ef9a9f, type: 3}
       propertyPath: m_Name
