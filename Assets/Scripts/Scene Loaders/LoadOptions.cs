@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class LoadOptions : MonoBehaviour
 {
+    public string LevelName;
     public void Load()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Lower Level");
     }
 }
