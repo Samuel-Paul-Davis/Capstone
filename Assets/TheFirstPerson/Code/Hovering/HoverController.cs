@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TheFirstPerson;
+using UnityEngine;
+
 /// <summary>
 /// Controls player hovering. Attaches to player controller. (Remember to add it to the PlayerController TFPExtensions.
 /// </summary>
@@ -23,10 +22,8 @@ public class HoverController : TFPExtension
         lastHitDist = 1;
     }
 
-
     public override void ExPostFixedUpdate(ref TFPData data, TFPInfo info)
     {
-
         base.ExPostFixedUpdate(ref data, info);
         RaycastHit hit;
         Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.up), Color.red);
@@ -34,14 +31,7 @@ public class HoverController : TFPExtension
         if (hasHit)
         {
             float forceAmount;
-            if (NormalCheck(hit.normal, info.controller))
-            {
-                print("Slide = true");
-            }
-            else
-            {
-                print("Slide = false");
-            }
+
             forceAmount = HooksLawDampen(hit.distance);
 
             if (data.grounded)
@@ -50,7 +40,6 @@ public class HoverController : TFPExtension
             }
             data.yVel += forceAmount;
             data.grounded = true;
-            print($"Current yVel: {data.yVel}");
         }
         else
         {
@@ -75,7 +64,6 @@ public class HoverController : TFPExtension
         lastHitDist = hitDistance;
 
         return forceAmount;
-
     }
 
     /// <summary>
