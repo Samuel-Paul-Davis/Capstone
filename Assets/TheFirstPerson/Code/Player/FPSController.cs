@@ -264,7 +264,6 @@ namespace TheFirstPerson
         private float yIn;
         private float xMouse;
         private float yMouse;
-        private bool climbing;
 
         //Vertical Movement
         private bool jumping;
@@ -324,6 +323,9 @@ namespace TheFirstPerson
         private string MouseHori = "MouseHorizontal";
         private string MouseVert = "MouseVertical";
         private string TargetingBtn = "ItemTargeting";
+
+        [Header("Stamina")]
+        public PlayerStamina playerStamina;
 
         public struct MousePosition
         {
@@ -663,7 +665,7 @@ namespace TheFirstPerson
                 {
                     currentMoveSpeed *= crouchMult;
                 }
-                else if (running && sprintEnabled)
+                else if (running && sprintEnabled && playerStamina.UseStamina())
                 {
                     if (thirdPersonMode)
                     {
@@ -677,7 +679,7 @@ namespace TheFirstPerson
                 currentMoveSpeed = airMoveSpeed;
                 currentStrafeMult = airStrafeMult;
                 currentBackwardMult = airBackwardMult;
-                if (running && airSprintEnabled && !(crouching && crouchEnabled))
+                if (running && airSprintEnabled && !(crouching && crouchEnabled) && playerStamina.UseStamina())
                 {
                     if (thirdPersonMode)
                     {
