@@ -10,8 +10,11 @@ public class Scanner : MonoBehaviour
     private GameObject beam;
     [SerializeField]
     private float speed = 100f;
+    [SerializeField]
+    private Vector3 maxScale = Vector3.one;
 
     private Vector3 beamScale;
+    private bool isScanning = false;
 
     private void Start()
     {
@@ -27,17 +30,20 @@ public class Scanner : MonoBehaviour
 
     private void Update()
     {
-       if (Input.GetKey(key)) 
+        if (Input.GetKeyDown(key))
+            isScanning = true;
+
+        if (isScanning)
         {
             beam.SetActive(true);
             beam.transform.localScale += Vector3.one * Time.deltaTime * speed;
         }
 
-        if (Input.GetKeyUp(key))
+        if (beam.transform.localScale.sqrMagnitude > maxScale.sqrMagnitude)
         {
             beam.SetActive(false);
-
             beam.transform.localScale = beamScale;
+            isScanning = false;
         }
     }
 }

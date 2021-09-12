@@ -750,6 +750,7 @@ MonoBehaviour:
   key: 102
   beam: {fileID: 1022685877323021323}
   speed: 50
+  maxScale: {x: 100, y: 100, z: 100}
 --- !u!1 &9037120187998941383
 GameObject:
   m_ObjectHideFlags: 0
