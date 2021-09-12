@@ -12,9 +12,12 @@ public class Scanner : MonoBehaviour
     private float speed = 100f;
     [SerializeField]
     private Vector3 maxScale = Vector3.one;
+    [SerializeField]
+    private float timeout;
 
     private Vector3 beamScale;
     private bool isScanning = false;
+    private float curTimeout;
 
     private void Start()
     {
@@ -30,7 +33,7 @@ public class Scanner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(key))
+        if (Input.GetKeyDown(key) && curTimeout == 0)
             isScanning = true;
 
         if (isScanning)
@@ -44,6 +47,12 @@ public class Scanner : MonoBehaviour
             beam.SetActive(false);
             beam.transform.localScale = beamScale;
             isScanning = false;
+            curTimeout = timeout;
         }
+
+        if (curTimeout > 0)
+            curTimeout -= 1000f * Time.deltaTime;
+        else
+            curTimeout = 0;
     }
 }
