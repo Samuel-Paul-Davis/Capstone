@@ -10,8 +10,19 @@ public class Scanner : MonoBehaviour
     private GameObject beam;
     [SerializeField]
     private float speed = 100f;
+    [SerializeField]
+    private Vector3 maxScale = Vector3.one;
+    [SerializeField]
+    private float timeout;
+    [Header("UI Bar")]
+    [SerializeField]
+    private UnityEngine.UI.Slider slider;
+    [SerializeField]
+    private float fadeInOutTime = .5f;
 
     private Vector3 beamScale;
+    private bool isScanning = false;
+    private float curTimeout;
 
     private void Start()
     {
@@ -27,17 +38,44 @@ public class Scanner : MonoBehaviour
 
     private void Update()
     {
-       if (Input.GetKey(key)) 
+        if (Input.GetKeyDown(key) && curTimeout == 0)
+            isScanning = true;
+
+        if (isScanning)
         {
             beam.SetActive(true);
             beam.transform.localScale += Vector3.one * Time.deltaTime * speed;
         }
 
-        if (Input.GetKeyUp(key))
+        if (beam.transform.localScale.sqrMagnitude > maxScale.sqrMagnitude)
         {
             beam.SetActive(false);
-
             beam.transform.localScale = beamScale;
+            isScanning = false;
+            curTimeout = timeout;
+            FadeInScannerBar();
         }
+
+        if (curTimeout > 0)
+            curTimeout -= 1000f * Time.deltaTime;
+        else
+        {
+            curTimeout = 0;
+            FadeOutScannerBar();
+        }
+
+        slider.value = 1 - curTimeout / timeout;
+    }
+
+    public void FadeInScannerBar()
+    {
+        if (slider.GetComponent<CanvasGroup>().alpha != 1)
+            slider.GetComponent<CanvasGroup>().LeanAlpha(1, fadeInOutTime);
+    }
+
+    public void FadeOutScannerBar()
+    {
+        if (slider.GetComponent<CanvasGroup>().alpha == 1)
+            slider.GetComponent<CanvasGroup>().LeanAlpha(0, fadeInOutTime);
     }
 }
