@@ -14,6 +14,11 @@ public class Scanner : MonoBehaviour
     private Vector3 maxScale = Vector3.one;
     [SerializeField]
     private float timeout;
+    [Header("UI Bar")]
+    [SerializeField]
+    private UnityEngine.UI.Slider slider;
+    [SerializeField]
+    private float fadeInOutTime = .5f;
 
     private Vector3 beamScale;
     private bool isScanning = false;
@@ -48,11 +53,29 @@ public class Scanner : MonoBehaviour
             beam.transform.localScale = beamScale;
             isScanning = false;
             curTimeout = timeout;
+            FadeInScannerBar();
         }
 
         if (curTimeout > 0)
             curTimeout -= 1000f * Time.deltaTime;
         else
+        {
             curTimeout = 0;
+            FadeOutScannerBar();
+        }
+
+        slider.value = 1 - curTimeout / timeout;
+    }
+
+    public void FadeInScannerBar()
+    {
+        if (slider.GetComponent<CanvasGroup>().alpha != 1)
+            slider.GetComponent<CanvasGroup>().LeanAlpha(1, fadeInOutTime);
+    }
+
+    public void FadeOutScannerBar()
+    {
+        if (slider.GetComponent<CanvasGroup>().alpha == 1)
+            slider.GetComponent<CanvasGroup>().LeanAlpha(0, fadeInOutTime);
     }
 }
