@@ -343,6 +343,16 @@ namespace TheFirstPerson
             return TargetingBtn;
         }
 
+        public string GetControllerHorizontal()
+        {
+            return MouseHori;
+        }
+
+        public string GetControllerVertical()
+        {
+            return MouseVert;
+        }
+
         private TFPInfo controllerInfo;
 
         // Variables for fixing movement for fixed cameras
@@ -789,13 +799,13 @@ namespace TheFirstPerson
             if (mouseLocked)
             {
                 Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                //Cursor.visible = false;
                 GetComponent<MouseInteractionSystem>().isMouseActive = false;
             }
             else
             {
                 Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
+                //Cursor.visible = true;
                 GetComponent<MouseInteractionSystem>().isMouseActive = true;
             }
         }
