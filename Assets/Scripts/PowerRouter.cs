@@ -22,6 +22,9 @@ public class PowerRouter : SlotPuzzle
         if (node.next == null && node != outputSlot)
             return false;
 
+        if (node.payload != node.expectedPayload)
+            return false;
+
         bool retVal = true;
 
         node.payload.isPowered = true;

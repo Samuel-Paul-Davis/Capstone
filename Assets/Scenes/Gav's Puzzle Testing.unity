@@ -657,6 +657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
   next: {fileID: 0}
+  expectedPayload: {fileID: 1259013948}
 --- !u!1 &40120069
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,6 +3852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
   next: {fileID: 1151039069}
+  expectedPayload: {fileID: 806010031}
 --- !u!1 &367500835
 GameObject:
   m_ObjectHideFlags: 0
@@ -7815,6 +7817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
   next: {fileID: 39234011}
+  expectedPayload: {fileID: 571363579}
 --- !u!1 &689033432
 GameObject:
   m_ObjectHideFlags: 0
@@ -10070,6 +10073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
   next: {fileID: 1699408258}
+  expectedPayload: {fileID: 2049214588}
 --- !u!1 &859593674
 GameObject:
   m_ObjectHideFlags: 0
@@ -11874,6 +11878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
   next: {fileID: 362625931}
+  expectedPayload: {fileID: 686052442}
 --- !u!1 &1024448790
 GameObject:
   m_ObjectHideFlags: 0
@@ -13669,6 +13674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
   next: {fileID: 686134416}
+  expectedPayload: {fileID: 591926330}
 --- !u!1 &1164830600
 GameObject:
   m_ObjectHideFlags: 0
@@ -20259,6 +20265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
   next: {fileID: 1886649941}
+  expectedPayload: {fileID: 747805923}
 --- !u!1 &1701616229
 GameObject:
   m_ObjectHideFlags: 0
@@ -22788,6 +22795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
   next: {fileID: 1013903914}
+  expectedPayload: {fileID: 881231471}
 --- !u!1 &1889285465
 GameObject:
   m_ObjectHideFlags: 0
@@ -27299,6 +27307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
   next: {fileID: 839513506}
+  expectedPayload: {fileID: 6132259241850976891}
 --- !u!1001 &8577667619700837665
 PrefabInstance:
   m_ObjectHideFlags: 0
