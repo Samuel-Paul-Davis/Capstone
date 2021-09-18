@@ -5,21 +5,9 @@ using UnityEngine;
 public class PowerBlockObject : SlotPartObject
 {
     public bool isPowered = false;
+
+    /*
+     * Add Discover() override?
+     *      - could show power flow with correct materials / shaders
+     */
 }
-
-/*[System.Serializable]
-public struct Connections
-{
-    public PowerBlockObject next;
-    public PowerBlockObject prev;
-}*/
-
-
-/*[System.Serializable]
-public struct Connections
-{
-    public bool left;
-    public bool right;
-    public bool top;
-    public bool bottom;
-}*/
