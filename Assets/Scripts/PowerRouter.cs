@@ -4,8 +4,45 @@ using UnityEngine;
 
 public class PowerRouter : SlotPuzzle
 {
-    public Vector2Int gridSize;
+    public SlotNode inputSlot;
+    public SlotNode outputSlot;
 
+    public bool unlocked = false;
+
+    private void Update()
+    {
+        unlocked = ConnectNodes(inputSlot);
+    }
+
+    private bool ConnectNodes(SlotNode node)
+    {
+        if (node == null || node.payload == null)
+            return false;
+
+        if (node.next == null && node != outputSlot)
+            return false;
+
+        bool retVal = true;
+
+        node.payload.isPowered = true;
+
+        if (node != outputSlot)
+            retVal = ConnectNodes(node.next);
+
+        return retVal;
+    }
+
+    private new void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+
+        collision.GetContact(0).thisCollider.gameObject.GetComponent<SlotNode>().payload = collision.GetContact(0).otherCollider.gameObject.GetComponent<PowerBlockObject>();
+    }
+}
+
+/*public class PowerRouter : SlotPuzzle
+{
+    public Vector2Int gridSize;
     public GameObject inputSlot;
     public GameObject outputSlot;
 
@@ -46,11 +83,11 @@ public class PowerRouter : SlotPuzzle
         }
     }
 
-    /*private bool IsAdjacent(Vector2Int a, Vector2Int b)
-    {
-        if ((a.x - b.x) <= 1 && (a.y - b.y) <= 1)
-            return true;
+//    private bool IsAdjacent(Vector2Int a, Vector2Int b)
+//    {
+//        if ((a.x - b.x) <= 1 && (a.y - b.y) <= 1)
+//            return true;
 
-        return false;
-    }*/
-}
+//        return false;
+//    }
+}*/
