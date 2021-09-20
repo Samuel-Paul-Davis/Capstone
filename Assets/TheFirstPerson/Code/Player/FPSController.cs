@@ -799,13 +799,13 @@ namespace TheFirstPerson
             if (mouseLocked)
             {
                 Cursor.lockState = CursorLockMode.Locked;
-                //Cursor.visible = false;
+                Cursor.visible = false;
                 GetComponent<MouseInteractionSystem>().isMouseActive = false;
             }
             else
             {
                 Cursor.lockState = CursorLockMode.Confined;
-                //Cursor.visible = true;
+                Cursor.visible = true;
                 GetComponent<MouseInteractionSystem>().isMouseActive = true;
             }
         }
