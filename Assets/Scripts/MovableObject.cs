@@ -55,12 +55,18 @@ public class MovableObject : AbstractObjectInteraction
     }
 
     void MoveAObject()
-    {
-        transform.LookAt(targetPos);
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-
-        if (transform.position == targetPos)
+    {       
+        if (Vector3.Distance(transform.position, targetPos) < 1)
+        {
             isMoving = false;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+        else
+        {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            transform.LookAt(targetPos);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        }
     }
 
     //overloading Discover() -- used by Scanner Tool
