@@ -2,7 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleDoor : MonoBehaviour
+public class PuzzleDoor : Door
+{
+    public Puzzle caller;
+
+    private void Update()
+    {
+        if (caller.unlocked)
+            Open();
+        else
+            Close();
+    }
+}
+
+/*public class PuzzleDoor : MonoBehaviour
 {
     public Puzzle caller;
     public Transform targetPosition;
@@ -10,7 +23,7 @@ public class PuzzleDoor : MonoBehaviour
     /*[Header("Direction")]
     public bool x = false;
     public bool y = false;
-    public bool z = false;*/
+    public bool z = false;*~/
 
     private Vector3 openPosition;
     private Vector3 closedPosition;
@@ -34,11 +47,12 @@ public class PuzzleDoor : MonoBehaviour
             openPosition.z -= (transform.localScale.z * 1); //BUG:
                                                             //      - if scale value is < 1 it will start performing percentages? Or times by zero if == 0?
                                                             //      - if scale is == 1 then object won't move
-        */
+        *~/
+        
                                                                     
     }
 
-    private void Update()
+    protected void Update()
     {
         if (caller.unlocked)
             Open();
@@ -57,4 +71,4 @@ public class PuzzleDoor : MonoBehaviour
         if (transform.position != closedPosition)
             transform.position = closedPosition;
     }
-}
+}*/
