@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class KeyReader : SlotPuzzle
 {
-    public bool unlocked = false;
+    //public bool unlocked = false;
 
     private void Update()
     {
