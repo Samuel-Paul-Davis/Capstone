@@ -788,6 +788,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4740603191323045157}
     m_Modifications:
+    - target: {fileID: 600783078, guid: aab4cd768866aa644a5d2228a7c56748, type: 3}
+      propertyPath: maxStamina
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 600783078, guid: aab4cd768866aa644a5d2228a7c56748, type: 3}
+      propertyPath: staminaCostPerTick
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1408005933, guid: aab4cd768866aa644a5d2228a7c56748, type: 3}
       propertyPath: cam
       value: 
