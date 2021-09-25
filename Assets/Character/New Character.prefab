@@ -593,13 +593,13 @@ MonoBehaviour:
       enableBigTilePrepass: 0
       isFptlEnabled: 0
   clearColorMode: 0
-  backgroundColorHDR: {r: 0.025, g: 0.07, b: 0.19, a: 0}
+  backgroundColorHDR: {r: 1, g: 1, b: 1, a: 1}
   clearDepth: 1
   volumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
   volumeAnchorOverride: {fileID: 0}
-  antialiasing: 0
+  antialiasing: 1
   SMAAQuality: 2
   dithering: 0
   stopNaNs: 0
@@ -898,7 +898,7 @@ MonoBehaviour:
   airControl: 0.447
   airSprintEnabled: 1
   normaliseMoveInput: 1
-  moveInFixedUpdate: 0
+  moveInFixedUpdate: 1
   cam: {fileID: 4740603190305585124}
   definedByHeight: 0
   variableHeight: 1
@@ -1006,6 +1006,7 @@ MonoBehaviour:
   maxScale: {x: 100, y: 100, z: 100}
   timeout: 5000
   slider: {fileID: 8893654007615474849}
+  fadeInOutTime: 0.5
 --- !u!1 &6584318009355334145
 GameObject:
   m_ObjectHideFlags: 0
