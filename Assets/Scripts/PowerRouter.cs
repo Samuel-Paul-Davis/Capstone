@@ -7,7 +7,7 @@ public class PowerRouter : SlotPuzzle
     public SlotNode inputSlot;
     public SlotNode outputSlot;
 
-    public bool unlocked = false;
+    //public bool unlocked = false;
 
     private void Update()
     {
