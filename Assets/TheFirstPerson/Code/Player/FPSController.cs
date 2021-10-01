@@ -356,8 +356,8 @@ namespace TheFirstPerson
         private TFPInfo controllerInfo;
 
         // Variables for fixing movement for fixed cameras
-        [SerializeField]
-        CinemachineClearShot cinemachineClearShot;
+        //[SerializeField]
+        //CinemachineClearShot cinemachineClearShot;
         Vector2 PreviousMovement = Vector2.zero;
 
         void Start()
@@ -411,6 +411,10 @@ namespace TheFirstPerson
 
             controllerInfo = GetInfo();
             ExecuteExtension(ExtFunc.Start);
+
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            GetComponent<MouseInteractionSystem>().isMouseActive = true;
         }
 
         private void Update()
@@ -428,8 +432,6 @@ namespace TheFirstPerson
             {
                 UpdateInput();
             }
-
-            UpdateMouseLock();
 
             ExecuteExtension(ExtFunc.PostInput);
             if (thirdPersonMode && movementEnabled)
@@ -777,37 +779,6 @@ namespace TheFirstPerson
         private void Hang()
         {
             Vector3 targetMove = Vector3.zero;
-        }
-
-        private void UpdateMouseLock()
-        {
-            if (mouseLockToggleEnabled && Time.timeScale > 0)
-            {
-                if (customInputSystem == null ? Input.GetButtonDown(unlockMouseBtn) : customInputSystem.UnlockMouseButton())
-                {
-                    if (mouseLocked == false)
-                    {
-                        mouseLocked = true;
-                    }
-                    else
-                    {
-                        mouseLocked = false;
-                    }
-                }
-            }
-
-            if (mouseLocked)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                GetComponent<MouseInteractionSystem>().isMouseActive = false;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                GetComponent<MouseInteractionSystem>().isMouseActive = true;
-            }
         }
 
         private void MouseMove()
