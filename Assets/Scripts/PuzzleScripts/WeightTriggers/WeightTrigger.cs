@@ -13,6 +13,16 @@ public class WeightTrigger : MonoBehaviour
     [SerializeField]
     private bool isTriggered = false;
 
+    public PuzzleState State {
+        get
+        {
+            if (isTriggered)
+                return PuzzleState.On;
+            else
+                return PuzzleState.Off;
+        }
+    }
+
     private List<Rigidbody> currentRigidBodies = new List<Rigidbody>();
     private float currentTotalWeight;
 

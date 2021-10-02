@@ -2,7 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeverDoor : MonoBehaviour
+public class LeverDoor : Door
+{
+    public LeverObject caller;
+
+    private void Update()
+    {
+        if (caller.isOn)
+            Open();
+        else
+            Close();
+    }
+}
+
+/*public class LeverDoor : MonoBehaviour
 {
     public LeverObject lever;
 
@@ -36,4 +49,4 @@ public class LeverDoor : MonoBehaviour
         if (transform.position != closedPosition)
             transform.position = closedPosition;
     }
-}
+}*/

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2713942219009333638
 Transform:
   m_ObjectHideFlags: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2713942219009333657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0, z: 0}
+  m_LocalPosition: {x: 0.25, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2713942219564060554}
@@ -42,8 +42,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 4, z: 1.25}
-  m_Center: {x: 0, y: -1.5, z: -0.25}
+  m_Size: {x: 0.25, y: 1, z: 2.19}
+  m_Center: {x: 0, y: -0.2, z: 0.6}
 --- !u!1 &2713942219564060558
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 2713942219564060552}
   - component: {fileID: 2713942219564060555}
   m_Layer: 0
-  m_Name: CardReader
+  m_Name: KeyReader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ Transform:
   m_GameObject: {fileID: 2713942219564060558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.0976334, y: 1, z: 6.1247177}
-  m_LocalScale: {x: 0.3, y: 0.25, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2713942219723346151}
   - {fileID: 2713942219009333638}
@@ -95,7 +95,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2713942219564060558}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -157,9 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903c44a33c2047240ba00a4d3c223ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot1: {fileID: 2713942219723346150}
-  slot2: {fileID: 2713942219009333657}
   unlocked: 0
+  slots: []
+  slot_parts: []
 --- !u!1 &2713942219723346150
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2713942219723346150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0, z: 0}
+  m_LocalPosition: {x: -0.008, y: -0.264, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2713942219564060554}
@@ -202,5 +202,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 4, z: 1.25}
-  m_Center: {x: 0, y: -1.5, z: -0.25}
+  m_Size: {x: 0.25, y: 1, z: 2.19}
+  m_Center: {x: 0, y: -0.2, z: 0.6}

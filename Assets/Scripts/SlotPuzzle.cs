@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotPuzzle : MonoBehaviour
+public class SlotPuzzle : Puzzle
 {
     public List<GameObject> slots;
 
