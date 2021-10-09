@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Desert Start Area.unity
     guid: b458b2397bc4ed74db6e8c9af92bea35
   - enabled: 1
+    path: Assets/Scenes/Top Level.unity
+    guid: 566199ef6e1b5654ab3376303fb96704
+  - enabled: 1
     path: Assets/Scenes/OptionsMenu.unity
     guid: 2396db91e41cd30498ff95d9937010f1
   m_configObjects: {}
