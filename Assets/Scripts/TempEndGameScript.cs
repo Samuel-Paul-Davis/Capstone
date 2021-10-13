@@ -23,8 +23,11 @@ public class TempEndGameScript : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Player")
+        {
         GameObject.Find(PlayerName).SetActive(false);
         TempEndGamePanel.SetActive(true);
+        }
     }
 
     public void ExitGame()

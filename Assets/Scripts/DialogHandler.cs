@@ -31,12 +31,13 @@ public class DialogHandler : MonoBehaviour
     {
         if (isInCutsceen)
         {
+            Time.timeScale = 0;
             if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape))
             {
-                Debug.Log(currentDialog + " : " + dialog.Count);
                 if (currentDialog >= dialog.Count)
                 {
                     isInCutsceen = false;
+                    Time.timeScale = 1;
                     dialogPanel.SetActive(false);
                 }
                 else

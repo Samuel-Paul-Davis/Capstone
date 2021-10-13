@@ -1,4 +1,3 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +36,6 @@ public class MouseInteractionSystem : MonoBehaviour
                 {
                     if (hit.collider.gameObject.tag == "Puzzle")
                     {
-                        //Debug.Log("Raycast: " + gameObject.name);
                         newTargetList.Add(gameObject);
                     }
                 }
@@ -57,7 +55,6 @@ public class MouseInteractionSystem : MonoBehaviour
 
             string tempString = "Raycast & IsVisible: ";
             targetList.ForEach(gameObject => tempString += gameObject.name + ", ");
-            Debug.Log(tempString);
         }
         if (isMouseActive)
         {

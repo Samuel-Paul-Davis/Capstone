@@ -36,7 +36,6 @@ public class CanvasController : MonoBehaviour
         isGamePaused = true;
         Time.timeScale = 0;
         GamePausePanel.SetActive(true);
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
@@ -45,6 +44,6 @@ public class CanvasController : MonoBehaviour
         isGamePaused = false;
         Time.timeScale = 1;
         GamePausePanel.SetActive(false);
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }

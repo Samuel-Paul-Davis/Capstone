@@ -16,8 +16,8 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
-  - 
+  - SmallObjects
+  - SOReceiver
   - PostProcessing
   - Not in Reflection
   - ClimableWall
