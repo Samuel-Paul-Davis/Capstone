@@ -42,11 +42,11 @@ public class PowerRouter : SlotPuzzle
         collision.GetContact(0).thisCollider.gameObject.GetComponent<SlotNode>().payload = collision.GetContact(0).otherCollider.gameObject.GetComponent<PowerBlockObject>();
     }
 
-    private void OnCollisionExit(Collision collision)
+    /*private void OnCollisionExit(Collision collision)
     {
         if (collision.collider.gameObject.TryGetComponent<PowerBlockObject>(out PowerBlockObject block))
         {
             block.isPowered = false;
         }
-    }
+    }*/
 }
