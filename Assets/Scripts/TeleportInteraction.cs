@@ -7,16 +7,13 @@ public class TeleportInteraction : AbstractObjectInteraction
 {
     [SerializeField]
     private string NextSceneName;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private AudioSource audioSource;
+
+    private void Start()
     {
-        
+        if (TryGetComponent<AudioSource>(out audioSource))
+            Debug.LogWarning("No Audio Source on: " + name);
     }
 
     public override void ObjectDeselectInteraction()
@@ -26,6 +23,7 @@ public class TeleportInteraction : AbstractObjectInteraction
 
     public override void ObjectInteraction()
     {
+        audioSource.Play();
         SceneManager.LoadScene(NextSceneName);
     }
 }

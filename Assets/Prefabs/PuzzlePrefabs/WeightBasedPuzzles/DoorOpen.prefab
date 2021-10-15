@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8045081052699684119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.000017516315, y: 0.8479579, z: 0.00000071525574}
+  m_LocalPosition: {x: 0, y: -1.017, z: 0.00000071525574}
   m_LocalScale: {x: 1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 8045081052846558815}
@@ -121,9 +121,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8045081052846558810}
-  m_LocalRotation: {x: -0.0067353244, y: 0.0000011472059, z: 0.0055506253, w: 0.9999619}
+  m_LocalRotation: {x: -0.006737046, y: 0.0000025627635, z: 0.005549711, w: 0.9999619}
   m_LocalPosition: {x: 420.5865, y: 9.778382, z: 463.686}
-  m_LocalScale: {x: 1, y: 8, z: 10}
+  m_LocalScale: {x: 0.5, y: 7.5, z: 7.5}
   m_Children:
   - {fileID: 8045081052699684104}
   m_Father: {fileID: 0}
@@ -203,7 +203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0472a1aaf94d31e439cdf9f522c8bfea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerID: 1
+  triggerID: 3
   debugLine: 1
   timeToTarget: 1
-  closeOnTriggerRelease: 0
+  closeOnTriggerRelease: 1
+  maxTriggers: 2
+  currentTriggers: 0

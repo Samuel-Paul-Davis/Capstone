@@ -237,8 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b51c985702dc7e4ab0d8de566faa7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 1558874044}
-  audioSourceFade: {fileID: 2313072536104432266}
+  audioSource01: {fileID: 1558874044}
+  audioSource02: {fileID: 2313072536104432266}
   menuMusic: {fileID: 8300000, guid: e722c5df6ec1c4f4cbadda5aae048ab5, type: 3}
   desertLevelMusic: {fileID: 8300000, guid: 6515a6ff3789f7f4c822ed8233837d7c, type: 3}
   bottomLevel: {fileID: 8300000, guid: e5623501f8aac3545ad00d0072fd3b67, type: 3}
