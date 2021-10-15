@@ -9,18 +9,41 @@ using UnityEngine;
 public class KeyReader : SlotPuzzle
 {
     //public bool unlocked = false;
+    private AudioSource audioSource;
 
+    //Triggers sound once. Is recent when door is locked.
+    private bool soundTrigger = false;
+
+    private void Awake()
+    {
+        if (TryGetComponent<AudioSource>(out audioSource))
+            Debug.LogWarning("No AudioSource Component on: " + name);
+    }
     private void Update()
     {
         for (int i=0; i<slots.Count;i++)
         {
             if (slot_parts[i] && slot_parts[i].GetComponent<KeyCoreObject>())
+            {
+                TriggerSound();
                 unlocked = true;
+            }
             else
             {
                 unlocked = false;
+                soundTrigger = false;
                 break;
             }
         }
     }
+
+    private void TriggerSound()
+    {
+        if (!soundTrigger)
+        {
+            audioSource.Play();
+            soundTrigger = true;
+        }
+    }
+
 }

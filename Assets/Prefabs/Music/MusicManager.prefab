@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7005771895502764336}
   - component: {fileID: 1558874044}
+  - component: {fileID: 2313072536104432266}
   - component: {fileID: 1558874043}
   m_Layer: 0
   m_Name: MusicManager
@@ -41,12 +42,108 @@ AudioSource:
   m_GameObject: {fileID: 8838795632118686492}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6252064388677452951, guid: c54004d112124f341b347709d7427c5f, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &2313072536104432266
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8838795632118686492}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 2384088302183530960, guid: c54004d112124f341b347709d7427c5f, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -140,8 +237,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b51c985702dc7e4ab0d8de566faa7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuMusic: {fileID: 8300000, guid: e029a07a2ee87fe4fb1d47fbbf307478, type: 3}
-  desertLevelMusic: {fileID: 8300000, guid: 6cdb2dd268a648c46afa84c519c9747b, type: 3}
-  bottomLevel: {fileID: 0}
+  audioSource01: {fileID: 1558874044}
+  audioSource02: {fileID: 2313072536104432266}
+  menuMusic: {fileID: 8300000, guid: e722c5df6ec1c4f4cbadda5aae048ab5, type: 3}
+  desertLevelMusic: {fileID: 8300000, guid: 6515a6ff3789f7f4c822ed8233837d7c, type: 3}
+  bottomLevel: {fileID: 8300000, guid: e5623501f8aac3545ad00d0072fd3b67, type: 3}
   topLevel: {fileID: 8300000, guid: c107cad2a60ec66439425f639cd25e61, type: 3}
+  audioMixer: {fileID: 24100000, guid: c54004d112124f341b347709d7427c5f, type: 2}
   fadeTime: 10

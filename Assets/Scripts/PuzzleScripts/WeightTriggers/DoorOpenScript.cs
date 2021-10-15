@@ -7,9 +7,13 @@ public class DoorOpenScript : BaseGatePuzzle
     public float timeToTarget = 1f;
     public bool closeOnTriggerRelease;
 
+    [Tooltip("Amount of triggers required before the puzzle is activated")]
+    public int maxTriggers = 1;
+
     private bool isDoorOpen;
     private Vector3 targetPosition;
     private Vector3 initialTransform;
+    public int currentTriggers;
 
     public bool DoorOpen
     {
@@ -46,22 +50,39 @@ public class DoorOpenScript : BaseGatePuzzle
     /// <param name="id"></param>
     private void OpenDoorway(int id)
     {
-        if (id == triggerID && !isDoorOpen)
+        if(id == triggerID)
         {
-            LeanTween.moveLocal(gameObject, targetPosition, timeToTarget).setEaseOutQuad();
-            isDoorOpen = true;
+            currentTriggers += 1;
+            if (!isDoorOpen)
+            {
+                if (TriggerCheck())
+                {
+                    LeanTween.moveLocal(gameObject, targetPosition, timeToTarget).setEaseOutQuad();
+                    isDoorOpen = true;
+                }
+            }
         }
+
     }
 
     private void CloseDoorway(int id)
     {
-        if (id == triggerID && closeOnTriggerRelease && isDoorOpen)
+        if (id == triggerID)
         {
-            LeanTween.moveLocal(gameObject, initialTransform, timeToTarget).setEaseOutQuad();
-            isDoorOpen = false;
+            currentTriggers -= 1;
+            if (closeOnTriggerRelease && isDoorOpen)
+            {
+                LeanTween.moveLocal(gameObject, initialTransform, timeToTarget).setEaseOutQuad();
+                currentTriggers -= 1;
+                isDoorOpen = false;
+            }
         }
     }
 
+    private bool TriggerCheck()
+    {
+        return currentTriggers >= maxTriggers;
+    }
     private void OnDrawGizmos()
     {
         //DrawArrow.ForGizmo(transform.position, targetPosition, Color.red);
