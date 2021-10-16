@@ -24,6 +24,9 @@ public class SlotNode : MonoBehaviour
     {
         //Debug.Log(name + " OnTriggerEnter(" + other.name + ")");
 
+        if (transform.childCount > 0)
+            Physics.IgnoreCollision(transform.GetChild(0).GetComponent<Collider>(), other.GetComponent<Collider>());
+
         if (other.GetComponent<SlotPartObject>() != null && transform.childCount == 0)
         {
             other.transform.SetParent(transform, false);
@@ -36,6 +39,11 @@ public class SlotNode : MonoBehaviour
             //GetComponent<Collider>().enabled = false; //this will stop OnTriggerExit
         }
     }
+
+    /*private void OnMouseDrag()
+    {
+        payload.GetComponent<Rigidbody>().isKinematic = false;
+    }*/
 
     private void OnTriggerExit(Collider other)
     {

@@ -43,11 +43,6 @@ public class PowerRouter : SlotPuzzle
         return retVal;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        //Debug.Log(name + " OnTriggerEnter(" + other.name + ")");
-    }
-
     /*private new void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
