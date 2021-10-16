@@ -11,6 +11,15 @@ public class SlotNode : MonoBehaviour
 
     public PowerBlockObject expectedPayload;
 
+    public void DepowerNext()
+    {
+        if (next != null && next.payload != null)
+        {
+            next.payload.isPowered = false;
+            next.DepowerNext();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log(name + " OnTriggerEnter(" + other.name + ")");
@@ -30,6 +39,8 @@ public class SlotNode : MonoBehaviour
         if (transform.childCount > 0)
         {
             payload.isPowered = false;
+
+            DepowerNext();
 
             transform.DetachChildren();
             payload = null;

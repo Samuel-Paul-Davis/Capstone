@@ -34,6 +34,9 @@ public class PowerRouter : SlotPuzzle
 
         bool retVal = node.payload.isPowered;
 
+        /*if (!node.payload.isPowered)
+            node.DepowerNext();*/
+
         if (retVal && node != outputSlot)
             retVal = ConnectNodes(node.next);
 
