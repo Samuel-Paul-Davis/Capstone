@@ -19,23 +19,33 @@ public class PowerRouter : SlotPuzzle
         if (node == null || node.payload == null)
             return false;
 
-        if (node.next == null && node != outputSlot)
-            return false;
+        /*if (node.next == null && node != outputSlot)
+            return false;*/
 
         if (node.payload != node.expectedPayload)
             return false;
 
-        bool retVal = true;
+        //bool retVal = true;
 
-        node.payload.isPowered = true;
+        if (node == inputSlot)
+            node.payload.isPowered = true;
+        else
+            node.payload.isPowered = node.prev.payload.isPowered;
 
-        if (node != outputSlot)
+        bool retVal = node.payload.isPowered;
+
+        if (retVal && node != outputSlot)
             retVal = ConnectNodes(node.next);
 
         return retVal;
     }
 
-    private new void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log(name + " OnTriggerEnter(" + other.name + ")");
+    }
+
+    /*private new void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
 
@@ -46,24 +56,8 @@ public class PowerRouter : SlotPuzzle
     {
         collision.collider.GetComponent<PowerBlockObject>().isPowered = false;
         collision.collider.transform.parent.GetComponent<SlotNode>().payload = null;
-        //collision.collider.transform.parent.DetachChildren();
-
-        /*SlotNode node = collision.collider.transform.parent.GetComponent<SlotNode>();
-
-        collision.collider.transform.SetParent(null);
-        node.payload = null;*/
-    }
-
-    /*private void OnCollisionExit(Collision collision)
-    {
-        //remove the payload
-        //unparent the collider
-
-        collision.collider.GetComponent<PowerBlockObject>().isPowered = false;
-
-        if (collision.collider.gameObject.TryGetComponent<PowerBlockObject>(out PowerBlockObject block))
-        {
-            block.isPowered = false;
-        }
+        //collision.collider.transform.parent.DetachChildren(); // causes an "object not found" error
     }*/
+
+
 }

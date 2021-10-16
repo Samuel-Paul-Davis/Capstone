@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 1467879985006586034}
   next: {fileID: 1467879985006586044}
   expectedPayload: {fileID: 0}
 --- !u!1 &1467879984285570341
@@ -118,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 1467879985006586035}
   next: {fileID: 1467879985802303684}
   expectedPayload: {fileID: 0}
 --- !u!1 &1467879984498053087
@@ -178,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 1467879984672604213}
   next: {fileID: 1467879985559649184}
   expectedPayload: {fileID: 0}
 --- !u!1 &1467879984672604212
@@ -238,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 1467879985377611267}
   next: {fileID: 1467879985006586032}
   expectedPayload: {fileID: 0}
 --- !u!1 &1467879985021848625
@@ -298,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 1467879985802303684}
   next: {fileID: 1467879985006586046}
   expectedPayload: {fileID: 0}
 --- !u!1 &1467879985138507488
@@ -358,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 1467879985559649184}
   next: {fileID: 1467879985006586034}
   expectedPayload: {fileID: 0}
 --- !u!1 &1467879985377611266
@@ -418,6 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 0}
   next: {fileID: 1467879984672604213}
   expectedPayload: {fileID: 0}
 --- !u!1 &1467879985474982536
@@ -478,6 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 1467879985006586046}
   next: {fileID: 0}
   expectedPayload: {fileID: 0}
 --- !u!1 &1467879985559649191
@@ -538,6 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 1467879985006586032}
   next: {fileID: 1467879985006586033}
   expectedPayload: {fileID: 0}
 --- !u!1 &1467879985649757898
@@ -554,7 +563,7 @@ GameObject:
   - component: {fileID: 1467879985649757899}
   - component: {fileID: 1467879985006586038}
   m_Layer: 0
-  m_Name: PowerRouter 1
+  m_Name: PowerRouter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -726,6 +735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 1467879985006586033}
   next: {fileID: 1467879985006586035}
   expectedPayload: {fileID: 0}
 --- !u!1 &1467879985802303675
@@ -786,6 +796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 1467879985006586044}
   next: {fileID: 1467879985006586045}
   expectedPayload: {fileID: 0}
 --- !u!1 &1467879985986138215
@@ -846,5 +857,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payload: {fileID: 0}
+  prev: {fileID: 1467879985006586045}
   next: {fileID: 1467879985006586039}
   expectedPayload: {fileID: 0}
