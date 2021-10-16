@@ -19,16 +19,4 @@ public class SlotPuzzle : Puzzle
 
         slot_parts = new GameObject[slots.Count];
     }
-
-    /*protected void OnCollisionEnter(Collision collision)
-    {
-        if (collision.GetContact(0).otherCollider.GetComponent<SlotPartObject>() != null && collision.GetContact(0).thisCollider.transform.childCount == 0 ) //&& collision.GetContact(0).otherCollider.transform.parent == null)
-        {
-            collision.GetContact(0).otherCollider.transform.SetParent(collision.GetContact(0).thisCollider.transform, false);
-            collision.GetContact(0).otherCollider.transform.localPosition = Vector3.zero;
-            collision.GetContact(0).otherCollider.transform.localRotation = Quaternion.identity;
-
-            slot_parts[slots.IndexOf(collision.GetContact(0).thisCollider.gameObject)] = collision.GetContact(0).otherCollider.gameObject;
-        }
-    }*/
 }

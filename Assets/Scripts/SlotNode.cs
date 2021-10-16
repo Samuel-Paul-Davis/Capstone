@@ -22,7 +22,6 @@ public class SlotNode : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(name + " OnTriggerEnter(" + other.name + ")");
 
         if (transform.childCount > 0)
             Physics.IgnoreCollision(transform.GetChild(0).GetComponent<Collider>(), other.GetComponent<Collider>());
@@ -34,20 +33,12 @@ public class SlotNode : MonoBehaviour
             other.transform.localRotation = Quaternion.identity;
 
             payload = other.GetComponent<PowerBlockObject>();
-            //payload.GetComponent<Collider>().enabled = false; //this will stop mouse interaction
-            //payload.GetComponent<Rigidbody>().isKinematic = true;
-            //GetComponent<Collider>().enabled = false; //this will stop OnTriggerExit
         }
     }
 
-    /*private void OnMouseDrag()
-    {
-        payload.GetComponent<Rigidbody>().isKinematic = false;
-    }*/
-
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PowerBlockObject>() != null && other.GetComponent<PowerBlockObject>() == payload)// && transform.childCount > 0)
+        if (other.GetComponent<PowerBlockObject>() != null && other.GetComponent<PowerBlockObject>() == payload)
         {
             payload.isPowered = false;
 

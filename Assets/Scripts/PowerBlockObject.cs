@@ -33,14 +33,4 @@ public class PowerBlockObject : SlotPartObject
             gameObject.GetComponent<MeshRenderer>().materials = originalMaterials;
         }
     }
-
-    private void OnMouseDown()
-    {
-        Debug.Log("Down");
-    }
-
-    private void OnMouseDrag()
-    {
-        Debug.Log("Drag");
-    }
 }
