@@ -31,12 +31,15 @@ public class SlotNode : MonoBehaviour
             other.transform.localRotation = Quaternion.identity;
 
             payload = other.GetComponent<PowerBlockObject>();
+            //payload.GetComponent<Collider>().enabled = false; //this will stop mouse interaction
+            //payload.GetComponent<Rigidbody>().isKinematic = true;
+            //GetComponent<Collider>().enabled = false; //this will stop OnTriggerExit
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (transform.childCount > 0)
+        if (other.GetComponent<PowerBlockObject>() != null && other.GetComponent<PowerBlockObject>() == payload)// && transform.childCount > 0)
         {
             payload.isPowered = false;
 
