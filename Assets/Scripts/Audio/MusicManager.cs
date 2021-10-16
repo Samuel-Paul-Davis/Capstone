@@ -2,85 +2,87 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
-public class MusicManager : MonoBehaviour
-{
+public class MusicManager : SingletonMonoBehaviour<MonoBehaviour>
+{ 
 
-    private AudioSource audioSource;
+    public AudioSource audioSource01;
+    public AudioSource audioSource02;
 
+    [Header("Music Clips")]
     public AudioClip menuMusic;
     public AudioClip desertLevelMusic;
     public AudioClip bottomLevel;
     public AudioClip topLevel;
 
-    public float fadeTime = 10;
+    [SerializeField] private AudioMixer audioMixer;
+    public float fadeTime = 5;
+
+    private string currentAudioGroup;
+    private AudioSource currentAudioSource;
+
+    private const string crossFadeGroup01 = "CrossFadeGroup01";
+    private const string crossFadeGroup02 = "CrossFadeGroup02";
 
     void Start()
     {
         DontDestroyOnLoad(this);
         SceneManager.sceneLoaded += OnLoadCallBack;
-        audioSource = GetComponent<AudioSource>();
-        PlayClip(menuMusic);
+        OnLoadCallBack(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
-    private void ChangeMusic(AudioClip clip)
+    public void CrossFadeMusic(AudioClip audioClip)
     {
-        if (!clip)
+
+
+        if (currentAudioGroup == crossFadeGroup01)
         {
-            Debug.LogWarning("No Music Clip Found");
-            return;
+            currentAudioSource = audioSource02;
+            currentAudioGroup = crossFadeGroup02;
+            currentAudioSource.clip = audioClip;
+            currentAudioSource.Play();
+            StartCoroutine(StartFade(audioMixer, currentAudioGroup, 5, 1));
+            StartCoroutine(StartFade(audioMixer, crossFadeGroup01, 5, 0));
+        }
+        else
+        {
+            currentAudioSource = audioSource01;
+            currentAudioGroup = crossFadeGroup01;
+            currentAudioSource.clip = audioClip;
+            currentAudioSource.Play();
+            StartCoroutine(StartFade(audioMixer, currentAudioGroup, 5, 1));
+            StartCoroutine(StartFade(audioMixer, crossFadeGroup02, 5, 0));
         }
 
-        StartCoroutine(StartFade(audioSource, 2, 0, clip));
-
     }
 
-    private void PlayClip(AudioClip clip)
+    public void PlayMusic(AudioClip audioClip)
     {
-        audioSource.clip = clip;
-        audioSource.Play();
+        currentAudioGroup = crossFadeGroup01;
+        currentAudioSource = audioSource01;
+        currentAudioSource.clip = audioClip;
+        currentAudioSource.Play();
     }
 
-    private void FadeOut()
+    private void MuteCurrentAudioGroup()
     {
-        float startVolume = audioSource.volume;
-        while (audioSource.volume > 0)
-        {
-            audioSource.volume -= startVolume * Time.deltaTime / fadeTime;
-        }
-    }   
-    private void FadeIn()
-    {
-        while (audioSource.volume < 1)
-        {
-            audioSource.volume += Time.deltaTime / fadeTime;
-        }
+        audioMixer.SetFloat(currentAudioGroup, -80);
     }
 
-
-    public static IEnumerator StartFade(AudioSource audioSource, float duration, float targetVolume, AudioClip clip)
+    public static IEnumerator StartFade(AudioMixer audioMixer, string exposedParam, float duration, float targetVolume)
     {
         float currentTime = 0;
-        float start = audioSource.volume;
+        float currentVol;
+        audioMixer.GetFloat(exposedParam, out currentVol);
+        currentVol = Mathf.Pow(10, currentVol / 20);
+        float targetValue = Mathf.Clamp(targetVolume, 0.0001f, 1);
 
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
-            audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
-            yield return null;
-        }
-
-        //TODO:Yeild wait in main branch to be able to easily switch music without doing this horrible thing
-        audioSource.clip = clip;
-        audioSource.Play();
-        yield return new WaitForSeconds(5.0f);
-
-        float currentTime1 = 0;
-        float start1 = audioSource.volume;
-        while (currentTime1 < duration)
-        {
-            currentTime1 += Time.deltaTime;
-            audioSource.volume = Mathf.Lerp(start1, 1, currentTime1 / 10);
+            float newVol = Mathf.Lerp(currentVol, targetValue, currentTime / duration);
+            audioMixer.SetFloat(exposedParam, Mathf.Log10(newVol) * 20);
             yield return null;
         }
         yield break;
@@ -88,13 +90,35 @@ public class MusicManager : MonoBehaviour
 
     private void OnLoadCallBack(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == "Top Level")
+        print(scene.name);
+        if (scene.name == "Top Level")
         {
-            ChangeMusic(topLevel);
+            CrossFadeMusic(topLevel);
         }
-        else
+
+        if (scene.name == "Menu")
         {
-            PlayClip(desertLevelMusic);
+            PlayMusic(menuMusic);
         }
+
+        if (scene.name == "Desert Start Area")
+        {
+            CrossFadeMusic(desertLevelMusic);
+        }
+
     }
+}
+
+
+enum MixerExposedParams
+{
+    CrossFadeVolume,
+    LevelMusicVolume
+}
+
+enum AudioGroups
+{
+    MenuMusic,
+    DeserArea,
+    TopLevel
 }

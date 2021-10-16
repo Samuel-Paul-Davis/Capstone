@@ -13,6 +13,11 @@ public class WeightTrigger : MonoBehaviour
     [SerializeField]
     private bool isTriggered = false;
 
+    [SerializeField]
+    private AudioSource triggerActiveSound;
+    [SerializeField]
+    private AudioSource triggerReleaseSound;
+
     public PuzzleState State {
         get
         {
@@ -42,11 +47,13 @@ public class WeightTrigger : MonoBehaviour
             if (isTriggered)
             {
                 EventTriggerDeactive();
+                triggerActiveSound.Play();
                 transform.position = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
             }
             else
             {
                 EventTriggerActive();
+                triggerReleaseSound.Play();
                 transform.position = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
             }
             isTriggered = tempTrigger;
