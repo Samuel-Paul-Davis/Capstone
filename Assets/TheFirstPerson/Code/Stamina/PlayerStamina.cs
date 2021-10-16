@@ -23,8 +23,21 @@ public class PlayerStamina : MonoBehaviour
         get { return currentStamina; }
     }
 
-    [SerializeField]
+    [Header("Slider Variables")]
+    [SerializeField, Tooltip("Stamina slider")]
     private Slider slider;
+
+    [SerializeField]
+    private Color staminaFullColour;
+
+    [SerializeField]
+    private Color staminaDepletedColour;
+
+    [SerializeField, Tooltip("The movming part of the slider")]
+    private Image handleImage;
+
+    [SerializeField, Tooltip("The background image of the slider")]
+    private Image backgroundImage;
 
     private float currentStamina;
     private WaitForSeconds regenTick = new WaitForSeconds(0.01f);
@@ -32,6 +45,7 @@ public class PlayerStamina : MonoBehaviour
     private CanvasGroup canvasGroup;
     private float regenTickRate = 0.01f;
 
+    private bool staminaDepleted;
 
     private void Awake()
     {
@@ -53,12 +67,19 @@ public class PlayerStamina : MonoBehaviour
     /// <returns></returns>
     private bool CheckStamina(float amt)
     {
+        if (currentStamina <= 1 || staminaDepleted)
+        {
+            staminaDepleted = true;
+            return true;
+        }
+
         return currentStamina <= amt;
     }
 
     private void UpdateUI()
     {
         slider.value = currentStamina;
+        handleImage.color = Color.Lerp(staminaDepletedColour, staminaFullColour, slider.value / 100);
     }
 
     /// <summary>
@@ -102,6 +123,7 @@ public class PlayerStamina : MonoBehaviour
             UpdateUI();
             yield return regenTick;
         }
+        staminaDepleted = false;
         FadeOutStaminaBar();
     }
 }

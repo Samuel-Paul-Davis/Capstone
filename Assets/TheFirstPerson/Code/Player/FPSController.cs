@@ -665,7 +665,7 @@ namespace TheFirstPerson
         private void setCurrentMoveVars()
         {
             currentTurnMult = 1.0f;
-            if (grounded)
+            if (grounded && moving)
             {
                 //currentMoveSpeed = moveSpeed;
                 //currentStrafeMult = strafeMult;
@@ -691,13 +691,16 @@ namespace TheFirstPerson
                 currentMoveSpeed = airMoveSpeed;
                 currentStrafeMult = airStrafeMult;
                 currentBackwardMult = airBackwardMult;
-                if (running && airSprintEnabled && !(crouching && crouchEnabled) && playerStamina.UseStamina())
+                if (moving)
                 {
-                    if (thirdPersonMode)
+                    if (running && airSprintEnabled && !(crouching && crouchEnabled) && playerStamina.UseStamina())
                     {
-                        currentTurnMult *= sprintTurnMult;
+                        if (thirdPersonMode)
+                        {
+                            currentTurnMult *= sprintTurnMult;
+                        }
+                        currentMoveSpeed *= airSprintMult;
                     }
-                    currentMoveSpeed *= airSprintMult;
                 }
 
                 if (jumpHeld && jumping)
