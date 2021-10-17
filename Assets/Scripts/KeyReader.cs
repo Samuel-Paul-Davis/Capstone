@@ -23,6 +23,14 @@ public class KeyReader : SlotPuzzle
     {
         for (int i=0; i<slots.Count;i++)
         {
+            if (slots[i].transform.childCount > 0 && slots[i].transform.GetChild(0).GetComponent<SlotPartObject>() != null)
+                unlocked = true;
+            else
+                unlocked = false;
+        }
+
+        /*for (int i=0; i<slots.Count;i++)
+        {
             if (slot_parts[i] && slot_parts[i].GetComponent<KeyCoreObject>())
             {
                 TriggerSound();
@@ -34,7 +42,7 @@ public class KeyReader : SlotPuzzle
                 soundTrigger = false;
                 break;
             }
-        }
+        }*/
     }
 
     private void TriggerSound()

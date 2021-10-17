@@ -19,34 +19,19 @@ public class PowerRouter : SlotPuzzle
         if (node == null || node.payload == null)
             return false;
 
-        if (node.next == null && node != outputSlot)
-            return false;
-
         if (node.payload != node.expectedPayload)
             return false;
 
-        bool retVal = true;
+        if (node == inputSlot)
+            node.payload.isPowered = true;
+        else
+            node.payload.isPowered = node.prev.payload.isPowered;
 
-        node.payload.isPowered = true;
+        bool retVal = node.payload.isPowered;
 
-        if (node != outputSlot)
+        if (retVal && node != outputSlot)
             retVal = ConnectNodes(node.next);
 
         return retVal;
-    }
-
-    private new void OnCollisionEnter(Collision collision)
-    {
-        base.OnCollisionEnter(collision);
-
-        collision.GetContact(0).thisCollider.gameObject.GetComponent<SlotNode>().payload = collision.GetContact(0).otherCollider.gameObject.GetComponent<PowerBlockObject>();
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.gameObject.TryGetComponent<PowerBlockObject>(out PowerBlockObject block))
-        {
-            block.isPowered = false;
-        }
     }
 }

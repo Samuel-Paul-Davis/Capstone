@@ -39,7 +39,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2713942219009333657}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.25, y: 1, z: 2.19}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 2713942219564060555}
   - component: {fileID: 8129412053434096097}
   m_Layer: 0
-  m_Name: KeyReader
+  m_Name: KeyReader[theirs]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlocked: 0
   slots: []
-  slot_parts: []
 --- !u!82 &8129412053434096097
 AudioSource:
   m_ObjectHideFlags: 0
@@ -296,7 +295,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2713942219723346150}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.25, y: 1, z: 2.19}
