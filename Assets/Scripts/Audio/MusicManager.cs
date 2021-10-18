@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
-public class MusicManager : SingletonMonoBehaviour<MonoBehaviour>
+public class MusicManager : SingletonMonoBehaviour<MusicManager>
 { 
 
     public AudioSource audioSource01;
