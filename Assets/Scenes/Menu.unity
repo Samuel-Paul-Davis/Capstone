@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.6191, g: 1835.6934, b: 2430.2617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55803dd750e82ea49b94fb8cf266d38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TopLevelName: Desert Start Area
+  TopLevelName: Intro Title
 --- !u!4 &628766291
 Transform:
   m_ObjectHideFlags: 0
