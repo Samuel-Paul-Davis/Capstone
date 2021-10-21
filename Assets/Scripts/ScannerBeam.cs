@@ -20,9 +20,9 @@ public class ScannerBeam : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(targetTag) && other.gameObject.GetComponent<Renderer>())
+        if (other.CompareTag(targetTag) && other.GetComponentInChildren<MovableObject>() && other.GetComponentInChildren<Renderer>())
         {
-            other.GetComponent<MovableObject>().Discover(materials);
+            other.GetComponentInChildren<MovableObject>().Discover(materials);
         }
     }
 }
