@@ -6,6 +6,7 @@ public class ScannerBeam : MonoBehaviour
 {
     public Material[] materials;
     public string targetTag;
+    public GameObject[] ignoreList;
 
     private void Start()
     {
@@ -15,6 +16,11 @@ public class ScannerBeam : MonoBehaviour
             {
                 Physics.IgnoreCollision(GetComponent<Collider>(), c);
             }
+        }
+
+        foreach (GameObject go in ignoreList)
+        {
+            Physics.IgnoreCollision(GetComponent<Collider>(), go.GetComponent<Collider>());
         }
     }
 
