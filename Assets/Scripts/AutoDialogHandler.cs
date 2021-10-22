@@ -40,6 +40,7 @@ public class AutoDialogHandler : MonoBehaviour
             isInCutsceen = false;
             Time.timeScale = 1;
             dialogPanel.SetActive(false);
+            currentDialog = 0;
         }
         else if (isInCutsceen)
         {
@@ -51,7 +52,7 @@ public class AutoDialogHandler : MonoBehaviour
                 NextDialog();
                 ShowDialog();
                 fTime = 0;
-            }          
+            }
         }
     }
 
