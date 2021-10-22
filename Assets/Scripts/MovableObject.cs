@@ -74,7 +74,7 @@ public class MovableObject : AbstractObjectInteraction
     {
         Discover();
 
-        if (gameObject.GetComponent<Renderer>().IsVisibleFrom(Camera.main))
-            gameObject.GetComponent<Renderer>().materials = materials;
+        if (gameObject.GetComponentInChildren<Renderer>().IsVisibleFrom(Camera.main))
+            gameObject.GetComponentInChildren<Renderer>().materials = materials;
     }
 }

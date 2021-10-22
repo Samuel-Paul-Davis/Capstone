@@ -6,6 +6,7 @@ public class ScannerBeam : MonoBehaviour
 {
     public Material[] materials;
     public string targetTag;
+    public GameObject[] ignoreList;
 
     private void Start()
     {
@@ -16,13 +17,18 @@ public class ScannerBeam : MonoBehaviour
                 Physics.IgnoreCollision(GetComponent<Collider>(), c);
             }
         }
+
+        foreach (GameObject go in ignoreList)
+        {
+            Physics.IgnoreCollision(GetComponent<Collider>(), go.GetComponent<Collider>());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(targetTag) && other.gameObject.GetComponent<Renderer>())
+        if (other.CompareTag(targetTag) && other.GetComponentInChildren<MovableObject>() && other.GetComponentInChildren<Renderer>())
         {
-            other.GetComponent<MovableObject>().Discover(materials);
+            other.GetComponentInChildren<MovableObject>().Discover(materials);
         }
     }
 }
