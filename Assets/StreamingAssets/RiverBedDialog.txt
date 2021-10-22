@@ -2,4 +2,4 @@ Supervisor[Looks like there is no simple way out of here. Good thing we came pre
 Supervisor[You have been equipped with a multitude of tools to manipulate the environment to your advantage.@3]
 Supervisor[Your scanner (F) will identify objects around you that are within your capacity to move. Please survey the area now.@3]
 Supervisor[Your hover tool has two uses. A push and pull application (F) and a lifting one (F). You cannot carry objects that exceed your safe weight limits. These are indicated by the colour red.@5]
-Supervisor[Use these tools to escape the riverbed. Good luck.@2]
+Supervisor[Use these tools to escape the riverbed. Good luck.@2

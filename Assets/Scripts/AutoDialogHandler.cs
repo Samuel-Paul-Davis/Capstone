@@ -29,13 +29,13 @@ public class AutoDialogHandler : MonoBehaviour
     {
         GenerateDialog();
         ShowDialog();
-        dialogPanel.SetActive(false);
+        //dialogPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentDialog >= dialog.Count)
+        if (currentDialog > dialog.Count)
         {
             isInCutsceen = false;
             Time.timeScale = 1;
@@ -98,6 +98,7 @@ public class AutoDialogHandler : MonoBehaviour
         {
             isInCutsceen = true;
             dialogPanel.SetActive(true);
+            ShowDialog();
         }      
     }
 }

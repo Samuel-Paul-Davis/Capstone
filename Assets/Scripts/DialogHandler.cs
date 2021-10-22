@@ -39,6 +39,8 @@ public class DialogHandler : MonoBehaviour
                     isInCutsceen = false;
                     Time.timeScale = 1;
                     dialogPanel.SetActive(false);
+                    currentDialog = 0;
+                    dialog.Clear();
                 }
                 else
                 {

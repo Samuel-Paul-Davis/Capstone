@@ -1,0 +1,4 @@
+Supervisor[That’s… interesting. These ruins were not detected in any initial or definitive planetary scans. We were under the impression that this planet was uninhabited.@4]
+Supervisor[Yet all scans did determine multiple natural sources repeatedly, this one included.@3]
+Supervisor[Hmm...@2]
+Supervisor[Permission granted to investigate the ruins. Locate that source, Percy.@3
