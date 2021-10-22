@@ -1,0 +1,13 @@
+P3R-C[
+P3R-C Unit: 001*
+Status: Functional*
+Systems: Stable*
+Receiver: Jammed*
+Objective: Locate Water Source*
+Sub-Objective: Investigate Area@3]
+P3R-C[Connection lost. Following previous directive. Recording progress.@2]
+P3R-C[Cityscape. Abandoned.@2]
+P3R-C[Object. Appears to function as key? Or - Keypad. Requires key input?@3]
+P3R-C[3b - Storing in compartment. Continuing mission objective.@3]
+P3R-C[Locked door. Cannot proceed.@2]
+P3R-C[5b - Door unlocked. Proceeding.@2
