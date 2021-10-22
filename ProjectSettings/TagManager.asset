@@ -9,6 +9,7 @@ TagManager:
   - Puzzle
   - Interactive
   - IgnoreRaycast
+  - PointOfInterest
   layers:
   - Default
   - TransparentFX

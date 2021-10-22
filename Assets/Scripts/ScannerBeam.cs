@@ -6,6 +6,8 @@ public class ScannerBeam : MonoBehaviour
 {
     public Material[] materials;
     public string targetTag;
+    public Material[] poiMaterials;
+    public string poiTag;
     public GameObject[] ignoreList;
 
     private void Start()
@@ -29,6 +31,11 @@ public class ScannerBeam : MonoBehaviour
         if (other.CompareTag(targetTag) && other.GetComponentInChildren<MovableObject>() && other.GetComponentInChildren<Renderer>())
         {
             other.GetComponentInChildren<MovableObject>().Discover(materials);
+        }
+
+        if (other.CompareTag(poiTag) && other.GetComponentInChildren<Renderer>())
+        {
+            other.GetComponentInChildren<Renderer>().materials = poiMaterials;
         }
     }
 }

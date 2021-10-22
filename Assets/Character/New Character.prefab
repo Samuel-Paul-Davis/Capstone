@@ -233,6 +233,12 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: a7c50eec5064ec74597899cc729adf74, type: 2}
   targetTag: Puzzle
+  poiMaterials:
+  - {fileID: 2100000, guid: 72674bf4728ce0d4c84b9340403016c0, type: 2}
+  - {fileID: 2100000, guid: 72674bf4728ce0d4c84b9340403016c0, type: 2}
+  - {fileID: 2100000, guid: 72674bf4728ce0d4c84b9340403016c0, type: 2}
+  poiTag: PointOfInterest
+  ignoreList: []
 --- !u!1 &2072437924524864782
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,13 +747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59313d68557847d4faccfc7a25888279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceBetweenFootsteps: 2
-  hoveringSound: {fileID: 0}
-  footsteps:
-  - {fileID: 11400000, guid: c23245070adcf634c865d5386e3030a4, type: 2}
-  - {fileID: 11400000, guid: bfcbe97c948957c448c8e2a7b4dc2c47, type: 2}
   hoveringSoundEffect: {fileID: 4740603191323045153}
-  defaultFootsteps: {fileID: 11400000, guid: c23245070adcf634c865d5386e3030a4, type: 2}
 --- !u!114 &4740603191323045152
 MonoBehaviour:
   m_ObjectHideFlags: 0
