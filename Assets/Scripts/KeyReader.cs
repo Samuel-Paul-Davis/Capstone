@@ -16,7 +16,7 @@ public class KeyReader : SlotPuzzle
 
     private void Awake()
     {
-        if (TryGetComponent<AudioSource>(out audioSource))
+        if (!TryGetComponent<AudioSource>(out audioSource))
             Debug.LogWarning("No AudioSource Component on: " + name);
     }
     private void Update()
