@@ -85,10 +85,19 @@ public struct DialogSection
 {
     public string Speaker { get; set; }
     public string Dialog { get; set; }
+    public int DialogAvailabilityLength { get; set; }
 
     public DialogSection(string pSpeaker, string pDialog)
     {
         Speaker = pSpeaker;
         Dialog = pDialog;
-    }   
+        DialogAvailabilityLength = 0;
+    }
+
+    public DialogSection(string pSpeaker, string pDialog, int pLength)
+    {
+        Speaker = pSpeaker;
+        Dialog = pDialog;
+        DialogAvailabilityLength = pLength;
+    }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -12,8 +13,7 @@ public class AutoDialogHandler : MonoBehaviour
     [SerializeField]
     private int currentDialog = 0;
     private float previousTime = 0.0f;
-    [SerializeField]
-    private float intervalPeriod;
+    private float intervalPeriod = 0;
     private List<DialogSection> dialog = new List<DialogSection>();
     [SerializeField]
     private Text speakerText;
@@ -43,8 +43,7 @@ public class AutoDialogHandler : MonoBehaviour
             currentDialog = 0;
         }
         else if (isInCutsceen)
-        {
-            
+        {           
             fTime = fTime + 1f * Time.deltaTime;
 
             if (fTime >= intervalPeriod)
@@ -66,15 +65,21 @@ public class AutoDialogHandler : MonoBehaviour
         {
             string[] splitLine = rawLine.Trim().Split('[');
 
-            DialogSection dialogSection = new DialogSection(splitLine[0].Trim(), splitLine[1].Replace('*', '\n'));
+            string[] splitDialog = splitLine[1].Split('@');
+
+            DialogSection dialogSection = new DialogSection(splitLine[0].Trim(), splitDialog[0].Replace('*', '\n'), Int32.Parse(splitDialog[1]));
             dialog.Add(dialogSection);
         }
     }
 
     public void ShowDialog()
     {
-        speakerText.text = dialog[currentDialog].Speaker;
-        dialogText.text = dialog[currentDialog].Dialog;
+        if (currentDialog < dialog.Count)
+        {
+            speakerText.text = dialog[currentDialog].Speaker;
+            dialogText.text = dialog[currentDialog].Dialog;
+            intervalPeriod = dialog[currentDialog].DialogAvailabilityLength;
+        }       
     }
 
     public void NextDialog()
@@ -89,7 +94,10 @@ public class AutoDialogHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        isInCutsceen = true;
-        dialogPanel.SetActive(true);
+        if (other.gameObject.tag == "Player")
+        {
+            isInCutsceen = true;
+            dialogPanel.SetActive(true);
+        }      
     }
 }
