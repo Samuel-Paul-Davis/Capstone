@@ -13,6 +13,8 @@ public class MouseInteractionSystem : MonoBehaviour
     public bool isMouseActive = false;
     private List<GameObject> targetList = new List<GameObject>();
 
+    public LayerMask IgnoreMe;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -63,11 +65,13 @@ public class MouseInteractionSystem : MonoBehaviour
                 
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit))
+                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10);
+                if (Physics.Raycast(ray, out hit, 1000f, ~IgnoreMe))
                 {
                     if (hit.rigidbody != null)
                     {
+                        print(hit.rigidbody.gameObject.name);
+
                         if (hit.rigidbody.gameObject.tag == "Puzzle")
                         {
                             currentObject = hit.rigidbody.gameObject;

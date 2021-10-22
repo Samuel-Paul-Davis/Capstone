@@ -73,7 +73,6 @@ public class DoorOpenScript : BaseGatePuzzle
             if (closeOnTriggerRelease && isDoorOpen)
             {
                 LeanTween.moveLocal(gameObject, initialTransform, timeToTarget).setEaseOutQuad();
-                currentTriggers -= 1;
                 isDoorOpen = false;
             }
         }

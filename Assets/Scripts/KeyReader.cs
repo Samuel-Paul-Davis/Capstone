@@ -24,7 +24,10 @@ public class KeyReader : SlotPuzzle
         for (int i=0; i<slots.Count;i++)
         {
             if (slots[i].transform.childCount > 0 && slots[i].transform.GetChild(0).GetComponent<SlotPartObject>() != null)
+            {
                 unlocked = true;
+                TriggerSound();
+            }
             else
                 unlocked = false;
         }
