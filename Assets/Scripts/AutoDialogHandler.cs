@@ -79,7 +79,7 @@ public class AutoDialogHandler : MonoBehaviour
             speakerText.text = dialog[currentDialog].Speaker;
             dialogText.text = dialog[currentDialog].Dialog;
             intervalPeriod = dialog[currentDialog].DialogAvailabilityLength;
-        }       
+        }
     }
 
     public void NextDialog()
