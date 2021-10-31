@@ -27,8 +27,8 @@ public class AutoDialogHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenerateDialog();
-        ShowDialog();
+        //GenerateDialog();
+        //ShowDialog();
         //dialogPanel.SetActive(false);
     }
 
