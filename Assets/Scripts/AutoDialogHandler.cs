@@ -28,7 +28,6 @@ public class AutoDialogHandler : MonoBehaviour
     void Start()
     {
         GenerateDialog();
-        ShowDialog();
     }
 
     // Update is called once per frame
@@ -40,6 +39,7 @@ public class AutoDialogHandler : MonoBehaviour
             Time.timeScale = 1;
             dialogPanel.SetActive(false);
             currentDialog = 0;
+            GameObject.Destroy(gameObject);
         }
         else if (isInCutsceen)
         {           
@@ -98,6 +98,6 @@ public class AutoDialogHandler : MonoBehaviour
             isInCutsceen = true;
             dialogPanel.SetActive(true);
             ShowDialog();
-        }      
+        }
     }
 }

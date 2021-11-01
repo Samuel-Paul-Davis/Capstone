@@ -1,4 +1,4 @@
 Supervisor[What's this? Readings are detecting a power panel up ahead...@4]
 Supervisor[Proceed with caution, Percy.@2]
 Supervisor[I'm detecting some strange readings from the pillars in this room. @3]
-Supervisor[Strange routing patterns can be seen on their faces. Maybe they're related to the power panel somehow? Either way, permission granted to investigate this room, Percy.@4]
+Supervisor[Strange routing patterns can be seen on their faces. Maybe they're related to the power panel somehow? Either way, permission granted to investigate this room, Percy.@4

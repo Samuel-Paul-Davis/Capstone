@@ -2243,9 +2243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf84cd9b30ac131439dee0dfc6ff1925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawDialogText: RawDialogText.txt
+  rawDialogText: TopLevelDialog.txt
   currentDialog: 0
-  intervalPeriod: 2
   speakerText: {fileID: 388670674}
   dialogText: {fileID: 388670673}
   dialogPanel: {fileID: 388670671}

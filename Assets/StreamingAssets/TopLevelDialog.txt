@@ -5,4 +5,4 @@ Systems: Stable*
 Receiver: Jammed*
 Objective: Locate Water Source*
 Sub-Objective: Investigate Area@3]
-P3R-C[Connection lost. Following previous directive. Recording progress.@3]
+P3R-C[Connection lost. Following previous directive. Recording progress.@3
