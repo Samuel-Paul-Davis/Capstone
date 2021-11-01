@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class AutoDialogHandler : MonoBehaviour
 {
     [SerializeField]
-    public string rawDialogText = "RawDialogText.txt";
+    private string rawDialogText = "RawDialogText.txt";
     [SerializeField]
     private int currentDialog = 0;
     private float previousTime = 0.0f;
@@ -29,7 +29,6 @@ public class AutoDialogHandler : MonoBehaviour
     {
         GenerateDialog();
         ShowDialog();
-        //dialogPanel.SetActive(false);
     }
 
     // Update is called once per frame
