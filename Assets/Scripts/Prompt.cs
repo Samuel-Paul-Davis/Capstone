@@ -27,9 +27,9 @@ public class Prompt : Puzzle
         }
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collider.gameObject.tag == ("Player"))
+        if (other.gameObject.tag == "Player")
         {
             waterOrb = true;
             Debug.Log("touched");

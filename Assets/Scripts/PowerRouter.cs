@@ -6,12 +6,12 @@ public class PowerRouter : SlotPuzzle
 {
     public SlotNode inputSlot;
     public SlotNode outputSlot;
-
     //public bool unlocked = false;
 
     private void Update()
     {
         unlocked = ConnectNodes(inputSlot);
+
     }
 
     private bool ConnectNodes(SlotNode node)
