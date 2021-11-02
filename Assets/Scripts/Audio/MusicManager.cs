@@ -15,6 +15,8 @@ public class MusicManager : SingletonMonoBehaviour<MusicManager>
     public AudioClip desertLevelMusic;
     public AudioClip bottomLevel;
     public AudioClip topLevel;
+    public AudioClip bridgeMusic;
+    public AudioClip restoredMusic;
 
     [SerializeField] private AudioMixer audioMixer;
     public float fadeTime = 5;
@@ -99,6 +101,16 @@ public class MusicManager : SingletonMonoBehaviour<MusicManager>
         if (scene.name == "Menu")
         {
             PlayMusic(menuMusic);
+        }
+
+        if (scene.name == "Bridge")
+        {
+            CrossFadeMusic(bridgeMusic);
+        }
+
+        if (scene.name == "Restored Desert")
+        {
+            CrossFadeMusic(restoredMusic);
         }
 
         if (scene.name == "Desert Start Area")

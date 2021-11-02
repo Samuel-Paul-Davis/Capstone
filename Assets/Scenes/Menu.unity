@@ -1616,6 +1616,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1558874043, guid: eea1bfa98990a4b498a4d4d1dd6b5d55, type: 3}
+      propertyPath: bridgeMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 51dda6a48cf6525479068b36aa88531d, type: 3}
+    - target: {fileID: 1558874043, guid: eea1bfa98990a4b498a4d4d1dd6b5d55, type: 3}
+      propertyPath: restoredMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 3562e989ba58414468e9ec73d00bf1fd, type: 3}
     - target: {fileID: 1558874044, guid: eea1bfa98990a4b498a4d4d1dd6b5d55, type: 3}
       propertyPath: m_Volume
       value: 0.5

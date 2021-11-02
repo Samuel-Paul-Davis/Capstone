@@ -11,6 +11,7 @@ TagManager:
   - IgnoreRaycast
   - PointOfInterest
   - Auto
+  - Water
   layers:
   - Default
   - TransparentFX
