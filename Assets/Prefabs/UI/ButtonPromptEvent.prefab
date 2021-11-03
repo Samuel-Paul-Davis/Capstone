@@ -59,4 +59,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayObject: {fileID: 0}
   display: 1
-  textToDisplay: Press Button
+  textToDisplay: Press 'F' to find interactable objects
