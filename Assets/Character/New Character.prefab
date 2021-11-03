@@ -772,11 +772,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: efd070c20357f404abf0862471d0bb15, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cf84eac78bb9cb44fbf442800204cc66, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.336
+  m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -978,6 +978,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMouseActive: 0
+  IgnoreMe:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &3748173427271572742
 MonoBehaviour:
   m_ObjectHideFlags: 0
