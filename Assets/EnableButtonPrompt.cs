@@ -7,8 +7,10 @@ public class EnableButtonPrompt : MonoBehaviour
     public GameObject displayObject;
     public bool display = true;
     public string textToDisplay;
+    public KeyCode key;
 
     private TextMeshProUGUI text;
+    private bool currentlyDisplayed;
     private void Start()
     {
         text = displayObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -17,22 +19,40 @@ public class EnableButtonPrompt : MonoBehaviour
         {
             Debug.LogWarning("TextMeshPro not found");
         }
+
+    }
+
+    private void ToggleText(bool activate)
+    {
+        displayObject.SetActive(activate);
+        currentlyDisplayed = activate;
+    }
+
+    private void Update()
+    {
+        if (currentlyDisplayed && Input.GetKeyDown(key))
+        {
+            ToggleText(false);
+            display = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (display && other.tag == "Player")
+        print("Active");
+        if (display && other.CompareTag("Player"))
         {
             text.text = textToDisplay;
-            displayObject.SetActive(true);
+            ToggleText(true);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        print("Not");
+        if (other.CompareTag("Player"))
         {
-            displayObject.SetActive(false);
+            ToggleText(false);
         }
     }
 }
