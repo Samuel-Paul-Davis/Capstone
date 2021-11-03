@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: Chaos Cricket Games
   productName: Re:Source
-  defaultCursor: {fileID: 2800000, guid: 5143841f9fb951d4ba30140df18047e8, type: 3}
+  defaultCursor: {fileID: 2800000, guid: 76de3d041e1ba3443807958bf1c38cc3, type: 3}
   cursorHotspot: {x: 50, y: 50}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1

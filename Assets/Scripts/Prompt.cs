@@ -33,21 +33,13 @@ public class Prompt : Puzzle
         {
             waterOrb = true;
             Debug.Log("touched");
-            MessagePanel.SetActive(true);
+            //MessagePanel.SetActive(true);
 
         }
 
         else
         {
-            MessagePanel.SetActive(false);
+            //MessagePanel.SetActive(false);
         }
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        waterOrb = false;
-        MessagePanel.SetActive(false);
-
-    }
-
 }
