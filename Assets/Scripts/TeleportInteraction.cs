@@ -29,25 +29,4 @@ public class TeleportInteraction : AbstractObjectInteraction
         audioSource.Play();
         SceneManager.LoadScene(NextSceneName);
     }
-
-    private void OnTriggerStay(Collider other)
-    {
-       if (other.gameObject.CompareTag("Player"))
-        {
-            messagePanel.SetActive(true);
-        }
-
-        else
-        {
-            messagePanel.SetActive(false);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            messagePanel.SetActive(false);
-        }
-    }
 }
