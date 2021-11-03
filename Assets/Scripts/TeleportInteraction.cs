@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DialogueEditor;
 
 public class TeleportInteraction : AbstractObjectInteraction
 {
     [SerializeField]
     private string NextSceneName;
+
+    public GameObject messagePanel;
 
     private AudioSource audioSource;
 
@@ -25,5 +28,26 @@ public class TeleportInteraction : AbstractObjectInteraction
     {
         audioSource.Play();
         SceneManager.LoadScene(NextSceneName);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+       if (other.gameObject.CompareTag("Player"))
+        {
+            messagePanel.SetActive(true);
+        }
+
+        else
+        {
+            messagePanel.SetActive(false);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            messagePanel.SetActive(false);
+        }
     }
 }
