@@ -5,11 +5,6 @@ using UnityEngine;
 public class PromptE : MonoBehaviour
 {
 
-    private void Update()
-    {
-
-    }
-
     public GameObject messagePanel;
     private void OnTriggerStay(Collider other)
     {
@@ -17,10 +12,13 @@ public class PromptE : MonoBehaviour
         {
             messagePanel.SetActive(true);
         }
+
+        else messagePanel.SetActive(false);
     }
 
     private void OnTriggerExit(Collider other)
     {
+        messagePanel.SetActive(false);
         GameObject.Destroy(gameObject);
     }
 }
