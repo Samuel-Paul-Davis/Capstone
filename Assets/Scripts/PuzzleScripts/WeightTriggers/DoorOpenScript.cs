@@ -15,6 +15,7 @@ public class DoorOpenScript : BaseGatePuzzle
     private Vector3 initialTransform;
     public int currentTriggers;
 
+    private AudioSource audioSource;
     public bool DoorOpen
     {
         get { return isDoorOpen; }
@@ -27,6 +28,10 @@ public class DoorOpenScript : BaseGatePuzzle
         targetPosition = GetTargetPosition();
         PuzzleEvents.current.OnWeightTrigger += OpenDoorway;
         PuzzleEvents.current.OffWeightTrigger += CloseDoorway;
+        if (!TryGetComponent<AudioSource>(out audioSource))
+        {
+            Debug.LogWarning("No audio source found.");
+        }
     }
 
     private Vector3 GetTargetPosition()
@@ -58,6 +63,8 @@ public class DoorOpenScript : BaseGatePuzzle
                 if (TriggerCheck())
                 {
                     LeanTween.moveLocal(gameObject, targetPosition, timeToTarget).setEaseOutQuad();
+                    if(audioSource)
+                        audioSource.Play();
                     isDoorOpen = true;
                 }
             }

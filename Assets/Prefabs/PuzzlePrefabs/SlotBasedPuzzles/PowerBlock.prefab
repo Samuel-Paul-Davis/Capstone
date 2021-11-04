@@ -14,12 +14,12 @@ GameObject:
   - component: {fileID: 5893805242480899209}
   - component: {fileID: 5893805242480899218}
   - component: {fileID: 5893805242480899210}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PowerBlock
   m_TagString: Puzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5893805242480899223
 Transform:
@@ -130,3 +130,4 @@ MonoBehaviour:
   isMoving: 0
   isActive: 0
   isPowered: 0
+  activatedMaterials: []

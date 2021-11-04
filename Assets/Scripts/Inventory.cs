@@ -6,6 +6,7 @@ public class Inventory : MonoBehaviour
 {
     public int collectLayer = 6;
     public int receiverLayer = 7;
+    public AudioSource audioSource;
 
     private static List<GameObject> inventory = new List<GameObject>();
 
@@ -25,6 +26,10 @@ public class Inventory : MonoBehaviour
             Collect(other.gameObject);
             other.gameObject.layer = 0;
             other.gameObject.SetActive(false);
+            if (audioSource)
+            {
+                audioSource.Play();
+            }
         }
 
         if (other.gameObject.layer == receiverLayer)

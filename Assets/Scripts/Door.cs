@@ -14,12 +14,18 @@ public class Door : MonoBehaviour
 
     private Vector3 openPosition;
     private Vector3 closedPosition;
+    private AudioSource audioSource;
 
     private void Start()
     {
         closedPosition = transform.position;
 
         openPosition = targetPosition.position;
+        if (!TryGetComponent<AudioSource>(out audioSource))
+        {
+            Debug.LogWarning("No audiosource found");
+
+        }
 
         //openPosition = transform.position;
         //openPosition = transform.localPosition;
@@ -35,7 +41,7 @@ public class Door : MonoBehaviour
                                                             //      - if scale value is < 1 it will start performing percentages? Or times by zero if == 0?
                                                             //      - if scale is == 1 then object won't move
         */
-                                                                    
+
     }
 
     /*protected void Update()
@@ -49,7 +55,13 @@ public class Door : MonoBehaviour
     protected void Open()
     {
         if (transform.position != openPosition)
+        {
             transform.position = openPosition;
+            if (audioSource)
+            {
+                audioSource.Play();
+            }
+        }
      }
 
     protected void Close()
