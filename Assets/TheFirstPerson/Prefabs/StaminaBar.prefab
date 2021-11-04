@@ -337,7 +337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8756312661722533660}
   - component: {fileID: 600783078}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StaminaBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,6 +377,10 @@ MonoBehaviour:
   regenPerTick: 2
   fadeInOutTime: 0.5
   slider: {fileID: 5864783744790090726}
+  staminaFullColour: {r: 0, g: 0, b: 0, a: 0}
+  staminaDepletedColour: {r: 0, g: 0, b: 0, a: 0}
+  handleImage: {fileID: 0}
+  backgroundImage: {fileID: 0}
 --- !u!1 &8173836326752251206
 GameObject:
   m_ObjectHideFlags: 0

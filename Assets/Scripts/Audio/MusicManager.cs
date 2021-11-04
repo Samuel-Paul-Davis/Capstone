@@ -103,7 +103,7 @@ public class MusicManager : SingletonMonoBehaviour<MusicManager>
             PlayMusic(menuMusic);
         }
 
-        if (scene.name == "Bridge")
+        if (scene.name == "bridge")
         {
             CrossFadeMusic(bridgeMusic);
         }
