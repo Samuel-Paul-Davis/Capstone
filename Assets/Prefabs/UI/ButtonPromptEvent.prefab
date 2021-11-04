@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4576303351641024346}
   - component: {fileID: 2396257377212936020}
   - component: {fileID: 8206899244154244651}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ButtonPromptEvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,3 +60,4 @@ MonoBehaviour:
   displayObject: {fileID: 0}
   display: 1
   textToDisplay: Press 'F' to find interactable objects
+  key: 0
