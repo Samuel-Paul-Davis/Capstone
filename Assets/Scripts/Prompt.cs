@@ -6,7 +6,6 @@ using DialogueEditor;
 public class Prompt : Puzzle
 {
     [SerializeField]
-    private GameObject MessagePanel;
     private bool waterOrb = false;
     public NPCConversation myConversation;
 
@@ -17,7 +16,6 @@ public class Prompt : Puzzle
         {
             GameObject.Destroy(gameObject);
             Debug.Log("destroyed");
-            MessagePanel.SetActive(false);
             unlocked = true;
             waterOrb = false;
             if (unlocked == true && waterOrb == false)
